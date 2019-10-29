@@ -77,10 +77,10 @@ export default class AuthProvider extends Component {
   handleSignup = user => {
     authService
       .signup(user)
-      .then(registredUser => {
+      .then(registeredUser => {
         this.setState({
           isLoggedin: true,
-          user: registredUser,
+          user: registeredUser,
           isLoading: false,
         });
       })

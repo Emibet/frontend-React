@@ -6,13 +6,14 @@ function PrivateRoute({ component: Comp, isLoggedin, ...rest }) {
   return (
     <Route
       {...rest}
-      render={(props) =>
+      render={props =>
         isLoggedin ? (
           <Comp {...props} />
         ) : (
           <Redirect
             to={{
-              pathname: "/login",
+              // pathname: "/login",
+              pathname: '/',
             }}
           />
         )

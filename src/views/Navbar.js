@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
+import Login from './auth/Login';
+import Signup from './auth/Signup';
 
-import PrivateView from './views/PrivateView';
-import Login from './views/auth/Login';
-import Signup from './views/auth/Signup';
-import { withAuth } from './Context/AuthContext';
+import { withAuth } from '../Context/AuthContext';
 
-import Navbar from './views/Navbar';
+import AnonRoute from '../components/AnonRoute';
+import PrivateRoute from '../components/PrivateRoute';
+import PrivateView from './PrivateView';
 
-import PrivateRoute from './components/PrivateRoute';
-import AnonRoute from './components/AnonRoute';
+class MenuSignLoginLogout extends Component {
+  state = {
+    me: '',
+  };
 
-class App extends Component {
   render() {
-    const { handleLogout } = this.props;
+    const { handleLogout, isLoggedin } = this.props;
     return (
       <>
-        <Navbar handleLogout={handleLogout}></Navbar>
+        {/* <MenuSignLoginLogout handleLogout={handleLogout}></MenuSignLoginLogout> */}
 
-        {/* <Router>
+        <Router>
           {isLoggedin ? (
             <button onClick={handleLogout}>logout</button>
           ) : (
@@ -35,10 +37,10 @@ class App extends Component {
           <AnonRoute exact path="/login" component={Login} />
           <AnonRoute exact path="/signup" component={Signup} />
           <PrivateRoute exact path="/private" component={PrivateView} />
-        </Router> */}
+        </Router>
       </>
     );
   }
 }
 
-export default withAuth(App);
+export default withAuth(MenuSignLoginLogout);
