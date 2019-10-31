@@ -8,8 +8,9 @@ import { withAuth } from '../Context/AuthContext';
 import AnonRoute from '../components/AnonRoute';
 import PrivateRoute from '../components/PrivateRoute';
 import PrivateView from './PrivateView';
+import Emibet from '../images/Emibet.jpg';
 
-class MenuSignLoginLogout extends Component {
+class Navbar extends Component {
   state = {
     me: '',
   };
@@ -18,9 +19,10 @@ class MenuSignLoginLogout extends Component {
     const { handleLogout, isLoggedin } = this.props;
     return (
       <>
-        {/* <MenuSignLoginLogout handleLogout={handleLogout}></MenuSignLoginLogout> */}
-
         <Router>
+          <Link to="/">
+            <img src={Emibet} alt="Logo Emibet" />
+          </Link>
           {isLoggedin ? (
             <button onClick={handleLogout}>logout</button>
           ) : (
@@ -43,4 +45,4 @@ class MenuSignLoginLogout extends Component {
   }
 }
 
-export default withAuth(MenuSignLoginLogout);
+export default withAuth(Navbar);

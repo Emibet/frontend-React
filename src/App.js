@@ -10,6 +10,7 @@ import Navbar from './views/Navbar';
 
 import PrivateRoute from './components/PrivateRoute';
 import AnonRoute from './components/AnonRoute';
+import Home from './views/Home';
 
 class App extends Component {
   render() {
@@ -17,25 +18,12 @@ class App extends Component {
     return (
       <>
         <Navbar handleLogout={handleLogout}></Navbar>
-
-        {/* <Router>
-          {isLoggedin ? (
-            <button onClick={handleLogout}>logout</button>
-          ) : (
-            <>
-              <Link to="/login">
-                <button type="button">LoginYo</button>
-              </Link>
-
-              <Link to="/signup">
-                <button type="button">SignUp</button>
-              </Link>
-            </>
-          )}
+        <Router>
+          <AnonRoute path="/" component={Home} />
           <AnonRoute exact path="/login" component={Login} />
           <AnonRoute exact path="/signup" component={Signup} />
           <PrivateRoute exact path="/private" component={PrivateView} />
-        </Router> */}
+        </Router>
       </>
     );
   }
