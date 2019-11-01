@@ -7,7 +7,7 @@ import { withAuth } from '../Context/AuthContext';
 
 import AnonRoute from '../components/AnonRoute';
 import PrivateRoute from '../components/PrivateRoute';
-import PrivateView from './PrivateView';
+import PrivateView from './PrivateView_old';
 import Emibet from '../images/Emibet.jpg';
 
 class Navbar extends Component {
@@ -36,9 +36,9 @@ class Navbar extends Component {
               </Link>
             </>
           )}
-          <AnonRoute exact path="/login" component={Login} />
+          {/* <AnonRoute exact path="/login" component={Login} />
           <AnonRoute exact path="/signup" component={Signup} />
-          <PrivateRoute exact path="/private" component={PrivateView} />
+          <PrivateRoute exact path="/private" component={PrivateView} /> */}
         </Router>
       </>
     );
