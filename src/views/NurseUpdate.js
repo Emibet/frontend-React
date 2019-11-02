@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../Context/AuthContext';
 import userService from '../services/userService';
+import authService from '../services/authService';
 
 class NurseUpdate extends Component {
   state = {
@@ -19,9 +20,28 @@ class NurseUpdate extends Component {
     //     params: { id },
     //   },
     // } = this.props;
-    const { user } = this.props;
+    const { user } = this.props; // Original
+
+    // Si se recarga la pagina no tenemos datos actualizados de user
+    // authService
+    //   .me()
+    //   .then(userAct => {
+    //     this.setState({
+    //       isLoggedin: true,
+    //       user: userAct,
+    //       isLoading: false,
+    //     });
+
+    //     console.log('me', user);
+    //   })
+    //   .catch(() => {
+    //     this.setState({
+    //       isLoading: false,
+    //     });
+    //   });
+    // // Hasta aqui
     console.log('PROPS NURSEUPDATE ComponentDidMount: ', this.props);
-    console.log('PROPS NURSEUPDATE ComponentDidMount:Nurse Name ', user.nurse.name);
+    console.log('PROPS NURSEUPDATE ComponentDidMount:Nurse Birthday ', user.nurse.birthday);
     try {
       this.setState({
         user,
@@ -40,7 +60,37 @@ class NurseUpdate extends Component {
       user: { nurse },
       user,
     } = this.state;
-    const { name, value } = event.target;
+    // const { name, type } = event.target;
+    // if (type === 'checked') {
+    //   var { checked: value } = event.target;
+    // } else {
+    //   var { value } = event.target;
+    // }
+
+    // type === 'checked' ? (let{ checked: value } = event.target) : (let{ value } = event.target);
+    const { name, value, type, checked } = event.target;
+    this.setState({
+      user: {
+        ...user,
+        nurse: {
+          ...nurse,
+          [name]: value,
+          // [name]: type === 'checked' ? checked : value,
+        },
+      },
+    });
+  };
+
+  handleChangeBox = event => {
+    console.log('TCL: NurseUpdate -> event', event.target.name);
+    const {
+      user: { nurse },
+      user,
+    } = this.state;
+    const { name, checked: value, type } = event.target;
+    console.log('TCL: NurseUpdate -> value', type);
+    console.log('TCL: NurseUpdate -> value', value);
+
     this.setState({
       user: {
         ...user,
@@ -83,9 +133,10 @@ class NurseUpdate extends Component {
     console.log('PROPS: ', this.props);
     // console.log('TCL: Signup -> render -> contractor', contractor);
     console.log('TCL: Signup -> componentDidMount -> user', user);
+
     return (
       <div>
-        NURSE UPDATE
+        NURSE UPDATE COMPONENT:
         {username}
         {message && <div>{message}</div>}
         {loading && <div>Loading...</div>}
@@ -96,103 +147,55 @@ class NurseUpdate extends Component {
               <input type="text" name="name" id="name" value={user.nurse.name} onChange={this.handleChange} />
               <label htmlFor="surname">LastName:</label>
               <input type="text" name="surname" id="surname" value={user.nurse.surname} onChange={this.handleChange} />
+              <label htmlFor="email">Email:</label>
+              <input type="email" name="email" id="email" value={user.nurse.email} onChange={this.handleChange} />
+              <label htmlFor="location">City:</label>
+              <input
+                type="text"
+                name="location"
+                id="location"
+                value={user.nurse.location}
+                onChange={this.handleChange}
+              />
+              <label htmlFor="address">Address:</label>
+              <input type="text" name="address" id="address" value={user.nurse.address} onChange={this.handleChange} />
+              <label htmlFor="phone">Phone Number:</label>
+              <input type="number" name="phone" id="phone" value={user.nurse.phone} onChange={this.handleChange} />
+              <label htmlFor="specialty">Specialty:</label>
+              <input
+                type="text"
+                name="speciality"
+                id="speciality"
+                value={user.nurse.speciality}
+                onChange={this.handleChange}
+              />
+              <label htmlFor="birthday">BirthDay:</label>
+              <input
+                type="date"
+                name="birthday"
+                id="birthday"
+                value={user.nurse.birthday}
+                onChange={this.handleChange}
+              />
+              <label htmlFor="dni">DNI:</label>
+              <input type="text" name="dni" id="dni" value={user.nurse.dni} onChange={this.handleChange} />
+              <label htmlFor="driverLicense">Driver License?</label>
+              <input
+                type="checkbox"
+                name="driverLicense"
+                id="driverLicense"
+                checked={user.nurse.driverLicense}
+                onChange={this.handleChangeBox}
+              />
+              <label htmlFor="car">Got CAR?</label>
+              <input type="checkbox" name="car" id="car" checked={user.nurse.car} onChange={this.handleChangeBox} />
               <input type="submit" value="Update" />
             </form>
           </>
         )}
-        {/* {user.nurse.name} */}
-        {/* <form onSubmit={this.handleFormSubmit}>
-          <input type="hidden" name="company" value={company} />
-          <label>Username:</label>
-          <input type="text" name="username" value={username} onChange={this.handleChange} />
-          <label>Password:</label>
-          <input type="password" name="password" value={password} onChange={this.handleChange} />
-          <input type="submit" value="Signup" />
-        </form> */}
       </div>
     );
   }
 }
 
 export default withAuth(NurseUpdate);
-
-// import React, { Component } from 'react';
-// import bookService from '../../services/bookService';
-
-// class BookUpdate extends Component {
-//   state = {
-//     book: {},
-//     loading: true,
-//     message: undefined
-//   }
-
-//   async componentDidMount() {
-//     const { match: {params: { id }} } = this.props;
-//     try {
-//       const book = await bookService.getBookById(id)
-//       this.setState({
-//         book,
-//         loading: false,
-//       })
-//     } catch (error) {
-//       console.log(error);
-//       this.setState({
-//         loading: false,
-//       })
-//     }
-//   }
-
-//   handleChange = (e) => {
-//     const { book } = this.state;
-//     this.setState({
-//       book: {
-//         ...book,
-//         [e.target.name]: e.target.value,
-//       }
-//     })
-//   }
-
-//   handleSubmit = (e) => {
-//     e.preventDefault();
-//     const { book } = this.state;
-//     const { history: { push }} = this.props;
-//     console.log(book);
-//     bookService.updateBook(book)
-//       .then(() => {
-//         // this.setState({
-//         //   message: 'book updated',
-//         // })
-//         push(`/books/${book._id}`)
-//       })
-//       .catch(() => {})
-//   }
-
-//   render() {
-//     const { book: { title, author, description, rating }, loading, message } = this.state;
-
-//     return (
-//       <div>
-//         BookUpdate
-//         {message && <div>{message}</div> }
-//         {loading && <div>Loading...</div> }
-//         {!loading && (
-//           <>
-//           <form onSubmit={this.handleSubmit}>
-//             <label htmlFor="title">title</label>
-//             <input type="text" name="title" id="title" value={title} onChange={this.handleChange}/>
-//             <label htmlFor="author">author</label>
-//             <input type="text" name="author" id="author" value={author} onChange={this.handleChange}/>
-//             <label htmlFor="description">description</label>
-//             <input type="text" name="description" id="description" value={description} onChange={this.handleChange}/>
-//             <label htmlFor="rating">rating</label>
-//             <input type="number" name="rating" id="rating" value={rating} onChange={this.handleChange}/>
-//             <input type="submit" value="submit"/>
-//           </form>
-//           </>
-//         ) }
-//       </div>
-//     );
-//   }
-// }
-
-// export default BookUpdate;

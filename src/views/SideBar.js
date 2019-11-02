@@ -16,9 +16,15 @@ const SideBar = ({ user }) => {
       <Link to={`${url}/profile`}>
         <button type="button">PROFILE</button>
       </Link>
+      <Link to={`${url}/jobs`}>
+        <button type="button">JOBS</button>
+      </Link>
       <Switch>
         <Router exact path={`${path}/profile`}>
           <NurseUpdate />
+        </Router>
+        <Router exact path={`${path}/jobs`}>
+          <Home />
         </Router>
         {/* <Route exact path={path}>
           <h3>Please select a topic.</h3>
