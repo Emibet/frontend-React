@@ -24,7 +24,12 @@ class App extends Component {
             <img src={Emibet} alt="Logo Emibet" />
           </Link>
           {isLoggedin ? (
-            <button onClick={handleLogout}>logout</button>
+            <>
+              <Link to="/private">
+                <button type="button">Private Zone</button>
+              </Link>
+              <button onClick={handleLogout}>logout</button>
+            </>
           ) : (
             <>
               <Link to="/login">

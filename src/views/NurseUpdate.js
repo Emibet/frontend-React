@@ -111,13 +111,18 @@ class NurseUpdate extends Component {
     //   company,
     // });
     console.log('The USER to SEND: ', user);
+
     userService
       .updateUserNurse(user)
       .then(() => {
         this.setState({
           message: 'User Updated',
         });
+        console.log('UserUpdated');
       })
+      // .then(() => {
+      //   this.props.userData();
+      // })
       .catch(() => {
         console.log('catch');
       });
@@ -145,10 +150,13 @@ class NurseUpdate extends Component {
             <form onSubmit={this.handleFormSubmit}>
               <label htmlFor="name">Name:</label>
               <input type="text" name="name" id="name" value={user.nurse.name} onChange={this.handleChange} />
+              <br></br>
               <label htmlFor="surname">LastName:</label>
               <input type="text" name="surname" id="surname" value={user.nurse.surname} onChange={this.handleChange} />
+              <br></br>
               <label htmlFor="email">Email:</label>
               <input type="email" name="email" id="email" value={user.nurse.email} onChange={this.handleChange} />
+              <br></br>
               <label htmlFor="location">City:</label>
               <input
                 type="text"
@@ -157,11 +165,14 @@ class NurseUpdate extends Component {
                 value={user.nurse.location}
                 onChange={this.handleChange}
               />
+              <br></br>
               <label htmlFor="address">Address:</label>
               <input type="text" name="address" id="address" value={user.nurse.address} onChange={this.handleChange} />
+              <br></br>
               <label htmlFor="phone">Phone Number:</label>
               <input type="number" name="phone" id="phone" value={user.nurse.phone} onChange={this.handleChange} />
-              <label htmlFor="specialty">Specialty:</label>
+              <br></br>
+              <label htmlFor="specialty">Speciality:</label>
               <input
                 type="text"
                 name="speciality"
@@ -169,6 +180,7 @@ class NurseUpdate extends Component {
                 value={user.nurse.speciality}
                 onChange={this.handleChange}
               />
+              <br></br>
               <label htmlFor="birthday">BirthDay:</label>
               <input
                 type="date"
@@ -177,8 +189,10 @@ class NurseUpdate extends Component {
                 value={user.nurse.birthday}
                 onChange={this.handleChange}
               />
+              <br></br>
               <label htmlFor="dni">DNI:</label>
               <input type="text" name="dni" id="dni" value={user.nurse.dni} onChange={this.handleChange} />
+              <br></br>
               <label htmlFor="driverLicense">Driver License?</label>
               <input
                 type="checkbox"
@@ -187,8 +201,10 @@ class NurseUpdate extends Component {
                 checked={user.nurse.driverLicense}
                 onChange={this.handleChangeBox}
               />
+              <br></br>
               <label htmlFor="car">Got CAR?</label>
               <input type="checkbox" name="car" id="car" checked={user.nurse.car} onChange={this.handleChangeBox} />
+              <br></br>
               <input type="submit" value="Update" />
             </form>
           </>

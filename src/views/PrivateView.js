@@ -24,6 +24,7 @@ class PrivateView extends Component {
         {/* {user && <SideBar />}
         {user.company && <SideBar />} */}
         {isLoggedin && <SideBar />}
+        {isLoggedin && <Home />}
       </div>
     );
   }

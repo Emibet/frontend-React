@@ -14,7 +14,7 @@ export const withAuth = Comp => {
     render() {
       return (
         <AuthConsumer>
-          {({ isLoading, isLoggedin, user, handleLogin, handleLogout, handleSignup }) => (
+          {({ isLoading, isLoggedin, user, handleLogin, handleLogout, handleSignup, userData }) => (
             <Comp
               {...this.props}
               isLoading={isLoading}
@@ -23,6 +23,7 @@ export const withAuth = Comp => {
               handleLogin={handleLogin}
               handleLogout={handleLogout}
               handleSignup={handleSignup}
+              userData={userData}
             />
           )}
         </AuthConsumer>
@@ -39,6 +40,30 @@ export default class AuthProvider extends Component {
   };
 
   componentDidMount() {
+    // authService
+    //   .me()
+    //   .then(user => {
+    //     this.setState({
+    //       isLoggedin: true,
+    //       user,
+    //       isLoading: false,
+    //     });
+
+    //     console.log('me', user);
+    //   })
+    //   .catch(() => {
+    //     this.setState({
+    //       isLoading: false,
+    //     });
+    //   });
+    this.userData();
+  }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log('Component  UPDATED : ', prevState.user);
+  // }
+
+  userData = () => {
     authService
       .me()
       .then(user => {
@@ -48,14 +73,14 @@ export default class AuthProvider extends Component {
           isLoading: false,
         });
 
-        console.log('me', user);
+        console.log('USERDATA me', user);
       })
       .catch(() => {
         this.setState({
           isLoading: false,
         });
       });
-  }
+  };
 
   handleLogin = user => {
     authService
@@ -129,6 +154,7 @@ export default class AuthProvider extends Component {
             handleLogin: this.handleLogin,
             handleSignup: this.handleSignup,
             handleLogout: this.handleLogout,
+            userData: this.userData,
           }}
         >
           {children}
