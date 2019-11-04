@@ -23,12 +23,13 @@ class JobNew extends Component {
     //   },
     // } = this.props;
     const { user } = this.props; // Original
-    console.log('TCL: CompanyUpdate -> componentDidMount -> user', user);
+    console.log('TCL: JOB NEW -> componentDidMount -> user', user);
 
     try {
       this.setState({
         user,
         loading: false,
+        redirect: false,
       });
     } catch (error) {
       console.log(error);
@@ -110,9 +111,10 @@ class JobNew extends Component {
 
     console.log('PROPS: ', this.props);
 
-    if (redirect) {
-      return <Redirect to="/private/myjobs" />;
-    }
+    // if (redirect) {
+    //   console.log('REDIRECTS');
+    //   return <Redirect to={`/private/${user.username}/jobs`} />;
+    // }
 
     return (
       <div>

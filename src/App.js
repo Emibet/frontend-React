@@ -52,6 +52,7 @@ class App extends Component {
           <AnonRoute exact path="/signup-employee" component={Signup} />
           <AnonRoute exact path="/signup-contractor" component={Signup} />
           <PrivateRoute path="/private" component={PrivateView}></PrivateRoute>
+
           {/* <PrivateRoute exact path="/private">
             <PrivateView />
           </PrivateRoute> */}

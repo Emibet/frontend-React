@@ -12,6 +12,14 @@ class JobService {
     return this.job.get('/jobs/all').then(({ data }) => data);
   }
 
+  listCompanyJobs(username) {
+    return this.job.get(`/jobs/${username}/all`).then(({ data }) => data);
+  }
+
+  jobDetail(jobId) {
+    return this.job.get(`/jobs/${jobId}/detail`).then(({ data }) => data);
+  }
+
   addNewJob(job, username) {
     const {
       title,
