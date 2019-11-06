@@ -20,6 +20,14 @@ class JobService {
     return this.job.get(`/jobs/${jobId}/detail`).then(({ data }) => data);
   }
 
+  applytoJob(jobId, userId) {
+    return this.job.put(`/jobs/${jobId}/${userId}/add`).then(({ data }) => data);
+  }
+
+  cancelApplytoJob(jobId, userId) {
+    return this.job.put(`/jobs/${jobId}/${userId}/cancel`).then(({ data }) => data);
+  }
+
   addNewJob(job, username) {
     const {
       title,

@@ -6,7 +6,7 @@ import PrivateRoute from '../components/PrivateRoute';
 import jobService from '../services/jobService';
 import JobDetail from './JobDetail';
 
-class CompanyJobsList extends Component {
+class JobsToJoin extends Component {
   state = {
     jobs: [],
     loading: true,
@@ -18,10 +18,12 @@ class CompanyJobsList extends Component {
     const { user } = this.props;
     try {
       // console.log('TCL: componentDidMount -> username', username);
-      const jobs = await jobService.listCompanyJobs(user.username);
-      console.log('TCL: CompanyJobsList -> componentDidMount -> jobs', jobs);
+      const jobs = await jobService.listAllJobs();
+      const availableJobs = jobs.jobs.filter(job => job.done === false);
+      console.log('TCL: CompanyJobsList -> componentDidMount -> Dispo jobs', availableJobs);
       this.setState({
         jobs,
+        availableJobs,
         loading: false,
       });
     } catch (error) {
@@ -34,15 +36,15 @@ class CompanyJobsList extends Component {
   }
 
   render() {
-    const { jobs, loading, error, job } = this.state;
+    const { jobs, loading, error, job, availableJobs } = this.state;
     return (
       <div>
         {!error && (
           <>
-            <h1>My created Jobs:</h1>
+            <h1>Available Jobs:</h1>
 
             {!loading &&
-              jobs.jobs.map(job => {
+              availableJobs.map(job => {
                 return (
                   <div key={job._id}>
                     <Link to={`/jobs/${job._id}/detail`}>{job.title}</Link>
@@ -61,4 +63,4 @@ class CompanyJobsList extends Component {
   }
 }
 
-export default withAuth(CompanyJobsList);
+export default withAuth(JobsToJoin);

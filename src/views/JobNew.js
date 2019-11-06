@@ -113,7 +113,7 @@ class JobNew extends Component {
 
     // if (redirect) {
     //   console.log('REDIRECTS');
-    //   return <Redirect to={`/private/${user.username}/jobs`} />;
+    //   return <Redirect to={'/private/company/jobs'} />;
     // }
 
     return (

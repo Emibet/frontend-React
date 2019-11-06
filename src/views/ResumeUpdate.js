@@ -100,9 +100,9 @@ class NurseUpdate extends Component {
         });
         console.log('UserUpdated');
       })
-      // .then(() => {
-      //   this.props.userData();
-      // })
+      .then(() => {
+        this.props.userData();
+      })
       .catch(() => {
         console.log('catch');
       });

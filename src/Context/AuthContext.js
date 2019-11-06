@@ -40,22 +40,22 @@ export default class AuthProvider extends Component {
   };
 
   componentDidMount() {
-    // authService
-    //   .me()
-    //   .then(user => {
-    //     this.setState({
-    //       isLoggedin: true,
-    //       user,
-    //       isLoading: false,
-    //     });
+    authService
+      .me()
+      .then(user => {
+        this.setState({
+          isLoggedin: true,
+          user,
+          isLoading: false,
+        });
 
-    //     console.log('me', user);
-    //   })
-    //   .catch(() => {
-    //     this.setState({
-    //       isLoading: false,
-    //     });
-    //   });
+        console.log('me', user);
+      })
+      .catch(() => {
+        this.setState({
+          isLoading: false,
+        });
+      });
     this.userData();
   }
 

@@ -40,8 +40,8 @@ class NurseUpdate extends Component {
     //     });
     //   });
     // // Hasta aqui
-    console.log('PROPS NURSEUPDATE ComponentDidMount: ', this.props);
-    console.log('PROPS NURSEUPDATE ComponentDidMount:Nurse Birthday ', user.nurse.birthday);
+    // console.log('PROPS NURSEUPDATE ComponentDidMount: ', this.props);
+    // console.log('PROPS NURSEUPDATE ComponentDidMount:Nurse Birthday ', user.nurse.birthday);
     try {
       this.setState({
         user,
@@ -120,9 +120,9 @@ class NurseUpdate extends Component {
         });
         console.log('UserUpdated');
       })
-      // .then(() => {
-      //   this.props.userData();
-      // })
+      .then(() => {
+        this.props.userData();
+      })
       .catch(() => {
         console.log('catch');
       });

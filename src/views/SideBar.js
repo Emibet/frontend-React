@@ -8,6 +8,7 @@ import CompanyUpdate from './CompanyUpdate';
 import ResumeUpdate from './ResumeUpdate';
 import JobNew from './JobNew';
 import CompanyJobsList from './CompanyJobsList';
+import JobsToJoin from './JobsToJoin';
 
 const SideBar = ({ user, handleLogout, isLoggedin }) => {
   let { path, url } = useRouteMatch();
@@ -48,9 +49,9 @@ const SideBar = ({ user, handleLogout, isLoggedin }) => {
       )}
       {isLoggedin && <button onClick={handleLogout}>logout</button>}
       <Switch>
-        <Router exact path={`${path}/nurse/profile/edit`}>
+        <PrivateRoute exact path={`${path}/nurse/profile/edit`}>
           <NurseUpdate />
-        </Router>
+        </PrivateRoute>
         <Router exact path={`${path}/company/profile/edit`}>
           <CompanyUpdate />
         </Router>
@@ -64,7 +65,8 @@ const SideBar = ({ user, handleLogout, isLoggedin }) => {
           <ResumeUpdate />
         </Router>
         <Router exact path={`${path}/jobs`}>
-          <Home />
+          {/* <Home /> */}
+          <JobsToJoin />
         </Router>
         {/* <Router exact path={`${path}/${user.username}/jobs`}>
           <CompanyUpdate />

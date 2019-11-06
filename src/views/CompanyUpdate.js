@@ -66,9 +66,9 @@ class CompanyUpdate extends Component {
         });
         console.log('UserUpdated');
       })
-      // .then(() => {
-      //   this.props.userData();
-      // })
+      .then(() => {
+        this.props.userData();
+      })
       .catch(() => {
         console.log('catch');
       });
@@ -91,7 +91,7 @@ class CompanyUpdate extends Component {
               <label htmlFor="contactName">Contact Name:</label>
               <input
                 type="text"
-                contactName="contactName"
+                name="contactName"
                 id="contactName"
                 value={user.contactName}
                 onChange={this.handleChange}
