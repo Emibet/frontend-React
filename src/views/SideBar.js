@@ -45,6 +45,9 @@ const SideBar = ({ user, handleLogout, isLoggedin }) => {
           <Link to={`${url}/jobs`}>
             <button type="button">JOBS</button>
           </Link>
+          <Link to={`${url}/jobs/available`}>
+            <button type="button">Available JOBS</button>
+          </Link>
         </>
       )}
       {isLoggedin && <button onClick={handleLogout}>logout</button>}
@@ -66,6 +69,9 @@ const SideBar = ({ user, handleLogout, isLoggedin }) => {
         </Router>
         <Router exact path={`${path}/jobs`}>
           {/* <Home /> */}
+          <JobsToJoin />
+        </Router>
+        <Router exact path={`${path}/jobs/available`}>
           <JobsToJoin />
         </Router>
         {/* <Router exact path={`${path}/${user.username}/jobs`}>

@@ -11,45 +11,28 @@ class CardJob extends Component {
     this.handleCancelApplytoJob = this.handleCancelApplytoJob.bind(this);
   }
 
-  // state = {
-  //   loading: true,
-  //   applicant: false,
-  //   job: {},
-  //   user: {},
-  // };
-
   async componentDidMount() {
     // const { job, user } = this.props;
     const { job, user } = this.state;
-    // let applicant;
-    const isApplicant = await job.applicants.filter(applicant => applicant._id === user._id);
-    // const applicant = await job.applicants.includes(user._id);
-    console.log('TCL: CardJob -> componentDidMount -> applicant', isApplicant);
-    // if (isApplicant.length > 0) {
-    //   applicant = true;
-    // } else {
-    //   applicant = false;
-    // }
-    const applicant = isApplicant.length > 0;
-    // console.log('TCL: CardJob -> componentDidMount -> user', user);
-    // console.log('TCL: CardJob -> componentDidMount -> job', job);
-    // try {
-    // const newAplication = await jobService.applytoJob(job._id, user._id);
-    // console.log('TCL: CardJob -> componentDidMount -> newAplication', newAplication);
-    this.setState({
-      job,
-      user,
-      loading: false,
-      isApplicant,
-      applicant,
-    });
-    // } catch (error) {
-    //   console.log(error);
-    //   this.setState({
-    //     loading: false,
-    //     error: 'Unable to load JOBS',
-    //   });
-    // }
+    try {
+      const isApplicant = await job.applicants.filter(applicant => applicant._id === user._id);
+      console.log('TCL: CardJob -> componentDidMount -> applicant', isApplicant);
+      const applicant = isApplicant.length > 0;
+
+      this.setState({
+        job,
+        user,
+        loading: false,
+        isApplicant,
+        applicant,
+      });
+    } catch (error) {
+      console.log(error);
+      this.setState({
+        loading: false,
+        error: 'Unable to load JOBS',
+      });
+    }
   }
 
   handleApplytoJob = async () => {
@@ -57,8 +40,11 @@ class CardJob extends Component {
     console.log('Vamos a aplicar al Trabajo');
     try {
       const newAplication = await jobService.applytoJob(job._id, user._id);
-      const applicant = await newAplication.job.applicants.includes(user._id);
+      const isApplicant = await newAplication.job.applicants.filter(applicant => applicant._id === user._id);
+      const applicant = isApplicant.length > 0;
+      // const applicant = await newAplication.job.applicants.includes(user._id);
       console.log('TCL: CardJob -> handleApplytoJob -> newAplication', newAplication);
+      await this.props.userData();
       this.setState({
         job: newAplication.job,
         user: newAplication.user,
@@ -78,9 +64,12 @@ class CardJob extends Component {
     const { job, user } = this.state;
     console.log('Vamos a cancelar la aplicación al Trabajo');
 
-    const newAplication = await jobService.cancelApplytoJob(job._id, user._id);
-    const applicant = await newAplication.job.applicants.includes(user._id);
     try {
+      const newAplication = await jobService.cancelApplytoJob(job._id, user._id);
+      const isApplicant = await newAplication.job.applicants.filter(applicant => applicant._id === user._id);
+      const applicant = isApplicant.length > 0;
+      // const applicant = await newAplication.job.applicants.includes(user._id);
+      await this.props.userData();
       this.setState({
         job: newAplication.job,
         user: newAplication.user,
@@ -96,9 +85,16 @@ class CardJob extends Component {
     }
   };
 
+  componentDidUpdate(prevProps) {
+    console.log('This PROPS: ', this.props.job._id);
+    if (this.props !== prevProps) {
+      this.props.getJob(this.props.job._id);
+    }
+  }
+
   render() {
-    // const { job, user } = this.props;
-    const { job, user, applicant, isApplicant } = this.state;
+    const { job, user } = this.props;
+    const { applicant, isApplicant } = this.state;
     console.log('TCL: CardJob -> render -> job', job);
     console.log('TCL: CardJob -> render -> user', user);
     console.log('TCL: CardJob -> render -> applicant', applicant);
@@ -107,13 +103,20 @@ class CardJob extends Component {
       <div>
         <h1>Job Detail:</h1>
         {job.done && <h3>JOB COMPLETED</h3>}
+        {user.company && <>{job.applicants.length} Applicants</>}
         {!user.company && (
           <>
             {job.applicants.length} Applicants
             {!applicant ? (
-              <button onClick={this.handleApplytoJob}>Apply</button>
+              <>
+                <p>Want to APPLY?</p>
+                <button onClick={this.handleApplytoJob}>Apply</button>
+              </>
             ) : (
-              <button onClick={this.handleCancelApplytoJob}>Cancel Application</button>
+              <>
+                <p>You are an applicant!!</p>
+                <button onClick={this.handleCancelApplytoJob}>Cancel Application</button>
+              </>
             )}
           </>
         )}
