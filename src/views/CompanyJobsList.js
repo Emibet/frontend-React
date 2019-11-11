@@ -5,6 +5,9 @@ import AnonRoute from '../components/AnonRoute';
 import PrivateRoute from '../components/PrivateRoute';
 import jobService from '../services/jobService';
 import JobDetail from './JobDetail';
+import JobNew from './JobNew';
+import JobManage from './JobManage';
+import JobApplicants from './JobApplicants';
 
 class CompanyJobsList extends Component {
   state = {
@@ -16,6 +19,7 @@ class CompanyJobsList extends Component {
 
   async componentDidMount() {
     const { user } = this.props;
+    console.log('TCL: componentDidMount -> his.props', this.props);
     try {
       // console.log('TCL: componentDidMount -> username', username);
       const jobs = await jobService.listCompanyJobs(user.username);
@@ -45,7 +49,7 @@ class CompanyJobsList extends Component {
               jobs.jobs.map(job => {
                 return (
                   <div key={job._id}>
-                    <Link to={`/jobs/${job._id}/detail`}>{job.title}</Link>
+                    <Link to={`/private/company/jobs/${job._id}`}>{job.title}</Link>
                     {job.location}
                   </div>
                 );
@@ -54,7 +58,20 @@ class CompanyJobsList extends Component {
         )}
         {loading && <div>loading...</div>}
         <div className="col-7">
-          <PrivateRoute exact path="/jobs/:id/detail" component={JobDetail}></PrivateRoute>
+          <Switch>
+            <Route exact path="/private/company/jobs/:id" component={JobDetail}></Route>
+            {/* <Route
+              exact
+              path="/private/company/job/:id/manage"
+              render={matchProps => <JobManage {...matchProps} {...this.props} handleMatch={this.handleMatch} />}
+            />
+            <Route
+              path="/private/company/job/:id/manage/applicants"
+              // path={`${this.props.match.path}/applicants`}
+            >
+              <JobApplicants job={job} />
+            </Route> */}
+          </Switch>
         </div>
       </div>
     );

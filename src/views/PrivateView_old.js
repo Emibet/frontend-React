@@ -3,7 +3,8 @@ import { withAuth } from '../Context/AuthContext';
 import Home from './Home';
 import SideBar from './SideBar';
 
-const PrivateView = ({ user, isLoggedin }) => {
+const PrivateView = ({ user, isLoggedin, ...rest }) => {
+  // console.log('PROPS PrivateView', this.props);
   return (
     <div>
       {/* PrivateView user: {user.username}
@@ -11,7 +12,7 @@ const PrivateView = ({ user, isLoggedin }) => {
       User Type: {user.contactName} */}
       {/* <Home /> */}
       {/* {user && <SideBar />} */}
-      {isLoggedin && <SideBar />}
+      {isLoggedin && <SideBar {...rest} />}
       {/* {isLoggedin && <Home />} */}
     </div>
   );

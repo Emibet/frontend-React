@@ -13,6 +13,10 @@ class UserService {
     return this.user.put('/nurses/profile/edit', { nurse }).then(({ data }) => data);
   }
 
+  infoUserNurse(nurseId) {
+    return this.user.get(`/nurses/${nurseId}/detail`).then(({ data }) => data);
+  }
+
   // listAllJobs() {
   //   return this.job.get('/jobs/all').then(({ data }) => data);
   // }

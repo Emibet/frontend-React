@@ -16,6 +16,7 @@ class JobsToJoin extends Component {
 
   async componentDidMount() {
     const { user } = this.props;
+    console.log('TCL: componentDidMount -> this.props', this.props);
     try {
       // console.log('TCL: componentDidMount -> username', username);
       const jobs = await jobService.listAllJobs();
@@ -47,7 +48,7 @@ class JobsToJoin extends Component {
               availableJobs.map(job => {
                 return (
                   <div key={job._id}>
-                    <Link to={`/jobs/${job._id}/detail`}>{job.title}</Link>
+                    <Link to={`/jobs/available/${job._id}/detail`}>{job.title}</Link>
                     {job.location}
                   </div>
                 );
@@ -56,7 +57,9 @@ class JobsToJoin extends Component {
         )}
         {loading && <div>loading...</div>}
         <div className="col-7">
-          <PrivateRoute exact path="/jobs/:id/detail" component={JobDetail}></PrivateRoute>
+          <Switch>
+            <Route exact path="/jobs/available/:id/detail" component={JobDetail}></Route>
+          </Switch>
         </div>
       </div>
     );

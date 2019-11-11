@@ -12,6 +12,7 @@ import PrivateRoute from './components/PrivateRoute';
 import AnonRoute from './components/AnonRoute';
 import Home from './views/Home';
 import Emibet from './images/Emibet.jpg';
+import JobNew from './views/JobNew';
 
 class App extends Component {
   render() {
@@ -52,6 +53,7 @@ class App extends Component {
           <AnonRoute exact path="/signup-employee" component={Signup} />
           <AnonRoute exact path="/signup-contractor" component={Signup} />
           <PrivateRoute path="/private" component={PrivateView}></PrivateRoute>
+          {/* <PrivateRoute exact path="/private/comapny/jobs/manage" component={JobNew}></PrivateRoute> */}
 
           {/* <PrivateRoute exact path="/private">
             <PrivateView />

@@ -9,8 +9,9 @@ import ResumeUpdate from './ResumeUpdate';
 import JobNew from './JobNew';
 import CompanyJobsList from './CompanyJobsList';
 import JobsToJoin from './JobsToJoin';
+import JobsApplied from './JobsApplied';
 
-const SideBar = ({ user, handleLogout, isLoggedin }) => {
+const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
   let { path, url } = useRouteMatch();
   // const { handleLogout, isLoggedin } = this.props;
   console.log('TCL: SideBar -> user', user);
@@ -42,11 +43,11 @@ const SideBar = ({ user, handleLogout, isLoggedin }) => {
           <Link to={`${url}/CV`}>
             <button type="button">CV</button>
           </Link>
-          <Link to={`${url}/jobs`}>
+          <Link to={`${url}/jobs/available`}>
             <button type="button">JOBS</button>
           </Link>
-          <Link to={`${url}/jobs/available`}>
-            <button type="button">Available JOBS</button>
+          <Link to={`${url}/jobs/applied`}>
+            <button type="button">Applied JOBS</button>
           </Link>
         </>
       )}
@@ -62,17 +63,22 @@ const SideBar = ({ user, handleLogout, isLoggedin }) => {
           <JobNew />
         </Router>
         <Router exact path={`${path}/company/jobs`}>
-          <CompanyJobsList />
+          <CompanyJobsList {...rest} />
         </Router>
+
+        <Router exact path="/private/company/jobs/manage">
+          <JobNew />
+        </Router>
+
         <Router exact path={`${path}/CV`}>
           <ResumeUpdate />
         </Router>
-        <Router exact path={`${path}/jobs`}>
+        <Router exact path={`${path}/jobs/available`}>
           {/* <Home /> */}
           <JobsToJoin />
         </Router>
-        <Router exact path={`${path}/jobs/available`}>
-          <JobsToJoin />
+        <Router exact path={`${path}/jobs/applied`}>
+          <JobsApplied />
         </Router>
         {/* <Router exact path={`${path}/${user.username}/jobs`}>
           <CompanyUpdate />

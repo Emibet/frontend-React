@@ -13,7 +13,7 @@ class PrivateView extends Component {
 
   render() {
     const { isLoggedin, user } = this.props;
-    console.log('TCL: PrivateView -> render -> user', user);
+    console.log('TCL: PrivateView YES -> render -> user', user);
 
     return (
       <div>

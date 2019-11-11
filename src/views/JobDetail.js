@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Link, useParams, useRouteMatch } from 'react-router-dom';
 import jobService from '../services/jobService';
 import { withAuth } from '../Context/AuthContext';
 import CardJob from './CardJob';
+import JobNew from './JobNew';
+import JobManageActions from './JobManageActions';
+import JobApplicants from './JobApplicants';
+import NurseDetail from './NurseDetail';
 
 class JobDetail extends Component {
   constructor(props) {
@@ -12,6 +17,9 @@ class JobDetail extends Component {
       user: this.props.user,
       loading: true,
       error: undefined,
+      show: false,
+      manageJob: false,
+      viewApplicants: false,
     };
     this.handleApplytoJob = this.handleApplytoJob.bind(this);
     this.handleCancelApplytoJob = this.handleCancelApplytoJob.bind(this);
@@ -19,6 +27,8 @@ class JobDetail extends Component {
 
   async componentDidMount() {
     const { user } = this.props;
+    console.log('TCL: JobDetail -> componentDidMount -> this.props', this.props);
+
     const {
       params: { id },
     } = this.props.match;
@@ -34,6 +44,7 @@ class JobDetail extends Component {
         loading: false,
         isApplicant,
         applicant,
+        show: true,
       });
     } catch (error) {
       console.log(error);
@@ -54,6 +65,7 @@ class JobDetail extends Component {
         job: job.job,
         loading: false,
         applicant,
+        show: true,
       });
     } catch (error) {
       console.log(error);
@@ -115,14 +127,91 @@ class JobDetail extends Component {
     }
   };
 
+  handleShow = () => {
+    this.setState({
+      show: false,
+    });
+    this.props.history.push('/private/jobs/applied');
+  };
+
+  handleManageJob = () => {
+    const { manageJob } = this.state;
+    this.setState({
+      manageJob: !manageJob,
+    });
+    // this.props.history.push(`/private/company/job/${job._id}/manage`);
+  };
+
   componentDidUpdate(prevProps) {
+    console.log('UPDATE COMPONENT JOB DETAIL');
+    const { manageJob, viewApplicants } = this.state;
+    // console.log('TCL: JobDetail -> componentDidUpdate -> prevProps', prevProps);
+    // console.log('TCL: JobDetail -> componentDidUpdate -> this.props', this.props);
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.getJob(this.props.match.params.id);
+      this.setState({
+        viewApplicants: false,
+        manageJob: false,
+      });
     }
   }
 
+  handleViewApplicants = () => {
+    const { viewApplicants } = this.state;
+    this.setState({
+      viewApplicants: !viewApplicants,
+    });
+  };
+
+  handleAssignToJob = async (nurse, jobId) => {
+    const { user } = this.state;
+    const { userData } = this.props;
+    console.log('TCL: JobDetail -> handleAssignToJob -> user', user);
+    console.log('TCL: JobDetail -> handleAssignToJob -> nurse', nurse);
+    console.log('TCL: JobDetail -> handleAssignToJob -> jobId', jobId);
+    try {
+      const job = await jobService.confirmJob(jobId, nurse._id);
+      console.log('TCL: JobDetail -> handleAssignToJob -> job', job);
+      this.setState({
+        job: job.job,
+        // nurseWork: job.nurse,
+      });
+    } catch (error) {
+      console.log(error);
+      this.setState({
+        loading: false,
+        error: 'Unable to load JOBS',
+      });
+    }
+    // userData();
+  };
+
+  handleQuitFromJob = async (nurse, jobId) => {
+    const { user } = this.state;
+    const { userData } = this.props;
+    console.log('TCL: JobDetail -> handleQuitFromJob -> user', user);
+    console.log('TCL: JobDetail -> handleQuitFromJob -> nurse', nurse);
+    console.log('TCL: JobDetail -> handleQuitFromJob -> jobId', jobId);
+    try {
+      const job = await jobService.cancelJob(jobId, nurse._id);
+      console.log('TCL: JobDetail -> handleQuitFromJob -> job', job);
+      this.setState({
+        job: job.job,
+        // nurseWork: job.nurse,
+      });
+    } catch (error) {
+      console.log(error);
+      this.setState({
+        loading: false,
+        error: 'Unable to load JOBS',
+      });
+    }
+    // userData();
+  };
+
   render() {
-    const { job, user, applicant, isApplicant, loading, error } = this.state;
+    const { job, user, applicant, isApplicant, loading, error, show, manageJob, viewApplicants, nurse } = this.state;
+    console.log('TCL: JobDetail -> render -> job', job);
 
     const {
       params: { id },
@@ -134,25 +223,74 @@ class JobDetail extends Component {
           <>
             {!loading && (
               <>
-                <h1>Job Detail:</h1>
-                {job.done && <h3>JOB COMPLETED</h3>}
-                {job.applicants.length} Applicants
-                {!user.company && (
+                {show && (
                   <>
-                    {!applicant ? (
+                    <button onClick={this.handleShow}>Close Detail</button>
+                    {user.company && (
                       <>
-                        <p>Want to APPLY?</p>
-                        <button onClick={this.handleApplytoJob}>Apply</button>
+                        <div>
+                          <h2> COMPANY</h2>
+
+                          <button type="button" onClick={this.handleManageJob}>
+                            MANAGE JOB
+                          </button>
+                          {manageJob && <JobManageActions handleViewApplicants={this.handleViewApplicants} />}
+                        </div>
                       </>
-                    ) : (
+                    )}
+                    <h1>Job Detail:</h1>
+                    {job.done && <h3>JOB COMPLETED</h3>}
+                    {job.applicants.length} Applicants
+                    {!user.company && (
                       <>
-                        <p>You are an applicant!!</p>
-                        <button onClick={this.handleCancelApplytoJob}>Cancel Application</button>
+                        {!applicant ? (
+                          <>
+                            <p>Want to APPLY?</p>
+                            <button onClick={this.handleApplytoJob}>Apply</button>
+                          </>
+                        ) : (
+                          <>
+                            <p>You are an applicant!!</p>
+                            <button onClick={this.handleCancelApplytoJob}>Cancel Application</button>
+                          </>
+                        )}
+                      </>
+                    )}
+                    <CardJob job={job}></CardJob>
+                    {user.company && job.employee && (
+                      <>
+                        <p>The WORKER</p>
+                        <NurseDetail
+                          job={job}
+                          jobId={job._id}
+                          nurse={job.employee}
+                          handleAssignToJob={this.handleAssignToJob}
+                          handleQuitFromJob={this.handleQuitFromJob}
+                        />
+                      </>
+                    )}
+                    {user.company && viewApplicants && (
+                      <>
+                        <div>
+                          Applicants:
+                          {job.applicants.map(nurse => {
+                            return (
+                              <div key={nurse._id}>
+                                <NurseDetail
+                                  job={job}
+                                  jobId={job._id}
+                                  nurse={nurse}
+                                  handleAssignToJob={this.handleAssignToJob}
+                                  handleQuitFromJob={this.handleQuitFromJob}
+                                />
+                              </div>
+                            );
+                          })}
+                        </div>
                       </>
                     )}
                   </>
                 )}
-                <CardJob job={job}></CardJob>
               </>
             )}
           </>
