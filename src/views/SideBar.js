@@ -1,4 +1,5 @@
 import React from 'react';
+import styled, { css } from 'styled-components';
 import { BrowserRouter as Router, Switch, Link, useParams, useRouteMatch } from 'react-router-dom';
 import { withAuth } from '../Context/AuthContext';
 import Home from './Home';
@@ -11,6 +12,46 @@ import CompanyJobsList from './CompanyJobsList';
 import JobsToJoin from './JobsToJoin';
 import JobsApplied from './JobsApplied';
 
+const PrivateView = styled.div`
+  margin: 3em auto;
+  display: flex;
+  flex-direction: row;
+`;
+
+const Lateral = styled.div`
+  border-radius: 3px;
+  border: 2px solid #4f98d3;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  text-align: center;
+  line-height: 1.5em;
+`;
+
+const Button = styled.button`
+  background: transparent;
+  border-radius: 3px;
+  border: 2px solid #4f98d3;
+  color: #4f98d3;
+  margin: 0.25em auto;
+  padding: 0.25em 1em;
+  width: 80%
+    ${props =>
+      props.primary &&
+      css`
+        background: #4f98d3;
+        color: white;
+      `};
+`;
+
+const NurseUpdateCard = styled.div`
+  border-radius: 3px;
+  border: 2px solid #4f98d3;
+  width: 30%;
+  margin: auto;
+  padding: 0.25em 1em;
+`;
+
 const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
   let { path, url } = useRouteMatch();
   // const { handleLogout, isLoggedin } = this.props;
@@ -18,79 +59,90 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
 
   return (
     <div>
-      PrivateView user: {user.username}
-      <br></br>
-      User Type: {user.contactName}
-      {/* <Home /> */}
-      {user.company && (
-        <>
-          <Link to={`${url}/company/profile/edit`}>
-            <button type="button">Basic Company PROFILE</button>
-          </Link>
-          <Link to={`${url}/company/jobs`}>
-            <button type="button">MY JOBS</button>
-          </Link>
-          <Link to={`${url}/company/job/new`}>
-            <button type="button">ADD NEW JOB</button>
-          </Link>
-        </>
-      )}
-      {!user.company && (
-        <>
-          <Link to={`${url}/nurse/profile/edit`}>
-            <button type="button">Basic PROFILE</button>
-          </Link>
-          <Link to={`${url}/CV`}>
-            <button type="button">CV</button>
-          </Link>
-          <Link to={`${url}/jobs/available`}>
-            <button type="button">JOBS</button>
-          </Link>
-          <Link to={`${url}/jobs/applied`}>
-            <button type="button">Applied JOBS</button>
-          </Link>
-        </>
-      )}
-      {isLoggedin && <button onClick={handleLogout}>logout</button>}
-      <Switch>
-        <PrivateRoute exact path={`${path}/nurse/profile/edit`}>
-          <NurseUpdate />
-        </PrivateRoute>
-        <Router exact path={`${path}/company/profile/edit`}>
-          <CompanyUpdate />
-        </Router>
-        <Router exact path={`${path}/company/job/new`}>
-          <JobNew />
-        </Router>
-        <Router exact path={`${path}/company/jobs`}>
-          <CompanyJobsList {...rest} />
-        </Router>
-
-        <Router exact path="/private/company/jobs/manage">
-          <JobNew />
-        </Router>
-
-        <Router exact path={`${path}/CV`}>
-          <ResumeUpdate />
-        </Router>
-        <Router exact path={`${path}/jobs/available`}>
+      <PrivateView>
+        <Lateral>
+          PrivateView USER: {user.username}
+          <br></br>
+          User Type: {user.contactName}
           {/* <Home /> */}
-          <JobsToJoin />
-        </Router>
-        <Router exact path={`${path}/jobs/applied`}>
-          <JobsApplied />
-        </Router>
-        {/* <Router exact path={`${path}/${user.username}/jobs`}>
+          {user.company && (
+            <>
+              <Link to={`${url}/company/profile/edit`}>
+                <Button type="button">Basic Company PROFILE</Button>
+              </Link>
+              <Link to={`${url}/company/jobs`}>
+                <Button type="button">MY JOBS</Button>
+              </Link>
+              <Link to={`${url}/company/job/new`}>
+                <Button type="button">ADD NEW JOB</Button>
+              </Link>
+            </>
+          )}
+          {!user.company && (
+            <>
+              <Link to={`${url}/nurse/profile/edit`}>
+                <Button type="button">Basic PROFILE</Button>
+              </Link>
+              <Link to={`${url}/CV`}>
+                <Button type="button">CV</Button>
+              </Link>
+              <Link to={`${url}/jobs/available`}>
+                <Button type="button">JOBS</Button>
+              </Link>
+              <Link to={`${url}/jobs/applied`}>
+                <Button type="button">Applied JOBS</Button>
+              </Link>
+            </>
+          )}
+          {isLoggedin && (
+            <Button primary onClick={handleLogout}>
+              logout
+            </Button>
+          )}
+        </Lateral>
+
+        <Switch>
+          <PrivateRoute exact path={`${path}/nurse/profile/edit`}>
+            <NurseUpdateCard>
+              <NurseUpdate />
+            </NurseUpdateCard>
+          </PrivateRoute>
+          <Router exact path={`${path}/company/profile/edit`}>
+            <CompanyUpdate />
+          </Router>
+          <Router exact path={`${path}/company/job/new`}>
+            <JobNew />
+          </Router>
+          <Router exact path={`${path}/company/jobs`}>
+            <CompanyJobsList {...rest} />
+          </Router>
+
+          <Router exact path="/private/company/jobs/manage">
+            <JobNew />
+          </Router>
+
+          <Router exact path={`${path}/CV`}>
+            <ResumeUpdate />
+          </Router>
+          <Router exact path={`${path}/jobs/available`}>
+            {/* <Home /> */}
+            <JobsToJoin />
+          </Router>
+          <Router exact path={`${path}/jobs/applied`}>
+            <JobsApplied />
+          </Router>
+          {/* <Router exact path={`${path}/${user.username}/jobs`}>
           <CompanyUpdate />
         </Router> */}
 
-        {/* <Route exact path={path}>
+          {/* <Route exact path={path}>
           <h3>Please select a topic.</h3>
         </Route> */}
-        {/* <Route path={`${path}/:topicId`}>
+          {/* <Route path={`${path}/:topicId`}>
           <Topic />
         </Route> */}
-      </Switch>
+        </Switch>
+      </PrivateView>
     </div>
   );
 };
