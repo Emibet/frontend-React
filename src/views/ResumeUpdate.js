@@ -1,9 +1,49 @@
 import React, { Component } from 'react';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../Context/AuthContext';
 import userService from '../services/userService';
 import authService from '../services/authService';
 import FormExperience from './FormExperience';
+
+const InputSubmit = styled.input`
+  background-color: #4f98d3;
+  color: white;
+  padding: 0.5em 1.5em;
+  display: block;
+  margin: 0.5em auto;
+  border: none;
+  border-radius: 3px;
+  &:focus {
+    outline: none;
+  }
+`;
+
+const Input = styled.input`
+  display: block;
+  margin: 0.5em 0;
+  text-align:end;
+  font-size:1em;
+  // margin: 0.5em auto;
+  width: 100%
+  border: none;
+  border-bottom: 1px solid #757575;
+  &:focus {
+    outline: none;
+  }
+  .freelance {
+    
+    position: relative;
+    margin-left: 97%;
+    line-height: 1.5em;
+    margin-bottom: 2em;
+  }
+`;
+
+const Label = styled.label`
+  color: #4f98d3;
+  position: absolute;
+`;
 
 class NurseUpdate extends Component {
   state = {
@@ -134,28 +174,29 @@ class NurseUpdate extends Component {
         {!loading && (
           <>
             <form onSubmit={this.handleFormSubmit}>
-              <label htmlFor="licenseNumber">licenseNumber:</label>
-              <input
+              <Label htmlFor="licenseNumber">licenseNumber:</Label>
+              <Input
                 type="number"
                 name="licenseNumber"
                 id="licenseNumber"
                 value={nurse.resume.licenseNumber}
                 onChange={this.handleChange}
               />
-              <br></br>
-              <label htmlFor="freelance">Mark if you are Freelance:</label>
-              <input
+
+              <Label htmlFor="freelance">Mark if you are Freelance:</Label>
+              <Input
+                className="freelance"
                 type="checkbox"
                 name="freelance"
                 id="freelance"
                 checked={nurse.resume.freelance}
                 onChange={this.handleChangeBox}
               />
-              <br></br>
-              <label htmlFor="year">NurseDegree (Year):</label>
-              <input type="date" name="year" id="year" value={nurse.nurseDegree} onChange={this.handleChange} />
-              <br></br>
-              <label htmlFor="experience">Experience:</label>
+
+              <Label htmlFor="year">NurseDegree (Year):</Label>
+              <Input type="date" name="year" id="year" value={nurse.nurseDegree} onChange={this.handleChange} />
+
+              <Label htmlFor="experience">Experience:</Label>
               {nurse.resume.experience.map((oneExperience, index) => (
                 <FormExperience
                   key={index}
@@ -169,7 +210,7 @@ class NurseUpdate extends Component {
                   handleChange={this.handleChange}
                 />
               ))}
-              <input type="submit" value="Update" />
+              <InputSubmit type="submit" value="Update" />
             </form>
           </>
         )}

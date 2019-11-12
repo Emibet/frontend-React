@@ -1,8 +1,52 @@
 import React, { Component } from 'react';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../Context/AuthContext';
 import userService from '../services/userService';
 import authService from '../services/authService';
+
+const InputSubmit = styled.input`
+  background-color: #4f98d3;
+  color: white;
+  padding: 0.5em 1.5em;
+  display: block;
+  margin: 0.5em auto;
+  border: none;
+  border-radius: 3px;
+  &:focus {
+    outline: none;
+  }
+`;
+
+const Input = styled.input`
+  display: block;
+  margin: 0.5em 0;
+  text-align:end;
+  font-size:1em;
+  // margin: 0.5em auto;
+  width: 100%
+  border: none;
+  border-bottom: 1px solid #757575;
+  &:focus {
+    outline: none;
+  }
+`;
+
+const Label = styled.label`
+  color: #4f98d3;
+  position: absolute;
+`;
+
+const WrappCheckBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const WrappCheck = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+`;
 
 class NurseUpdate extends Component {
   state = {
@@ -141,71 +185,75 @@ class NurseUpdate extends Component {
 
     return (
       <div>
-        NURSE UPDATE COMPONENT:
+        NURSE UPDATE PROFILE:
         {username}
         {message && <div>{message}</div>}
         {loading && <div>Loading...</div>}
         {!loading && (
           <>
             <form onSubmit={this.handleFormSubmit}>
-              <label htmlFor="name">Name:</label>
-              <input type="text" name="name" id="name" value={user.nurse.name} onChange={this.handleChange} />
-              <br></br>
-              <label htmlFor="surname">LastName:</label>
-              <input type="text" name="surname" id="surname" value={user.nurse.surname} onChange={this.handleChange} />
-              <br></br>
-              <label htmlFor="email">Email:</label>
-              <input type="email" name="email" id="email" value={user.nurse.email} onChange={this.handleChange} />
-              <br></br>
-              <label htmlFor="location">City:</label>
-              <input
+              <Label htmlFor="name">Name:</Label>
+              <Input type="text" name="name" id="name" value={user.nurse.name} onChange={this.handleChange} />
+
+              <Label htmlFor="surname">LastName:</Label>
+              <Input type="text" name="surname" id="surname" value={user.nurse.surname} onChange={this.handleChange} />
+
+              <Label htmlFor="email">Email:</Label>
+              <Input type="email" name="email" id="email" value={user.nurse.email} onChange={this.handleChange} />
+
+              <Label htmlFor="location">City:</Label>
+              <Input
                 type="text"
                 name="location"
                 id="location"
                 value={user.nurse.location}
                 onChange={this.handleChange}
               />
-              <br></br>
-              <label htmlFor="address">Address:</label>
-              <input type="text" name="address" id="address" value={user.nurse.address} onChange={this.handleChange} />
-              <br></br>
-              <label htmlFor="phone">Phone Number:</label>
-              <input type="number" name="phone" id="phone" value={user.nurse.phone} onChange={this.handleChange} />
-              <br></br>
-              <label htmlFor="specialty">Speciality:</label>
-              <input
+
+              <Label htmlFor="address">Address:</Label>
+              <Input type="text" name="address" id="address" value={user.nurse.address} onChange={this.handleChange} />
+
+              <Label htmlFor="phone">Phone Number:</Label>
+              <Input type="number" name="phone" id="phone" value={user.nurse.phone} onChange={this.handleChange} />
+
+              <Label htmlFor="specialty">Speciality:</Label>
+              <Input
                 type="text"
                 name="speciality"
                 id="speciality"
                 value={user.nurse.speciality}
                 onChange={this.handleChange}
               />
-              <br></br>
-              <label htmlFor="birthday">BirthDay:</label>
-              <input
+
+              <Label htmlFor="birthday">BirthDay:</Label>
+              <Input
                 type="date"
                 name="birthday"
                 id="birthday"
                 value={user.nurse.birthday}
                 onChange={this.handleChange}
               />
-              <br></br>
-              <label htmlFor="dni">DNI:</label>
-              <input type="text" name="dni" id="dni" value={user.nurse.dni} onChange={this.handleChange} />
-              <br></br>
-              <label htmlFor="driverLicense">Driver License?</label>
-              <input
-                type="checkbox"
-                name="driverLicense"
-                id="driverLicense"
-                checked={user.nurse.driverLicense}
-                onChange={this.handleChangeBox}
-              />
-              <br></br>
-              <label htmlFor="car">Got CAR?</label>
-              <input type="checkbox" name="car" id="car" checked={user.nurse.car} onChange={this.handleChangeBox} />
-              <br></br>
-              <input type="submit" value="Update" />
+
+              <Label htmlFor="dni">DNI:</Label>
+              <Input type="text" name="dni" id="dni" value={user.nurse.dni} onChange={this.handleChange} />
+
+              <WrappCheck>
+                <WrappCheckBox>
+                  <label htmlFor="driverLicense">Driver License?</label>
+                  <input
+                    type="checkbox"
+                    name="driverLicense"
+                    id="driverLicense"
+                    checked={user.nurse.driverLicense}
+                    onChange={this.handleChangeBox}
+                  />
+                </WrappCheckBox>
+                <WrappCheckBox>
+                  <label htmlFor="car">Got CAR?</label>
+                  <input type="checkbox" name="car" id="car" checked={user.nurse.car} onChange={this.handleChangeBox} />
+                </WrappCheckBox>
+              </WrappCheck>
+              <InputSubmit type="submit" value="Update" />
             </form>
           </>
         )}

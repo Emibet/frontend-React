@@ -13,7 +13,7 @@ import JobsToJoin from './JobsToJoin';
 import JobsApplied from './JobsApplied';
 
 const PrivateView = styled.div`
-  margin: 3em auto;
+  margin: 1.3em auto;
   display: flex;
   flex-direction: row;
 `;
@@ -44,12 +44,13 @@ const Button = styled.button`
       `};
 `;
 
-const NurseUpdateCard = styled.div`
+const UpdateCard = styled.div`
   border-radius: 3px;
   border: 2px solid #4f98d3;
-  width: 30%;
+  width: 50%;
   margin: auto;
   padding: 0.25em 1em;
+  box-sizing: border-box;
 `;
 
 const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
@@ -103,12 +104,14 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
 
         <Switch>
           <PrivateRoute exact path={`${path}/nurse/profile/edit`}>
-            <NurseUpdateCard>
+            <UpdateCard>
               <NurseUpdate />
-            </NurseUpdateCard>
+            </UpdateCard>
           </PrivateRoute>
           <Router exact path={`${path}/company/profile/edit`}>
-            <CompanyUpdate />
+            <UpdateCard>
+              <CompanyUpdate />
+            </UpdateCard>
           </Router>
           <Router exact path={`${path}/company/job/new`}>
             <JobNew />
@@ -122,7 +125,9 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
           </Router>
 
           <Router exact path={`${path}/CV`}>
-            <ResumeUpdate />
+            <UpdateCard>
+              <ResumeUpdate />
+            </UpdateCard>
           </Router>
           <Router exact path={`${path}/jobs/available`}>
             {/* <Home /> */}
