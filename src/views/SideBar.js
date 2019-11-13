@@ -127,7 +127,9 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
             <JobNew />
           </Router>
           <Router exact path={`${path}/company/jobs`}>
-            <CompanyJobsList {...rest} />
+            <Card>
+              <CompanyJobsList {...rest} />
+            </Card>
           </Router>
 
           <Router exact path="/private/company/jobs/manage">

@@ -97,6 +97,7 @@ class JobDetail extends Component {
     // console.log('Vamos a aplicar al Trabajo');
     try {
       const newAplication = await jobService.applytoJob(job._id, user._id);
+      console.log('TCL: JobDetail -> handleApplytoJob -> newAplication', newAplication);
       const isApplicant = await newAplication.job.applicants.filter(applicant => applicant.user._id === user._id);
       const applicant = isApplicant.length > 0;
 

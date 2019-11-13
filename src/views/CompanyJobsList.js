@@ -8,6 +8,8 @@ import JobDetail from './JobDetail';
 import JobNew from './JobNew';
 import JobManage from './JobManage';
 import JobApplicants from './JobApplicants';
+import Card from '../ui/Card';
+import WrappFlex from '../ui/WrappFlex';
 
 class CompanyJobsList extends Component {
   state = {
@@ -40,40 +42,40 @@ class CompanyJobsList extends Component {
   render() {
     const { jobs, loading, error, job } = this.state;
     return (
-      <div>
+      <WrappFlex>
         {!error && (
-          <>
+          <div>
             <h1>My created Jobs:</h1>
 
             {!loading &&
               jobs.jobs.map(job => {
                 return (
-                  <div key={job._id}>
+                  <Card listed key={job._id}>
                     <Link to={`/private/company/jobs/${job._id}`}>{job.title}</Link>
                     {job.location}
-                  </div>
+                  </Card>
                 );
               })}
-          </>
+          </div>
         )}
         {loading && <div>loading...</div>}
-        <div className="col-7">
+        <WrappFlex jobDetail>
           <Switch>
             <Route exact path="/private/company/jobs/:id" component={JobDetail}></Route>
             {/* <Route
               exact
               path="/private/company/job/:id/manage"
               render={matchProps => <JobManage {...matchProps} {...this.props} handleMatch={this.handleMatch} />}
-            />
-            <Route
+              />
+              <Route
               path="/private/company/job/:id/manage/applicants"
               // path={`${this.props.match.path}/applicants`}
-            >
+              >
               <JobApplicants job={job} />
             </Route> */}
           </Switch>
-        </div>
-      </div>
+        </WrappFlex>
+      </WrappFlex>
     );
   }
 }
