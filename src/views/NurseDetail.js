@@ -95,11 +95,11 @@ class NurseDetail extends Component {
             </button>
           </>
         )}
-        <p>{nurse.username}</p>
-        <p> {nurse.nurse.location}</p>
+        <p>{nurse.user.username}</p>
+        <p> {nurse.user.nurse.location}</p>
         {showCV && (
           <>
-            {nurse.nurse.resume.freelance ? (
+            {nurse.user.nurse.resume.freelance ? (
               <>
                 <p>I`m Freelance</p>
               </>

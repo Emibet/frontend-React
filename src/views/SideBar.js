@@ -52,7 +52,7 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
               </Link>
               <Link to={`${url}/company/profile/edit`}>
                 <Button lateral type="button">
-                  Basic Company PROFILE
+                  Edit PROFILE
                 </Button>
               </Link>
               <Link to={`${url}/company/jobs`}>
@@ -76,7 +76,7 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
               </Link>
               <Link to={`${url}/nurse/profile/edit`}>
                 <Button lateral type="button">
-                  Basic PROFILE
+                  Edit PROFILE
                 </Button>
               </Link>
               <Link to={`${url}/CV`}>

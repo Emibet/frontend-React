@@ -45,8 +45,10 @@ class JobDetail extends Component {
     } = this.props.match;
     try {
       const job = await jobService.jobDetail(id);
+      console.log('TCL: JobDetail -> componentDidMount -> job', job);
 
-      const isApplicant = await job.job.applicants.filter(applicant => applicant._id === user._id);
+      const isApplicant = await job.job.applicants.filter(applicant => applicant.user._id === user._id);
+      console.log('TCL: JobDetail -> componentDidMount -> isApplicant', isApplicant);
       const applicant = isApplicant.length > 0;
 
       this.setState({
@@ -70,7 +72,9 @@ class JobDetail extends Component {
     const { user } = this.state;
     try {
       const job = await jobService.jobDetail(id);
-      const isApplicant = await job.job.applicants.filter(applicant => applicant._id === user._id);
+      console.log('TCL: JobDetail -> getJob -> job', job);
+      const isApplicant = await job.job.applicants.filter(applicant => applicant.user._id === user._id);
+      console.log('TCL: JobDetail -> getJob -> isApplicant', isApplicant);
       const applicant = isApplicant.length > 0;
       this.setState({
         job: job.job,
@@ -93,7 +97,7 @@ class JobDetail extends Component {
     // console.log('Vamos a aplicar al Trabajo');
     try {
       const newAplication = await jobService.applytoJob(job._id, user._id);
-      const isApplicant = await newAplication.job.applicants.filter(applicant => applicant._id === user._id);
+      const isApplicant = await newAplication.job.applicants.filter(applicant => applicant.user._id === user._id);
       const applicant = isApplicant.length > 0;
 
       await this.props.userData();
@@ -119,7 +123,7 @@ class JobDetail extends Component {
 
     try {
       const newAplication = await jobService.cancelApplytoJob(job._id, user._id);
-      const isApplicant = await newAplication.job.applicants.filter(applicant => applicant._id === user._id);
+      const isApplicant = await newAplication.job.applicants.filter(applicant => applicant.user._id === user._id);
       const applicant = isApplicant.length > 0;
       // const applicant = await newAplication.job.applicants.includes(user._id);
       await this.props.userData();
