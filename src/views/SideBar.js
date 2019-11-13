@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Link, useParams, useRouteMatch } from 
 import { withAuth } from '../Context/AuthContext';
 import Home from './Home';
 import PrivateRoute from '../components/PrivateRoute';
+import AnonRoute from '../components/AnonRoute';
 import NurseUpdate from './NurseUpdate';
 import CompanyUpdate from './CompanyUpdate';
 import ResumeUpdate from './ResumeUpdate';
@@ -51,6 +52,17 @@ const UpdateCard = styled.div`
   margin: auto;
   padding: 0.25em 1em;
   box-sizing: border-box;
+`;
+
+const JobsListCard = styled.div`
+  border-radius: 3px;
+  border: 2px solid #4f98d3;
+  width: 60%;
+  margin-left: 3em;
+  padding: 0.25em 1em;
+  // box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
 `;
 
 const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
@@ -103,6 +115,9 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
         </Lateral>
 
         <Switch>
+          <AnonRoute exact path="/">
+            <Home />
+          </AnonRoute>
           <PrivateRoute exact path={`${path}/nurse/profile/edit`}>
             <UpdateCard>
               <NurseUpdate />
@@ -131,10 +146,14 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
           </Router>
           <Router exact path={`${path}/jobs/available`}>
             {/* <Home /> */}
-            <JobsToJoin />
+            <JobsListCard>
+              <JobsToJoin />
+            </JobsListCard>
           </Router>
           <Router exact path={`${path}/jobs/applied`}>
-            <JobsApplied />
+            <JobsListCard>
+              <JobsApplied />
+            </JobsListCard>
           </Router>
           {/* <Router exact path={`${path}/${user.username}/jobs`}>
           <CompanyUpdate />

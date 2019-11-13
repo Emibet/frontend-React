@@ -31,12 +31,12 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
-  .freelance {
+  &.freelance {
     
-    position: relative;
-    margin-left: 97%;
-    line-height: 1.5em;
-    margin-bottom: 2em;
+    outline: 1px solid #1e5180;
+    display: block;
+    width: 5%;
+    margin-left: auto;
   }
 `;
 
@@ -167,7 +167,7 @@ class NurseUpdate extends Component {
     console.log('TCL: NurseUpdate -> render -> nurse.experience', nurse);
     return (
       <div>
-        NURSE UPDATE RESUME COMPONENT:
+        NURSE UPDATE RESUME:
         {username}
         {message && <div>{message}</div>}
         {loading && <div>Loading...</div>}
@@ -179,6 +179,7 @@ class NurseUpdate extends Component {
                 type="number"
                 name="licenseNumber"
                 id="licenseNumber"
+                placeholder="fill License Number"
                 value={nurse.resume.licenseNumber}
                 onChange={this.handleChange}
               />

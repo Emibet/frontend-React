@@ -44,9 +44,9 @@ const WrappButtonHeader = styled.div`
 `;
 
 const WrappHeader = styled.section`
-    display:flex;
-    align-items; flex-start;
-    justify-content: space-between
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
 `;
 
 const WrappImage = styled.div`

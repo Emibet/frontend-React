@@ -123,6 +123,7 @@ export default class AuthProvider extends Component {
     authService
       .logout()
       .then(() => {
+        this.props.history.push('/');
         this.setState({
           isLoggedin: false,
           user: undefined,

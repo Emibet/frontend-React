@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
+import styled, { css } from 'styled-components';
 import { Switch, Route, Link } from 'react-router-dom';
 import { withAuth } from '../Context/AuthContext';
 import AnonRoute from '../components/AnonRoute';
 import PrivateRoute from '../components/PrivateRoute';
 import jobService from '../services/jobService';
 import JobDetail from './JobDetail';
+
+const WrappListAndDetail = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const JobsListCard = styled.div`
+  border-radius: 3px;
+  border: 2px solid #4f98d3;
+  // width: 100%;
+  margin: auto;
+  padding: 0.25em 1em;
+  box-sizing: border-box;
+`;
 
 class JobsToJoin extends Component {
   state = {
@@ -39,9 +54,9 @@ class JobsToJoin extends Component {
   render() {
     const { jobs, loading, error, job, availableJobs } = this.state;
     return (
-      <div>
+      <WrappListAndDetail>
         {!error && (
-          <>
+          <JobsListCard>
             <h1>Available Jobs:</h1>
 
             {!loading &&
@@ -53,15 +68,16 @@ class JobsToJoin extends Component {
                   </div>
                 );
               })}
-          </>
+          </JobsListCard>
         )}
         {loading && <div>loading...</div>}
-        <div className="col-7">
+
+        <div>
           <Switch>
             <Route exact path="/jobs/available/:id/detail" component={JobDetail}></Route>
           </Switch>
         </div>
-      </div>
+      </WrappListAndDetail>
     );
   }
 }

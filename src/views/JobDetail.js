@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styled, { css } from 'styled-components';
 import { BrowserRouter as Router, Switch, Link, useParams, useRouteMatch } from 'react-router-dom';
 import jobService from '../services/jobService';
 import { withAuth } from '../Context/AuthContext';
@@ -7,6 +8,15 @@ import JobNew from './JobNew';
 import JobManageActions from './JobManageActions';
 import JobApplicants from './JobApplicants';
 import NurseDetail from './NurseDetail';
+
+const JobDetailCard = styled.div`
+  border-radius: 3px;
+  border: 2px solid #4f98d3;
+  // width: 100%;
+  margin-left: 2em;
+  padding: 0.25em 1em;
+  box-sizing: border-box;
+`;
 
 class JobDetail extends Component {
   constructor(props) {
@@ -223,74 +233,76 @@ class JobDetail extends Component {
           <>
             {!loading && (
               <>
-                {show && (
-                  <>
-                    <button onClick={this.handleShow}>Close Detail</button>
-                    {user.company && (
-                      <>
-                        <div>
-                          <h2> COMPANY</h2>
+                <JobDetailCard>
+                  {show && (
+                    <>
+                      <button onClick={this.handleShow}>Close Detail</button>
+                      {user.company && (
+                        <>
+                          <div>
+                            <h2> COMPANY</h2>
 
-                          <button type="button" onClick={this.handleManageJob}>
-                            MANAGE JOB
-                          </button>
-                          {manageJob && <JobManageActions handleViewApplicants={this.handleViewApplicants} />}
-                        </div>
-                      </>
-                    )}
-                    <h1>Job Detail:</h1>
-                    {job.done && <h3>JOB COMPLETED</h3>}
-                    {job.applicants.length} Applicants
-                    {!user.company && (
-                      <>
-                        {!applicant ? (
-                          <>
-                            <p>Want to APPLY?</p>
-                            <button onClick={this.handleApplytoJob}>Apply</button>
-                          </>
-                        ) : (
-                          <>
-                            <p>You are an applicant!!</p>
-                            <button onClick={this.handleCancelApplytoJob}>Cancel Application</button>
-                          </>
-                        )}
-                      </>
-                    )}
-                    <CardJob job={job}></CardJob>
-                    {user.company && job.employee && (
-                      <>
-                        <p>The WORKER</p>
-                        <NurseDetail
-                          job={job}
-                          jobId={job._id}
-                          nurse={job.employee}
-                          handleAssignToJob={this.handleAssignToJob}
-                          handleQuitFromJob={this.handleQuitFromJob}
-                        />
-                      </>
-                    )}
-                    {user.company && viewApplicants && (
-                      <>
-                        <div>
-                          Applicants:
-                          {job.applicants.map(nurse => {
-                            return (
-                              <div key={nurse._id}>
-                                <NurseDetail
-                                  job={job}
-                                  jobId={job._id}
-                                  nurse={nurse}
-                                  handleAssignToJob={this.handleAssignToJob}
-                                  handleQuitFromJob={this.handleQuitFromJob}
-                                />
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </>
-                    )}
-                  </>
-                )}
+                            <button type="button" onClick={this.handleManageJob}>
+                              MANAGE JOB
+                            </button>
+                            {manageJob && <JobManageActions handleViewApplicants={this.handleViewApplicants} />}
+                          </div>
+                        </>
+                      )}
+                      <h1>Job Detail:</h1>
+                      {job.done && <h3>JOB COMPLETED</h3>}
+                      {job.applicants.length} Applicants
+                      {!user.company && (
+                        <>
+                          {!applicant ? (
+                            <>
+                              <p>Want to APPLY?</p>
+                              <button onClick={this.handleApplytoJob}>Apply</button>
+                            </>
+                          ) : (
+                            <>
+                              <p>You are an applicant!!</p>
+                              <button onClick={this.handleCancelApplytoJob}>Cancel Application</button>
+                            </>
+                          )}
+                        </>
+                      )}
+                      <CardJob job={job}></CardJob>
+                      {user.company && job.employee && (
+                        <>
+                          <p>The WORKER</p>
+                          <NurseDetail
+                            job={job}
+                            jobId={job._id}
+                            nurse={job.employee}
+                            handleAssignToJob={this.handleAssignToJob}
+                            handleQuitFromJob={this.handleQuitFromJob}
+                          />
+                        </>
+                      )}
+                      {user.company && viewApplicants && (
+                        <>
+                          <div>
+                            Applicants:
+                            {job.applicants.map(nurse => {
+                              return (
+                                <div key={nurse._id}>
+                                  <NurseDetail
+                                    job={job}
+                                    jobId={job._id}
+                                    nurse={nurse}
+                                    handleAssignToJob={this.handleAssignToJob}
+                                    handleQuitFromJob={this.handleQuitFromJob}
+                                  />
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </>
+                      )}
+                    </>
+                  )}
+                </JobDetailCard>
               </>
             )}
           </>
