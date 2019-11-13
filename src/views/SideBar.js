@@ -13,46 +13,11 @@ import CompanyJobsList from './CompanyJobsList';
 import JobsToJoin from './JobsToJoin';
 import JobsApplied from './JobsApplied';
 
-const PrivateView = styled.div`
-  margin: 1.3em auto;
-  display: flex;
-  flex-direction: row;
-`;
-
-const Lateral = styled.div`
-  border-radius: 3px;
-  border: 2px solid #4f98d3;
-  display: flex;
-  flex-direction: column;
-  width: 20%;
-  text-align: center;
-  line-height: 1.5em;
-`;
-
-const Button = styled.button`
-  background: transparent;
-  border-radius: 3px;
-  border: 2px solid #4f98d3;
-  color: #4f98d3;
-  margin: 0.25em auto;
-  padding: 0.25em 1em;
-  width: 80%
-    ${props =>
-      props.primary &&
-      css`
-        background: #4f98d3;
-        color: white;
-      `};
-`;
-
-const UpdateCard = styled.div`
-  border-radius: 3px;
-  border: 2px solid #4f98d3;
-  width: 50%;
-  margin: auto;
-  padding: 0.25em 1em;
-  box-sizing: border-box;
-`;
+import Card from '../ui/Card';
+import PrivateView from '../ui/PrivateView';
+import Lateral from '../ui/Lateral';
+import Button from '../ui/Button';
+import UserData from './UserData';
 
 const JobsListCard = styled.div`
   border-radius: 3px;
@@ -74,41 +39,65 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
     <div>
       <PrivateView>
         <Lateral>
-          PrivateView USER: {user.username}
+          <h3 className="h3">Username:</h3> {user.username}
           <br></br>
           User Type: {user.contactName}
           {/* <Home /> */}
           {user.company && (
             <>
+              <Link to={`${url}`}>
+                <Button lateral type="button">
+                  My Info
+                </Button>
+              </Link>
               <Link to={`${url}/company/profile/edit`}>
-                <Button type="button">Basic Company PROFILE</Button>
+                <Button lateral type="button">
+                  Basic Company PROFILE
+                </Button>
               </Link>
               <Link to={`${url}/company/jobs`}>
-                <Button type="button">MY JOBS</Button>
+                <Button lateral type="button">
+                  MY JOBS
+                </Button>
               </Link>
               <Link to={`${url}/company/job/new`}>
-                <Button type="button">ADD NEW JOB</Button>
+                <Button lateral type="button">
+                  ADD NEW JOB
+                </Button>
               </Link>
             </>
           )}
           {!user.company && (
             <>
+              <Link to={`${url}`}>
+                <Button lateral type="button">
+                  My Info
+                </Button>
+              </Link>
               <Link to={`${url}/nurse/profile/edit`}>
-                <Button type="button">Basic PROFILE</Button>
+                <Button lateral type="button">
+                  Basic PROFILE
+                </Button>
               </Link>
               <Link to={`${url}/CV`}>
-                <Button type="button">CV</Button>
+                <Button lateral type="button">
+                  CV
+                </Button>
               </Link>
               <Link to={`${url}/jobs/available`}>
-                <Button type="button">JOBS</Button>
+                <Button lateral type="button">
+                  JOBS
+                </Button>
               </Link>
               <Link to={`${url}/jobs/applied`}>
-                <Button type="button">Applied JOBS</Button>
+                <Button lateral type="button">
+                  Applied JOBS
+                </Button>
               </Link>
             </>
           )}
           {isLoggedin && (
-            <Button primary onClick={handleLogout}>
+            <Button primary lateral onClick={handleLogout}>
               logout
             </Button>
           )}
@@ -118,15 +107,21 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
           <AnonRoute exact path="/">
             <Home />
           </AnonRoute>
+          <PrivateRoute exact path={`${path}/`}>
+            <Card>
+              {/* <Home /> */}
+              <UserData />
+            </Card>
+          </PrivateRoute>
           <PrivateRoute exact path={`${path}/nurse/profile/edit`}>
-            <UpdateCard>
+            <Card>
               <NurseUpdate />
-            </UpdateCard>
+            </Card>
           </PrivateRoute>
           <Router exact path={`${path}/company/profile/edit`}>
-            <UpdateCard>
+            <Card>
               <CompanyUpdate />
-            </UpdateCard>
+            </Card>
           </Router>
           <Router exact path={`${path}/company/job/new`}>
             <JobNew />
@@ -140,20 +135,20 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
           </Router>
 
           <Router exact path={`${path}/CV`}>
-            <UpdateCard>
+            <Card>
               <ResumeUpdate />
-            </UpdateCard>
+            </Card>
           </Router>
           <Router exact path={`${path}/jobs/available`}>
             {/* <Home /> */}
-            <JobsListCard>
+            <Card>
               <JobsToJoin />
-            </JobsListCard>
+            </Card>
           </Router>
           <Router exact path={`${path}/jobs/applied`}>
-            <JobsListCard>
+            <Card>
               <JobsApplied />
-            </JobsListCard>
+            </Card>
           </Router>
           {/* <Router exact path={`${path}/${user.username}/jobs`}>
           <CompanyUpdate />

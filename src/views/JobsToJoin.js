@@ -6,11 +6,13 @@ import AnonRoute from '../components/AnonRoute';
 import PrivateRoute from '../components/PrivateRoute';
 import jobService from '../services/jobService';
 import JobDetail from './JobDetail';
+import Card from '../ui/Card';
+import WrappFlex from '../ui/WrappFlex';
 
-const WrappListAndDetail = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
+// const WrappFlex = styled.div`
+//   display: flex;
+//   flex-direction: row;
+// `;
 
 const JobsListCard = styled.div`
   border-radius: 3px;
@@ -54,30 +56,32 @@ class JobsToJoin extends Component {
   render() {
     const { jobs, loading, error, job, availableJobs } = this.state;
     return (
-      <WrappListAndDetail>
+      <WrappFlex>
         {!error && (
-          <JobsListCard>
+          <div>
             <h1>Available Jobs:</h1>
 
             {!loading &&
               availableJobs.map(job => {
                 return (
-                  <div key={job._id}>
+                  // <Card listed>
+                  <Card listed key={job._id}>
                     <Link to={`/jobs/available/${job._id}/detail`}>{job.title}</Link>
                     {job.location}
-                  </div>
+                  </Card>
+                  // </Card>
                 );
               })}
-          </JobsListCard>
+          </div>
         )}
         {loading && <div>loading...</div>}
 
-        <div>
+        <WrappFlex jobDetail>
           <Switch>
             <Route exact path="/jobs/available/:id/detail" component={JobDetail}></Route>
           </Switch>
-        </div>
-      </WrappListAndDetail>
+        </WrappFlex>
+      </WrappFlex>
     );
   }
 }

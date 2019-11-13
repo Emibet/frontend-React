@@ -17,51 +17,12 @@ import Home from './views/Home';
 import Emibet from './images/Emibet.jpg';
 import JobNew from './views/JobNew';
 
-const Button = styled.button`
-  background: transparent;
-  border-radius: 3px;
-  border: 2px solid #4f98d3;
-  color: #4f98d3;
-  margin: 0.25em 1em;
-  padding: 0.25em 1em;
-
-  ${props =>
-    props.primary &&
-    css`
-      background: #4f98d3;
-      color: white;
-    `};
-`;
-
-const WrappSignUp = styled.div`
-  display: inline-flex;
-  flex-direction: column;
-`;
-
-const WrappButtonHeader = styled.div`
-  display: inline;
-  align-items: center;
-`;
-
-const WrappHeader = styled.section`
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-`;
-
-const WrappImage = styled.div`
-  max-width: 75%;
-  height: auto;
-  .imgLogo {
-    width: 100%;
-    height: 100%;
-  }
-`;
-
-const WrappLogOutPrivate = styled.div`
-  display: block;
-  text-align: end;
-`;
+import Button from './ui/Button';
+import WrappSignUp from './ui/WrappSignUp';
+import WrappButtonHeader from './ui/WrappButtonHeader';
+import WrappHeader from './ui/WrappHeader';
+import WrappImage from './ui/WrappImage';
+import WrappLogOutPrivate from './ui/WrappLogOutPrivate';
 
 class App extends Component {
   render() {

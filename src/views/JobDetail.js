@@ -8,15 +8,16 @@ import JobNew from './JobNew';
 import JobManageActions from './JobManageActions';
 import JobApplicants from './JobApplicants';
 import NurseDetail from './NurseDetail';
+import Card from '../ui/Card';
 
-const JobDetailCard = styled.div`
-  border-radius: 3px;
-  border: 2px solid #4f98d3;
-  // width: 100%;
-  margin-left: 2em;
-  padding: 0.25em 1em;
-  box-sizing: border-box;
-`;
+// const Card = styled.div`
+//   border-radius: 3px;
+//   border: 2px solid #4f98d3;
+//   // width: 100%;
+//   margin-left: 2em;
+//   padding: 0.25em 1em;
+//   box-sizing: border-box;
+// `;
 
 class JobDetail extends Component {
   constructor(props) {
@@ -233,20 +234,18 @@ class JobDetail extends Component {
           <>
             {!loading && (
               <>
-                <JobDetailCard>
+                <Card detailJob>
                   {show && (
                     <>
                       <button onClick={this.handleShow}>Close Detail</button>
                       {user.company && (
                         <>
-                          <div>
-                            <h2> COMPANY</h2>
+                          <h2> COMPANY</h2>
 
-                            <button type="button" onClick={this.handleManageJob}>
-                              MANAGE JOB
-                            </button>
-                            {manageJob && <JobManageActions handleViewApplicants={this.handleViewApplicants} />}
-                          </div>
+                          <button type="button" onClick={this.handleManageJob}>
+                            MANAGE JOB
+                          </button>
+                          {manageJob && <JobManageActions handleViewApplicants={this.handleViewApplicants} />}
                         </>
                       )}
                       <h1>Job Detail:</h1>
@@ -302,7 +301,7 @@ class JobDetail extends Component {
                       )}
                     </>
                   )}
-                </JobDetailCard>
+                </Card>
               </>
             )}
           </>
