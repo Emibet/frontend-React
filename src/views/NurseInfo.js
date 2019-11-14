@@ -1,6 +1,7 @@
 import React from 'react';
 
 const NurseInfo = props => {
+  console.log('TCL: props NURSE INFO', props);
   const {
     address,
     dni,

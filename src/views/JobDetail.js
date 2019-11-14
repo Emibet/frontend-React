@@ -22,9 +22,8 @@ import Card from '../ui/Card';
 class JobDetail extends Component {
   constructor(props) {
     super(props);
-    // No llames this.setState() aquí!
+
     this.state = {
-      // job: this.props.job,
       job: {},
       user: this.props.user,
       loading: true,
@@ -32,6 +31,7 @@ class JobDetail extends Component {
       show: false,
       manageJob: false,
       viewApplicants: false,
+      changingState: false,
     };
     this.handleApplytoJob = this.handleApplytoJob.bind(this);
     this.handleCancelApplytoJob = this.handleCancelApplytoJob.bind(this);
@@ -39,18 +39,15 @@ class JobDetail extends Component {
 
   async componentDidMount() {
     const { user } = this.props;
-    console.log('TCL: JobDetail -> componentDidMount -> this.props', this.props);
 
     const {
       params: { id },
     } = this.props.match;
     try {
       const job = await jobService.jobDetail(id);
-      console.log('TCL: JobDetail -> componentDidMount -> job', job);
 
-      // const isApplicant = await job.job.applicants.filter(applicant => applicant.user._id === user._id);
       const isApplicant = 0;
-      console.log('TCL: JobDetail -> componentDidMount -> isApplicant', isApplicant);
+
       const applicant = isApplicant.length > 0;
 
       this.setState({
@@ -74,9 +71,9 @@ class JobDetail extends Component {
     const { user } = this.state;
     try {
       const job = await jobService.jobDetail(id);
-      console.log('TCL: JobDetail -> getJob -> job', job);
+
       const isApplicant = await job.job.applicants.filter(applicant => applicant.user._id === user._id);
-      console.log('TCL: JobDetail -> getJob -> isApplicant', isApplicant);
+
       const applicant = isApplicant.length > 0;
       this.setState({
         job: job.job,
@@ -96,10 +93,9 @@ class JobDetail extends Component {
   handleApplytoJob = async () => {
     const { job, user } = this.state;
 
-    // console.log('Vamos a aplicar al Trabajo');
     try {
       const newAplication = await jobService.applytoJob(job._id, user._id);
-      console.log('TCL: JobDetail -> handleApplytoJob -> newAplication', newAplication);
+
       const isApplicant = await newAplication.job.applicants.filter(applicant => applicant.user._id === user._id);
       const applicant = isApplicant.length > 0;
 
@@ -122,13 +118,11 @@ class JobDetail extends Component {
   handleCancelApplytoJob = async () => {
     const { job, user } = this.state;
 
-    // console.log('Vamos a cancelar la aplicación al Trabajo');
-
     try {
       const newAplication = await jobService.cancelApplytoJob(job._id, user._id);
       const isApplicant = await newAplication.job.applicants.filter(applicant => applicant.user._id === user._id);
       const applicant = isApplicant.length > 0;
-      // const applicant = await newAplication.job.applicants.includes(user._id);
+
       await this.props.userData();
       this.setState({
         job: newAplication.job,
@@ -158,14 +152,11 @@ class JobDetail extends Component {
       manageJob: !manageJob,
       viewApplicants: viewApplicants ? !viewApplicants : viewApplicants,
     });
-    // this.props.history.push(`/private/company/job/${job._id}/manage`);
   };
 
   componentDidUpdate(prevProps) {
-    console.log('UPDATE COMPONENT JOB DETAIL');
     const { manageJob, viewApplicants } = this.state;
-    // console.log('TCL: JobDetail -> componentDidUpdate -> prevProps', prevProps);
-    // console.log('TCL: JobDetail -> componentDidUpdate -> this.props', this.props);
+
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.getJob(this.props.match.params.id);
       this.setState({
@@ -185,16 +176,12 @@ class JobDetail extends Component {
   handleAssignToJob = async (jobId, nurseId, applicationId) => {
     const { user } = this.state;
     const { userData } = this.props;
-    console.log('TCL: JobDetail -> handleAssignToJob -> user', user);
-    console.log('TCL: JobDetail -> handleAssignToJob -> jobId', jobId);
-    console.log('TCL: JobDetail -> handleAssignToJob -> nurse', nurseId);
-    console.log('TCL: JobDetail -> handleAssignToJob -> applicationId', applicationId);
+
     try {
       const job = await jobService.confirmJob(jobId, nurseId, applicationId);
-      console.log('TCL: JobDetail -> handleAssignToJob -> job', job);
+
       this.setState({
         job: job.job,
-        // nurseWork: job.nurse,
       });
     } catch (error) {
       console.log(error);
@@ -203,22 +190,17 @@ class JobDetail extends Component {
         error: 'Unable to load JOBS',
       });
     }
-    // userData();
   };
 
   handleQuitFromJob = async (jobId, nurseId) => {
     const { user } = this.state;
     const { userData } = this.props;
-    console.log('TCL: JobDetail -> handleQuitFromJob -> user', user);
-    // console.log('TCL: JobDetail -> handleQuitFromJob -> nurse', nurse);
-    console.log('TCL: JobDetail -> handleQuitFromJob -> jobId', jobId);
-    // console.log('TCL: JobDetail -> handleQuitFromJob -> applicationId', applicationId);
+
     try {
       const job = await jobService.cancelJob(jobId, nurseId);
-      console.log('TCL: JobDetail -> handleQuitFromJob -> job', job);
+
       this.setState({
         job: job.job,
-        // nurseWork: job.nurse,
       });
     } catch (error) {
       console.log(error);
@@ -227,14 +209,42 @@ class JobDetail extends Component {
         error: 'Unable to load JOBS',
       });
     }
-    // userData();
+  };
+
+  handleDeclineToJob = async (jobId, nurseId) => {
+    try {
+      const job = await jobService.declineJob(jobId, nurseId);
+
+      this.setState({
+        job: job.job,
+      });
+    } catch (error) {
+      console.log(error);
+      this.setState({
+        loading: false,
+        error: 'Unable to load JOBS',
+      });
+    }
+  };
+
+  handlePendingToJob = async (jobId, nurseId) => {
+    try {
+      const job = await jobService.pendingJob(jobId, nurseId);
+
+      this.setState({
+        job: job.job,
+      });
+    } catch (error) {
+      console.log(error);
+      this.setState({
+        loading: false,
+        error: 'Unable to load JOBS',
+      });
+    }
   };
 
   render() {
     const { job, user, applicant, isApplicant, loading, error, show, manageJob, viewApplicants, nurse } = this.state;
-    console.log('TCL: JobDetail -> render -> job', job);
-    // console.log('TCL: JobDetail -> render -> job Employee', job.employee);
-    // console.log('TCL: JobDetail -> render -> job Apllicant =0: ', job.applicants[0]);
 
     const {
       params: { id },
@@ -284,12 +294,15 @@ class JobDetail extends Component {
                         <>
                           <p>Print worker</p>
                           <NurseDetail
+                            applicant={false}
                             job={job}
                             jobId={job._id}
                             nurse={job.employee}
                             employee={job.employee}
                             handleAssignToJob={this.handleAssignToJob}
                             handleQuitFromJob={this.handleQuitFromJob}
+                            handleDeclineToJob={this.handleDeclineToJob}
+                            handlePendingToJob={this.handlePendingToJob}
                           />
                         </>
                       )}
@@ -297,15 +310,21 @@ class JobDetail extends Component {
                         <>
                           <div>
                             Applicants:
+                            {/* {console.log(' DENTRO APLLICANTS ', job)} */}
                             {job.applicants.map(nurse => {
+                              console.log('TCL: JobDetail -> render MAP -> nurse', nurse);
                               return (
                                 <div key={nurse._id}>
+                                  <p>{nurse.status}</p>
                                   <NurseDetail
+                                    applicant={true}
                                     job={job}
                                     jobId={job._id}
                                     nurse={nurse}
                                     handleAssignToJob={this.handleAssignToJob}
                                     handleQuitFromJob={this.handleQuitFromJob}
+                                    handleDeclineToJob={this.handleDeclineToJob}
+                                    handlePendingToJob={this.handlePendingToJob}
                                   />
                                 </div>
                               );

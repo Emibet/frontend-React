@@ -32,6 +32,14 @@ class JobService {
     return this.job.put(`/jobs/${jobId}/${userId}/cancelAssign`).then(({ data }) => data);
   }
 
+  declineJob(jobId, userId) {
+    return this.job.put(`/jobs/${jobId}/${userId}/declineAssign`).then(({ data }) => data);
+  }
+
+  pendingJob(jobId, userId) {
+    return this.job.put(`/jobs/${jobId}/${userId}/pendingAssign`).then(({ data }) => data);
+  }
+
   cancelApplytoJob(jobId, userId) {
     return this.job.put(`/jobs/${jobId}/${userId}/cancel`).then(({ data }) => data);
   }

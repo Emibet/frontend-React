@@ -16,9 +16,8 @@ class NurseDetail extends Component {
       showCV: false,
       loading: true,
       error: undefined,
+      applicant: this.props.applicant,
     };
-    console.log('TCL: NurseDetail -> constructor -> job', this.state.job);
-    console.log('TCL: NurseDetail -> constructor -> nurse', this.state.nurse);
   }
 
   handleShowCV = () => {
@@ -29,28 +28,20 @@ class NurseDetail extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    console.log('UPDATE COMPONENT NURSE DETAIL');
-    // const { manageJob, viewApplicants } = this.state;
-    console.log('TCL: JobDetail -> componentDidUpdate -> prevProps', prevProps);
-    console.log('TCL: JobDetail -> componentDidUpdate -> this.props', this.props);
     if (this.props.job.employee !== prevProps.job.employee) {
-      // this.getJob(this.props.match.params.id);
       this.setState({
         job: this.props.job,
         nurse: this.props.nurse,
         employee: this.props.employee,
+        applicant: this.props.applicant,
       });
     }
   }
 
   render() {
-    const { nurse, user, showCV, jobId, job, employee } = this.state;
-    const { handleAssignToJob, handleQuitFromJob } = this.props;
-    console.log('TCL: NurseDetail -> render -> job', job);
-    console.log('TCL: NurseDetail -> render -> job employee', job.employee);
-    console.log('TCL: render -> employee', employee);
-    // const { handleShowCV } = this.props;
-    console.log('TCL: NurseDetail -> render -> nurse', nurse);
+    const { user, showCV, jobId, job, employee, applicant } = this.state;
+    const { handleAssignToJob, handleQuitFromJob, handleDeclineToJob, handlePendingToJob, nurse } = this.props;
+
     return (
       <div>
         {user.company && job.employee && (
@@ -72,28 +63,31 @@ class NurseDetail extends Component {
           </>
         )}
         {/* <p>
-          {nurse.user.username} Request: {nurse.status}
+          {nurse.user.username} 
           </p>
         <p> {nurse.user.nurse.location}</p> */}
-        {user.company && nurse && !job.employee && (
+        {user.company && nurse && applicant && (
           <>
+            Request: {nurse.status}
             <button type="button" onClick={this.handleShowCV}>
               View CV
             </button>
             <NurseInfo user={nurse.user} />
             {nurse.status === 'Pending' && !job.employee && (
               <>
-                <p> Appli_ID:{nurse._id}</p>
-                <p> JOB:ID{jobId}</p>
-                <p>NurseID: {nurse.user._id}</p>
                 <button type="button" onClick={() => handleAssignToJob(jobId, nurse.user._id, nurse._id)}>
                   Assign to JOB
                 </button>
               </>
             )}
-            {nurse.status === 'Pending' && !job.employee && (
-              <button type="button" onClick={() => handleAssignToJob(nurse, jobId)}>
+            {nurse.status === 'Pending' && (
+              <button type="button" onClick={() => handleDeclineToJob(jobId, nurse.user._id)}>
                 Decline
+              </button>
+            )}
+            {nurse.status === 'Declined' && (
+              <button type="button" onClick={() => handlePendingToJob(jobId, nurse.user._id)}>
+                To Pending
               </button>
             )}
           </>
