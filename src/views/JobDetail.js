@@ -24,7 +24,8 @@ class JobDetail extends Component {
     super(props);
     // No llames this.setState() aquí!
     this.state = {
-      job: this.props.job,
+      // job: this.props.job,
+      job: {},
       user: this.props.user,
       loading: true,
       error: undefined,
@@ -205,14 +206,15 @@ class JobDetail extends Component {
     // userData();
   };
 
-  handleQuitFromJob = async (nurse, jobId) => {
+  handleQuitFromJob = async (jobId, nurseId) => {
     const { user } = this.state;
     const { userData } = this.props;
     console.log('TCL: JobDetail -> handleQuitFromJob -> user', user);
-    console.log('TCL: JobDetail -> handleQuitFromJob -> nurse', nurse);
+    // console.log('TCL: JobDetail -> handleQuitFromJob -> nurse', nurse);
     console.log('TCL: JobDetail -> handleQuitFromJob -> jobId', jobId);
+    // console.log('TCL: JobDetail -> handleQuitFromJob -> applicationId', applicationId);
     try {
-      const job = await jobService.cancelJob(jobId, nurse._id);
+      const job = await jobService.cancelJob(jobId, nurseId);
       console.log('TCL: JobDetail -> handleQuitFromJob -> job', job);
       this.setState({
         job: job.job,
@@ -231,6 +233,8 @@ class JobDetail extends Component {
   render() {
     const { job, user, applicant, isApplicant, loading, error, show, manageJob, viewApplicants, nurse } = this.state;
     console.log('TCL: JobDetail -> render -> job', job);
+    // console.log('TCL: JobDetail -> render -> job Employee', job.employee);
+    // console.log('TCL: JobDetail -> render -> job Apllicant =0: ', job.applicants[0]);
 
     const {
       params: { id },
@@ -259,7 +263,7 @@ class JobDetail extends Component {
                       <h1>Job Detail:</h1>
                       {job.done && <h3>JOB COMPLETED</h3>}
                       {job.applicants.length} Applicants
-                      {job.worker ? <p>Assigned</p> : <p>Not Assigned</p>}
+                      {job.employee ? <p>Assigned</p> : <p>Not Assigned</p>}
                       {!user.company && (
                         <>
                           {!applicant ? (
@@ -278,14 +282,15 @@ class JobDetail extends Component {
                       <CardJob job={job}></CardJob>
                       {user.company && job.employee && (
                         <>
-                          <p>The WORKER</p>
-                          {/* <NurseDetail
+                          <p>Print worker</p>
+                          <NurseDetail
                             job={job}
                             jobId={job._id}
                             nurse={job.employee}
+                            employee={job.employee}
                             handleAssignToJob={this.handleAssignToJob}
                             handleQuitFromJob={this.handleQuitFromJob}
-                          /> */}
+                          />
                         </>
                       )}
                       {user.company && viewApplicants && (

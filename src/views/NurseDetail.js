@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withAuth } from '../Context/AuthContext';
 import userService from '../services/userService';
 import jobService from '../services/jobService';
+import NurseInfo from './NurseInfo';
 
 class NurseDetail extends Component {
   constructor(props) {
@@ -9,12 +10,15 @@ class NurseDetail extends Component {
     this.state = {
       job: this.props.job,
       nurse: this.props.nurse,
+      employee: this.props.job.employee,
       user: this.props.user,
       jobId: this.props.jobId,
       showCV: false,
       loading: true,
       error: undefined,
     };
+    console.log('TCL: NurseDetail -> constructor -> job', this.state.job);
+    console.log('TCL: NurseDetail -> constructor -> nurse', this.state.nurse);
   }
 
   handleShowCV = () => {
@@ -23,28 +27,6 @@ class NurseDetail extends Component {
       showCV: !showCV,
     });
   };
-
-  // handleAssignToJob = async () => {
-  //   const { nurse, user, jobId } = this.state;
-  //   const { userData } = this.props;
-  //   console.log('TCL: NurseDetail -> handleAssignToJob -> user', user);
-  //   console.log('TCL: NurseDetail -> handleAssignToJob -> nurse', nurse);
-  //   console.log('TCL: NurseDetail -> handleAssignToJob -> jobId', jobId);
-  //   try {
-  //     const job = await jobService.confirmJob(jobId, nurse._id);
-  //     console.log('TCL: NurseDetail -> handleAssignToJob -> job', job);
-  //     this.setState({
-  //       job: job.job,
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //     this.setState({
-  //       loading: false,
-  //       error: 'Unable to load JOBS',
-  //     });
-  //   }
-  //   // userData();
-  // };
 
   componentDidUpdate(prevProps) {
     console.log('UPDATE COMPONENT NURSE DETAIL');
@@ -56,15 +38,17 @@ class NurseDetail extends Component {
       this.setState({
         job: this.props.job,
         nurse: this.props.nurse,
+        employee: this.props.employee,
       });
     }
   }
 
   render() {
-    const { nurse, user, showCV, jobId, job } = this.state;
+    const { nurse, user, showCV, jobId, job, employee } = this.state;
     const { handleAssignToJob, handleQuitFromJob } = this.props;
     console.log('TCL: NurseDetail -> render -> job', job);
     console.log('TCL: NurseDetail -> render -> job employee', job.employee);
+    console.log('TCL: render -> employee', employee);
     // const { handleShowCV } = this.props;
     console.log('TCL: NurseDetail -> render -> nurse', nurse);
     return (
@@ -72,28 +56,31 @@ class NurseDetail extends Component {
         {user.company && job.employee && (
           <>
             {job.employee._id === nurse._id ? (
-              <button type="button" onClick={() => handleQuitFromJob(nurse, jobId)}>
-                QUIT from JOB
-              </button>
+              <>
+                <button type="button" onClick={() => handleQuitFromJob(jobId, nurse._id)}>
+                  QUIT from JOB
+                </button>
+                <NurseInfo user={employee} />
+              </>
             ) : (
               // <button type="button" onClick={this.handleAssignToJob}>
               //   Assign to JOB
               // </button>
               <></>
             )}
-
             {/* <p>ADD to Job</p> */}
           </>
         )}
-        <p>
+        {/* <p>
           {nurse.user.username} Request: {nurse.status}
-        </p>
-        <p> {nurse.user.nurse.location}</p>
+          </p>
+        <p> {nurse.user.nurse.location}</p> */}
         {user.company && nurse && !job.employee && (
           <>
             <button type="button" onClick={this.handleShowCV}>
               View CV
             </button>
+            <NurseInfo user={nurse.user} />
             {nurse.status === 'Pending' && !job.employee && (
               <>
                 <p> Appli_ID:{nurse._id}</p>
