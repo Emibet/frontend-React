@@ -24,8 +24,8 @@ class JobService {
     return this.job.put(`/jobs/${jobId}/${userId}/add`).then(({ data }) => data);
   }
 
-  confirmJob(jobId, userId) {
-    return this.job.put(`/jobs/${jobId}/${userId}/assign`).then(({ data }) => data);
+  confirmJob(jobId, userId, ApplicId) {
+    return this.job.put(`/jobs/${jobId}/${userId}/${ApplicId}/assign`).then(({ data }) => data);
   }
 
   cancelJob(jobId, userId) {

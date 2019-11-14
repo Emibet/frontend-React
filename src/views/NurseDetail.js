@@ -69,9 +69,6 @@ class NurseDetail extends Component {
     console.log('TCL: NurseDetail -> render -> nurse', nurse);
     return (
       <div>
-        <button type="button" onClick={this.handleShowCV}>
-          View CV
-        </button>
         {user.company && job.employee && (
           <>
             {job.employee._id === nurse._id ? (
@@ -88,15 +85,32 @@ class NurseDetail extends Component {
             {/* <p>ADD to Job</p> */}
           </>
         )}
+        <p>
+          {nurse.user.username} Request: {nurse.status}
+        </p>
+        <p> {nurse.user.nurse.location}</p>
         {user.company && nurse && !job.employee && (
           <>
-            <button type="button" onClick={() => handleAssignToJob(nurse, jobId)}>
-              Assign to JOB
+            <button type="button" onClick={this.handleShowCV}>
+              View CV
             </button>
+            {nurse.status === 'Pending' && !job.employee && (
+              <>
+                <p> Appli_ID:{nurse._id}</p>
+                <p> JOB:ID{jobId}</p>
+                <p>NurseID: {nurse.user._id}</p>
+                <button type="button" onClick={() => handleAssignToJob(jobId, nurse.user._id, nurse._id)}>
+                  Assign to JOB
+                </button>
+              </>
+            )}
+            {nurse.status === 'Pending' && !job.employee && (
+              <button type="button" onClick={() => handleAssignToJob(nurse, jobId)}>
+                Decline
+              </button>
+            )}
           </>
         )}
-        <p>{nurse.user.username}</p>
-        <p> {nurse.user.nurse.location}</p>
         {showCV && (
           <>
             {nurse.user.nurse.resume.freelance ? (
