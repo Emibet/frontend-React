@@ -9,6 +9,8 @@ import JobManageActions from './JobManageActions';
 import JobApplicants from './JobApplicants';
 import NurseDetail from './NurseDetail';
 import Card from '../ui/Card';
+import './JobDetail.css';
+import Button from '../ui/Button';
 
 // const Card = styled.div`
 //   border-radius: 3px;
@@ -68,6 +70,7 @@ class JobDetail extends Component {
   }
 
   async getJob(id) {
+    console.log('TCL: JobDetail -> getJob -> id', id);
     const { user } = this.state;
     try {
       const job = await jobService.jobDetail(id);
@@ -143,7 +146,7 @@ class JobDetail extends Component {
     this.setState({
       show: false,
     });
-    this.props.history.push('/private/jobs/applied');
+    this.props.history.push('/private');
   };
 
   handleManageJob = () => {
@@ -155,8 +158,9 @@ class JobDetail extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { manageJob, viewApplicants } = this.state;
-
+    // const { manageJob, viewApplicants } = this.state;
+    // console.log('TCL: JobDetail -> componentDidUpdate -> prevProps', prevProps);
+    // console.log('TCL: JobDetail -> componentDidUpdate ->  THIS Props', this.props);
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.getJob(this.props.match.params.id);
       this.setState({
@@ -249,6 +253,7 @@ class JobDetail extends Component {
     const {
       params: { id },
     } = this.props.match;
+    // console.log('TCL: JobDetail -> render -> this.props', this.props);
 
     return (
       <div>
@@ -256,21 +261,21 @@ class JobDetail extends Component {
           <>
             {!loading && (
               <>
-                <Card detailJob>
+                <Card detailJob className="jobDetailPopUp">
                   {show && (
                     <>
                       <button onClick={this.handleShow}>Close Detail</button>
                       {user.company && (
                         <>
-                          <h2> COMPANY</h2>
+                          {/* <h2> COMPANY</h2> */}
 
-                          <button type="button" onClick={this.handleManageJob}>
+                          <Button primary type="button" onClick={this.handleManageJob}>
                             MANAGE JOB
-                          </button>
+                          </Button>
                           {manageJob && <JobManageActions handleViewApplicants={this.handleViewApplicants} />}
                         </>
                       )}
-                      <h1>Job Detail:</h1>
+                      {/* <h1>Job Detail:</h1> */}
                       {job.done && <h3>JOB COMPLETED</h3>}
                       {job.applicants.length} Applicants
                       {job.employee ? <p>Assigned</p> : <p>Not Assigned</p>}

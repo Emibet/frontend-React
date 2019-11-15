@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../Context/AuthContext';
 import companyService from '../services/companyService';
 import authService from '../services/authService';
+import Message from '../ui/Message';
+
+import Input from '../ui/Input';
+import InputSubmit from '../ui/InputSubmit';
+
+const Label = styled.label`
+  color: #4f98d3;
+  position: absolute;
+`;
 
 class CompanyUpdate extends Component {
   state = {
@@ -15,11 +25,6 @@ class CompanyUpdate extends Component {
   };
 
   async componentDidMount() {
-    // const {
-    //   match: {
-    //     params: { id },
-    //   },
-    // } = this.props;
     const { user } = this.props; // Original
     console.log('TCL: CompanyUpdate -> componentDidMount -> user', user);
 
@@ -81,48 +86,56 @@ class CompanyUpdate extends Component {
 
     return (
       <div>
-        COMPANY UPDATE COMPONENT:
-        {username}
-        {message && <div>{message}</div>}
+        COMPANY UPDATE PROFILE:
+        {/* {username} */}
+        {message && <Message> {message}</Message>}
         {loading && <div>Loading...</div>}
         {!loading && (
           <>
             <form onSubmit={this.handleFormSubmit}>
-              <label htmlFor="contactName">Contact Name:</label>
-              <input
+              <Label htmlFor="contactName">Contact Name:</Label>
+              <Input
+                update
                 type="text"
                 name="contactName"
                 id="contactName"
                 value={user.contactName}
                 onChange={this.handleChange}
               />
-              <br></br>
-              <label htmlFor="email">Email:</label>
-              <input type="email" name="email" id="email" value={user.email} onChange={this.handleChange} />
-              <br></br>
-              <label htmlFor="location">City:</label>
-              <input type="text" name="location" id="location" value={user.location} onChange={this.handleChange} />
-              <br></br>
-              <label htmlFor="address">Address:</label>
-              <input type="text" name="address" id="address" value={user.address} onChange={this.handleChange} />
-              <br></br>
-              <label htmlFor="phone">Phone Number:</label>
-              <input type="number" name="phone" id="phone" value={user.phone} onChange={this.handleChange} />
-              <br></br>
-              <label htmlFor="NIF">NIF:</label>
-              <input type="text" name="NIF" id="NIF" value={user.NIF} onChange={this.handleChange} />
-              <br></br>
-              <label htmlFor="description">Company Description:</label>
-              <input
+
+              <Label htmlFor="email">Email:</Label>
+              <Input update type="email" name="email" id="email" value={user.email} onChange={this.handleChange} />
+
+              <Label htmlFor="location">City:</Label>
+              <Input
+                update
+                type="text"
+                name="location"
+                id="location"
+                value={user.location}
+                onChange={this.handleChange}
+              />
+
+              <Label htmlFor="address">Address:</Label>
+              <Input update type="text" name="address" id="address" value={user.address} onChange={this.handleChange} />
+
+              <Label htmlFor="phone">Phone Number:</Label>
+              <Input update type="number" name="phone" id="phone" value={user.phone} onChange={this.handleChange} />
+
+              <Label htmlFor="NIF">NIF:</Label>
+              <Input update type="text" name="NIF" id="NIF" value={user.NIF} onChange={this.handleChange} />
+
+              <Label htmlFor="description">Company Description:</Label>
+              <Input
+                update
                 type="text"
                 name="description"
                 id="description"
                 value={user.description}
                 onChange={this.handleChange}
               />
-              <br></br>
 
-              <input type="submit" value="Update" />
+              <InputSubmit type="submit" value="Update" />
             </form>
           </>
         )}

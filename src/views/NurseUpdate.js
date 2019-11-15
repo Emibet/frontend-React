@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { withAuth } from '../Context/AuthContext';
 import userService from '../services/userService';
 import authService from '../services/authService';
+import Input from '../ui/Input';
+import Message from '../ui/Message';
 
 const InputSubmit = styled.input`
   background-color: #4f98d3;
@@ -18,19 +20,19 @@ const InputSubmit = styled.input`
   }
 `;
 
-const Input = styled.input`
-  display: block;
-  margin: 0.5em 0;
-  text-align:end;
-  font-size:1em;
-  // margin: 0.5em auto;
-  width: 100%
-  border: none;
-  border-bottom: 1px solid #757575;
-  &:focus {
-    outline: none;
-  }
-`;
+// const Input = styled.input`
+//   display: block;
+//   margin: 0.5em 0;
+//   text-align:end;
+//   font-size:1em;
+//   // margin: 0.5em auto;
+//   width: 100%
+//   border: none;
+//   border-bottom: 1px solid #757575;
+//   &:focus {
+//     outline: none;
+//   }
+// `;
 
 const Label = styled.label`
   color: #4f98d3;
@@ -187,22 +189,37 @@ class NurseUpdate extends Component {
       <div>
         NURSE UPDATE PROFILE:
         {username}
-        {message && <div>{message}</div>}
+        {message && <Message>{message}</Message>}
         {loading && <div>Loading...</div>}
         {!loading && (
           <>
             <form onSubmit={this.handleFormSubmit}>
               <Label htmlFor="name">Name:</Label>
-              <Input type="text" name="name" id="name" value={user.nurse.name} onChange={this.handleChange} />
+              <Input update type="text" name="name" id="name" value={user.nurse.name} onChange={this.handleChange} />
 
               <Label htmlFor="surname">LastName:</Label>
-              <Input type="text" name="surname" id="surname" value={user.nurse.surname} onChange={this.handleChange} />
+              <Input
+                update
+                type="text"
+                name="surname"
+                id="surname"
+                value={user.nurse.surname}
+                onChange={this.handleChange}
+              />
 
               <Label htmlFor="email">Email:</Label>
-              <Input type="email" name="email" id="email" value={user.nurse.email} onChange={this.handleChange} />
+              <Input
+                update
+                type="email"
+                name="email"
+                id="email"
+                value={user.nurse.email}
+                onChange={this.handleChange}
+              />
 
               <Label htmlFor="location">City:</Label>
               <Input
+                update
                 type="text"
                 name="location"
                 id="location"
@@ -211,13 +228,28 @@ class NurseUpdate extends Component {
               />
 
               <Label htmlFor="address">Address:</Label>
-              <Input type="text" name="address" id="address" value={user.nurse.address} onChange={this.handleChange} />
+              <Input
+                update
+                type="text"
+                name="address"
+                id="address"
+                value={user.nurse.address}
+                onChange={this.handleChange}
+              />
 
               <Label htmlFor="phone">Phone Number:</Label>
-              <Input type="number" name="phone" id="phone" value={user.nurse.phone} onChange={this.handleChange} />
+              <Input
+                update
+                type="number"
+                name="phone"
+                id="phone"
+                value={user.nurse.phone}
+                onChange={this.handleChange}
+              />
 
               <Label htmlFor="specialty">Speciality:</Label>
               <Input
+                update
                 type="text"
                 name="speciality"
                 id="speciality"
@@ -227,6 +259,7 @@ class NurseUpdate extends Component {
 
               <Label htmlFor="birthday">BirthDay:</Label>
               <Input
+                update
                 type="date"
                 name="birthday"
                 id="birthday"
@@ -235,7 +268,7 @@ class NurseUpdate extends Component {
               />
 
               <Label htmlFor="dni">DNI:</Label>
-              <Input type="text" name="dni" id="dni" value={user.nurse.dni} onChange={this.handleChange} />
+              <Input update type="text" name="dni" id="dni" value={user.nurse.dni} onChange={this.handleChange} />
 
               <WrappCheck>
                 <WrappCheckBox>

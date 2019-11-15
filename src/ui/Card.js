@@ -22,7 +22,7 @@ const Card = styled.div`
   ${props =>
     props.detailJob &&
     css`
-      /* margin: 0.25em auto; */
+      margin-left: 0.25em;
       width: fit-content;
     `};
 `;

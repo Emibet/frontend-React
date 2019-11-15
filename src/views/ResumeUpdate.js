@@ -5,6 +5,8 @@ import { withAuth } from '../Context/AuthContext';
 import userService from '../services/userService';
 import authService from '../services/authService';
 import FormExperience from './FormExperience';
+import Message from '../ui/Message';
+import Title from '../ui/Ttile';
 
 const InputSubmit = styled.input`
   background-color: #4f98d3;
@@ -167,9 +169,9 @@ class NurseUpdate extends Component {
     console.log('TCL: NurseUpdate -> render -> nurse.experience', nurse);
     return (
       <div>
-        NURSE UPDATE RESUME:
-        {username}
-        {message && <div>{message}</div>}
+        <Title>UPDATE RESUME:</Title>
+        {/* {username} */}
+        {message && <Message>{message}</Message>}
         {loading && <div>Loading...</div>}
         {!loading && (
           <>

@@ -14,6 +14,10 @@ const WrappForm = styled.div`
   width: 13em;
   max-width: 90vw;
   margin: 3em auto;
+  .login {
+    text-decoration: none;
+    color: red;
+  }
 `;
 
 export default WrappForm;

@@ -1,0 +1,22 @@
+.name {
+  color: black;
+  display: block;
+  margin: 0.5em;
+}
+
+.name .info {
+  color: #4f98d3;
+}
+
+.Wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.freelance {
+  color: green;
+}
+.not-freelance {
+  color: orange;
+}

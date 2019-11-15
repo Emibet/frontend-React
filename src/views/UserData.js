@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withAuth } from '../Context/AuthContext';
+import jobService from '../services/jobService';
 import CompanyInfo from './CompanyInfo';
 import NurseInfo from './NurseInfo';
 
@@ -8,16 +9,21 @@ class UserData extends Component {
     user: {},
     loading: true,
     message: undefined,
+    jobs: {},
   };
 
   async componentDidMount() {
     const { user } = this.props;
+    let jobs = {};
     console.log('TCL: UserData -> componentDidMount -> user', user);
-
     try {
+      if (user.company) {
+        jobs = await jobService.listCompanyJobs(user.username);
+      }
       this.setState({
         user,
         loading: false,
+        jobs,
       });
     } catch (error) {
       console.log(error);
@@ -28,17 +34,16 @@ class UserData extends Component {
   }
 
   render() {
-    const { user, loading, message } = this.state;
+    const { user, loading, message, jobs } = this.state;
     return (
       <div>
         {message && <div>{message}</div>}
         {loading && <div>Loading...</div>}
         {!loading && (
           <>
-            AQUI IRÁ LA INFO DEL USER:
             {user.company && (
               <>
-                <CompanyInfo user={user} />
+                <CompanyInfo user={user} jobs={jobs} />
               </>
             )}
             {!user.company && (

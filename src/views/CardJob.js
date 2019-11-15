@@ -1,56 +1,81 @@
 import React, { Component } from 'react';
 import { withAuth } from '../Context/AuthContext';
+import './CardJob.css';
 
 class CardJob extends Component {
   render() {
     const { job, user } = this.props;
+    console.log('TCL: CardJob -> render -> job', job);
 
     return (
-      <div>
-        <p>
-          Title:
-          {job.title}
-        </p>
-        <p>
-          Location:
-          {job.location}
-        </p>
-        <p>
-          Contract:
-          {job.contractType}
-        </p>
-        <p>
-          Minimun Salary:
-          {job.salaryMin}
-        </p>
-        <p>
-          Maximun Salary:
-          {job.salaryMax}
-        </p>
-        <p>
-          Minimun Experience Required:
-          {job.experienceMin}
-        </p>
-        <p>
-          WorkDay:
-          {job.workday}
-        </p>
-        <p>
-          Study:
-          {job.study}
-        </p>
-        <p>
-          Minimun Requiremet:
-          {job.requirementMin}
-        </p>
-        <p>
-          Applicants:
-          {job.title}
-        </p>
-        <p>
-          Employee:
-          {job.title}
-        </p>
+      <div className="cardJob-Wrapper-info">
+        {job.title && (
+          <div className="cardJob-info">
+            Title:
+            <p>{job.title}</p>
+          </div>
+        )}
+
+        {job.location && (
+          <div className="cardJob-info">
+            Location:
+            <p> {job.location}</p>
+          </div>
+        )}
+        {job.contractType && (
+          <div className="cardJob-info">
+            Contract:
+            <p>{job.contractType}</p>
+          </div>
+        )}
+        {job.salaryMin && (
+          <div className="cardJob-info">
+            Minimun Salary:
+            <p>{job.salaryMin}</p>
+          </div>
+        )}
+        {job.salaryMax && (
+          <div className="cardJob-info">
+            Maximun Salary:
+            <p>{job.salaryMax}</p>
+          </div>
+        )}
+        {job.experienceMin && (
+          <div className="cardJob-info">
+            Minimun Experience Required:
+            <p>{job.experienceMin}</p>
+          </div>
+        )}
+        {job.workday && (
+          <div className="cardJob-info">
+            WorkDay:
+            <p>{job.workday}</p>
+          </div>
+        )}
+        {job.study && (
+          <div className="cardJob-info">
+            Study:
+            <p>{job.study}</p>
+          </div>
+        )}
+        {job.requirementMin && (
+          <div className="cardJob-info">
+            Minimun Requiremet:
+            <p>{job.requirementMin}</p>
+          </div>
+        )}
+        {/* {job.title && (
+          <div className="cardJob-info">
+            Applicants:
+            <p>{job.title}</p>
+          </div>
+        )} */}
+        {job.employee && (
+          <div className="cardJob-info">
+            Employee:
+            <p>{job.employee.nurse.name}</p>
+          </div>
+        )}
       </div>
     );
   }

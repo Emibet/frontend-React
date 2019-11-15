@@ -1,0 +1,9 @@
+@media (max-width: 600px) {
+  .jobDetailPopUp {
+    position: absolute;
+    width: auto;
+    left: 5%;
+    right: 5%;
+    top: 10%;
+  }
+}
