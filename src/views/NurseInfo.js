@@ -69,6 +69,9 @@ class NurseInfo extends Component {
           )}
         </div>
         <div>
+          {!name && !surname && !dni && !location && !address && !phone && !email && !speciality && (
+            <h2>EDIT YOUR PROFILE</h2>
+          )}
           {name && (
             <p className="name">
               Name: <span className="info">{name}</span>

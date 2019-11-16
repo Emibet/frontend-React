@@ -71,7 +71,7 @@ class NurseDetail extends Component {
         {user.company && nurse && applicant && (
           <>
             {/* <p> Request: {nurse.status}</p> */}
-            <Request status={nurse.status}></Request>
+            <Request>{nurse.status}</Request>
             <button type="button" onClick={this.handleShowCV}>
               View CV
             </button>

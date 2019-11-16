@@ -12,6 +12,7 @@ import JobNew from './JobNew';
 import CompanyJobsList from './CompanyJobsList';
 import JobsToJoin from './JobsToJoin';
 import JobsApplied from './JobsApplied';
+import NotFound from './NotFound';
 
 import Card from '../ui/Card';
 import PrivateView from '../ui/PrivateView';
@@ -156,6 +157,7 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
               <JobsApplied />
             </Card>
           </Router>
+          {/* <Router path={`${path}/*`} component={NotFound} /> */}
           {/* <Router exact path={`${path}/${user.username}/jobs`}>
           <CompanyUpdate />
         </Router> */}
