@@ -39,14 +39,14 @@ class CompanyJobsList extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    // console.log('TCL: CompanyJobsList -> componentDidUpdate -> prevProps', prevProps);
-    // console.log('TCL: CompanyJobsList -> componentDidUpdate ->  THIS Props', this.props);
-    if (this.props.location.key !== prevProps.location.key) {
-      // this.getJob(this.props.match.params.id);
-      // this.props.history.push('/private/company/jobs');
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   // console.log('TCL: CompanyJobsList -> componentDidUpdate -> prevProps', prevProps);
+  //   // console.log('TCL: CompanyJobsList -> componentDidUpdate ->  THIS Props', this.props);
+  //   if (this.props.location.key !== prevProps.location.key) {
+  //     // this.getJob(this.props.match.params.id);
+  //     // this.props.history.push('/private/company/jobs');
+  //   }
+  // }
 
   render() {
     const { jobs, loading, error, job } = this.state;
@@ -55,8 +55,8 @@ class CompanyJobsList extends Component {
       <WrappFlex>
         {!error && (
           <div>
-            {console.log('RENDER COMPANY JOB LIST')}
-            <h1>My created Jobs:</h1>
+            {/* {console.log('RENDER COMPANY JOB LIST')} */}
+            <h1>All My Jobs:</h1>
 
             {!loading &&
               jobs.jobs.map(job => {

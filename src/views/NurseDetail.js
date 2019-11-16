@@ -3,6 +3,8 @@ import { withAuth } from '../Context/AuthContext';
 import userService from '../services/userService';
 import jobService from '../services/jobService';
 import NurseInfo from './NurseInfo';
+import Button from '../ui/Button';
+import Request from '../ui/Request';
 
 class NurseDetail extends Component {
   constructor(props) {
@@ -48,9 +50,9 @@ class NurseDetail extends Component {
           <>
             {job.employee._id === nurse._id ? (
               <>
-                <button type="button" onClick={() => handleQuitFromJob(jobId, nurse._id)}>
+                <Button red type="button" onClick={() => handleQuitFromJob(jobId, nurse._id)}>
                   QUIT from JOB
-                </button>
+                </Button>
                 <NurseInfo user={employee} />
               </>
             ) : (
@@ -68,27 +70,28 @@ class NurseDetail extends Component {
         <p> {nurse.user.nurse.location}</p> */}
         {user.company && nurse && applicant && (
           <>
-            Request: {nurse.status}
+            {/* <p> Request: {nurse.status}</p> */}
+            <Request status={nurse.status}></Request>
             <button type="button" onClick={this.handleShowCV}>
               View CV
             </button>
             <NurseInfo user={nurse.user} />
             {nurse.status === 'Pending' && !job.employee && (
               <>
-                <button type="button" onClick={() => handleAssignToJob(jobId, nurse.user._id, nurse._id)}>
+                <Button green type="button" onClick={() => handleAssignToJob(jobId, nurse.user._id, nurse._id)}>
                   Assign to JOB
-                </button>
+                </Button>
               </>
             )}
             {nurse.status === 'Pending' && (
-              <button type="button" onClick={() => handleDeclineToJob(jobId, nurse.user._id)}>
+              <Button red type="button" onClick={() => handleDeclineToJob(jobId, nurse.user._id)}>
                 Decline
-              </button>
+              </Button>
             )}
             {nurse.status === 'Declined' && (
-              <button type="button" onClick={() => handlePendingToJob(jobId, nurse.user._id)}>
+              <Button orange type="button" onClick={() => handlePendingToJob(jobId, nurse.user._id)}>
                 To Pending
-              </button>
+              </Button>
             )}
           </>
         )}

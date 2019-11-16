@@ -21,6 +21,27 @@ const Button = styled.button`
       margin: 0.25em auto;
       width: 80%;
     `};
+  ${props =>
+    props.green &&
+    css`
+      border-color: green;
+      background: green;
+      color: white;
+    `};
+  ${props =>
+    props.red &&
+    css`
+      border-color: red;
+      background: red;
+      color: black;
+    `};
+  ${props =>
+    props.orange &&
+    css`
+      border-color: orange;
+      background: orange;
+      color: black;
+    `};
 `;
 
 export default Button;

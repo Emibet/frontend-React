@@ -1,16 +1,16 @@
 import React from 'react';
+import Button from '../ui/Button';
 
 const JobManageActions = props => {
   console.log('TCL: props', props);
   const { handleViewApplicants } = props;
   return (
     <div>
-      <button type="button" onClick={handleViewApplicants}>
+      <Button type="button" onClick={handleViewApplicants}>
         View Applicants
-      </button>
-      <button>HOLA2</button>
-      <button>HOLA3</button>
-      <button>HOLA4</button>
+      </Button>
+      <Button orange>Edit Job</Button>
+      <Button red>DELETE</Button>
     </div>
   );
 };

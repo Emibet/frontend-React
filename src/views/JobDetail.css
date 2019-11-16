@@ -7,3 +7,30 @@
     top: 10%;
   }
 }
+
+.assigned {
+  border-top: 1px solid lightblue;
+  border-bottom: 1px solid lightblue;
+  text-align: center;
+  color: rgb(0, 104, 0);
+  text-transform: uppercase;
+}
+.not {
+  color: red;
+}
+
+.applicants {
+  color: #4f98d3;
+  font-weight: bold;
+}
+
+.worker {
+  border-top: 1px solid lightblue;
+  border-bottom: 1px solid lightblue;
+  text-align: center;
+  color: #4f98d3;
+  font-weight: bold;
+}
+.unAssigned {
+  font-weight: 500;
+}

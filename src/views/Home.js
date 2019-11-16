@@ -3,6 +3,8 @@ import { Link, Route } from 'react-router-dom';
 import AnonRoute from '../components/AnonRoute';
 import jobService from '../services/jobService';
 import JobDetail from './JobDetail';
+import Card from '../ui/Card';
+import './Home.css';
 
 class Home extends Component {
   state = {
@@ -31,29 +33,29 @@ class Home extends Component {
   render() {
     const { jobs, loading, error } = this.state;
     return (
-      <div>
+      <>
         {!error && (
-          <>
-            <h1>Jobs List:</h1>
-
+          <Card>
+            <h1 className="homepageTitle">FIND YOUR JOB or NURSE:</h1>
+            <h2>Jobs:</h2>
             {!loading &&
               jobs.jobs.map(job => {
                 return (
                   <div key={job._id}>
-                    <Link to={`/jobs/${job._id}/detail`}>{job.title}</Link>
-                    {job.location}
+                    <div>{job.title}</div>
+                    <div> {job.location}</div>
                   </div>
                 );
               })}
 
             {/* {jobs.jobs.map()} */}
-          </>
+          </Card>
         )}
         {loading && <div>loading...</div>}
-        <div className="col-7">
-          <AnonRoute exact path="/jobs/:id/detail" component={JobDetail}></AnonRoute>
-        </div>
-      </div>
+        {/* <div className="col-7">
+          <Route exact path="/jobs/:id/detail" component={JobDetail}></Route>
+        </div> */}
+      </>
     );
   }
 }

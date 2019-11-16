@@ -277,19 +277,27 @@ class JobDetail extends Component {
                       )}
                       {/* <h1>Job Detail:</h1> */}
                       {job.done && <h3>JOB COMPLETED</h3>}
-                      {job.applicants.length} Applicants
-                      {job.employee ? <p>Assigned</p> : <p>Not Assigned</p>}
+                      <p className="applicants">{job.applicants.length} Applicants</p>
+                      {job.employee ? (
+                        <p className="assigned">Assigned</p>
+                      ) : (
+                        <p className="assigned not">Not Assigned</p>
+                      )}
                       {!user.company && (
                         <>
                           {!applicant ? (
                             <>
                               <p>Want to APPLY?</p>
-                              <button onClick={this.handleApplytoJob}>Apply</button>
+                              <Button green onClick={this.handleApplytoJob}>
+                                Apply
+                              </Button>
                             </>
                           ) : (
                             <>
                               <p>You are an applicant!!</p>
-                              <button onClick={this.handleCancelApplytoJob}>Cancel Application</button>
+                              <Button red onClick={this.handleCancelApplytoJob}>
+                                Cancel Application
+                              </Button>
                             </>
                           )}
                         </>
@@ -297,7 +305,7 @@ class JobDetail extends Component {
                       <CardJob job={job}></CardJob>
                       {user.company && job.employee && (
                         <>
-                          <p>Print worker</p>
+                          <p className="worker">Applicant ASSIGNED</p>
                           <NurseDetail
                             applicant={false}
                             job={job}
@@ -314,13 +322,13 @@ class JobDetail extends Component {
                       {user.company && viewApplicants && (
                         <>
                           <div>
-                            Applicants:
+                            <p className="worker unAssigned"> Applicants:</p>
                             {/* {console.log(' DENTRO APLLICANTS ', job)} */}
                             {job.applicants.map(nurse => {
                               console.log('TCL: JobDetail -> render MAP -> nurse', nurse);
                               return (
                                 <div key={nurse._id}>
-                                  <p>{nurse.status}</p>
+                                  {/* <p>{nurse.status}</p> */}
                                   <NurseDetail
                                     applicant={true}
                                     job={job}
