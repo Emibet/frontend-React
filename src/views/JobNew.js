@@ -214,6 +214,7 @@ class JobNew extends Component {
               <Label htmlFor="urgent">CHECK IF URGENT:</Label>
               <Input
                 update
+                urgent
                 type="checkbox"
                 name="urgent"
                 id="urgent"

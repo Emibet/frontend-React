@@ -17,6 +17,14 @@ const Input = styled.input`
       font-size: 1em;
       width: 100%;
     `};
+  ${props =>
+    props.urgent &&
+    css`
+      /* margin-left: 90%; */
+      border: 1px solid black;
+      background-color: burlywood;
+      box-sizing: border-box;
+    `};
 `;
 
 export default Input;

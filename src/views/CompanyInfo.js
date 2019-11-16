@@ -2,11 +2,11 @@ import React from 'react';
 
 const CompanyInfo = props => {
   console.log('TCL: props', props);
-  const { username, NIF, address, contactName, email, location, phone, jobs } = props.user;
-
+  const { username, NIF, address, contactName, email, location, phone } = props.user;
+  const { jobs } = props;
   return (
     <div>
-      <p>TOTAL JOBS CREATED: {jobs.length}</p>
+      <p>TOTAL JOBS CREATED: {jobs.jobs.length}</p>
       {username && (
         <p className="name">
           Username: <span className="info">{username}</span>
