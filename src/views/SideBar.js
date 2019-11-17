@@ -95,6 +95,11 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
                   Applied JOBS
                 </Button>
               </Link>
+              <Link to={`${url}/jobs/assigned`}>
+                <Button top type="button">
+                  Assigned JOBS
+                </Button>
+              </Link>
             </>
           )}
           {/* {isLoggedin && (
@@ -149,12 +154,20 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
           <Router exact path={`${path}/jobs/available`}>
             {/* <Home /> */}
             <Card jobList>
-              <JobsToJoin />
+              <JobsToJoin {...rest} />
             </Card>
           </Router>
           <Router exact path={`${path}/jobs/applied`}>
-            <Card>
+            <Card jobList>
+              <JobsToJoin {...rest} />
+            </Card>
+            {/* <Card>
               <JobsApplied />
+            </Card> */}
+          </Router>
+          <Router exact path={`${path}/jobs/assigned`}>
+            <Card jobList>
+              <JobsToJoin {...rest} />
             </Card>
           </Router>
           {/* <Router path={`${path}/*`} component={NotFound} /> */}

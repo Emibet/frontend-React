@@ -41,6 +41,7 @@ class JobDetail extends Component {
 
   async componentDidMount() {
     const { user } = this.props;
+    console.log('TCL: JobDetail -> componentDidMount -> this.props', this.props);
     console.log('TCL: JobDetail -> componentDidMount -> user', user);
 
     const {
@@ -50,7 +51,9 @@ class JobDetail extends Component {
       const job = await jobService.jobDetail(id);
       console.log('TCL: JobDetail -> componentDidMount -> job', job);
 
-      const isApplicant = user.nurse.candidateTo.includes(job.job._id);
+      const isApplicant = user.company ? 0 : user.nurse.candidateTo.includes(job.job._id);
+
+      // const isApplicant = user.nurse.candidateTo.includes(job.job._id);
       console.log('TCL: JobDetail -> componentDidMount -> isApplicant', isApplicant);
 
       const applicant = isApplicant;
@@ -164,8 +167,8 @@ class JobDetail extends Component {
 
   componentDidUpdate(prevProps) {
     // const { manageJob, viewApplicants } = this.state;
-    // console.log('TCL: JobDetail -> componentDidUpdate -> prevProps', prevProps);
-    // console.log('TCL: JobDetail -> componentDidUpdate ->  THIS Props', this.props);
+    console.log('TCL: JobDetail -> componentDidUpdate -> prevProps', prevProps);
+    console.log('TCL: JobDetail -> componentDidUpdate ->  THIS Props', this.props);
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.getJob(this.props.match.params.id);
       this.setState({
@@ -254,7 +257,7 @@ class JobDetail extends Component {
 
   render() {
     const { job, user, applicant, isApplicant, loading, error, show, manageJob, viewApplicants, nurse } = this.state;
-
+    console.log('JOB DETAILLLLLLLLLLLLLLLLLLL');
     const {
       params: { id },
     } = this.props.match;
