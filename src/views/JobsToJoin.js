@@ -8,7 +8,7 @@ import jobService from '../services/jobService';
 import JobDetail from './JobDetail';
 import Card from '../ui/Card';
 import WrappFlex from '../ui/WrappFlex';
-
+import './JobsToJoin.css';
 // const WrappFlex = styled.div`
 //   display: flex;
 //   flex-direction: row;
@@ -56,10 +56,10 @@ class JobsToJoin extends Component {
   render() {
     const { jobs, loading, error, job, availableJobs } = this.state;
     return (
-      <WrappFlex>
+      <WrappFlex jobList>
         {!error && (
-          <div>
-            <h1>Available Jobs:</h1>
+          <div className="jobsList">
+            <h1 className="jobsToJoin-title">Available Jobs:</h1>
 
             {!loading &&
               availableJobs.map(job => {

@@ -1,0 +1,6 @@
+.wrapperActions {
+  margin: 0.75em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

@@ -6,8 +6,7 @@ const Card = styled.div`
   border: 2px solid #4f98d3;
   min-width: 65%;
   width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 2em auto;
   height: fit-content;
   padding: 0.75em 1em;
   box-sizing: border-box;
@@ -22,8 +21,21 @@ const Card = styled.div`
   ${props =>
     props.detailJob &&
     css`
-      margin-left: 0.25em;
+      margin-left: 0.75em;
+      margin-right: 0.75em;
       width: fit-content;
+    `};
+  ${props =>
+    props.jobs &&
+    css`
+      margin-left: auto;
+      margin-right: auto;
+      width: 95%;
+    `};
+  ${props =>
+    props.jobList &&
+    css`
+      height: 80%;
     `};
 `;
 

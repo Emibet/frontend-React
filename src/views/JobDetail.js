@@ -41,16 +41,19 @@ class JobDetail extends Component {
 
   async componentDidMount() {
     const { user } = this.props;
+    console.log('TCL: JobDetail -> componentDidMount -> user', user);
 
     const {
       params: { id },
     } = this.props.match;
     try {
       const job = await jobService.jobDetail(id);
+      console.log('TCL: JobDetail -> componentDidMount -> job', job);
 
-      const isApplicant = 0;
+      const isApplicant = user.nurse.candidateTo.includes(job.job._id);
+      console.log('TCL: JobDetail -> componentDidMount -> isApplicant', isApplicant);
 
-      const applicant = isApplicant.length > 0;
+      const applicant = isApplicant;
 
       this.setState({
         job: job.job,
@@ -74,8 +77,10 @@ class JobDetail extends Component {
     const { user } = this.state;
     try {
       const job = await jobService.jobDetail(id);
+      console.log('TCL: JobDetail -> getJob -> job', job);
 
       const isApplicant = await job.job.applicants.filter(applicant => applicant.user._id === user._id);
+      console.log('TCL: JobDetail -> getJob -> isApplicant', isApplicant);
 
       const applicant = isApplicant.length > 0;
       this.setState({

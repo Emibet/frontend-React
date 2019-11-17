@@ -5,6 +5,7 @@ import jobService from '../services/jobService';
 import NurseInfo from './NurseInfo';
 import Button from '../ui/Button';
 import Request from '../ui/Request';
+import './NurseDetail.css';
 
 class NurseDetail extends Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class NurseDetail extends Component {
     const { handleAssignToJob, handleQuitFromJob, handleDeclineToJob, handlePendingToJob, nurse } = this.props;
 
     return (
-      <div>
+      <div className="nurseDetailWrapp">
         {user.company && job.employee && (
           <>
             {job.employee._id === nurse._id ? (

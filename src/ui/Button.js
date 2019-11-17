@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 
 const Button = styled.button`
-  background: transparent;
+  /* background: transparent; */
   border-radius: 3px;
   border: 2px solid #4f98d3;
   color: #4f98d3;
   margin: 0.25em 1em;
-  padding: 0.25em 1em;
-
+  padding: 0.5em 1em;
+  box-sizing: border-box;
   ${props =>
     props.primary &&
     css`
@@ -22,6 +22,14 @@ const Button = styled.button`
       width: 80%;
     `};
   ${props =>
+    props.top &&
+    css`
+      /* margin: 0.25em auto; */
+      width: auto;
+      height: 100%;
+      background: white;
+    `};
+  ${props =>
     props.green &&
     css`
       border-color: green;
@@ -33,7 +41,7 @@ const Button = styled.button`
     css`
       border-color: red;
       background: red;
-      color: black;
+      color: white;
     `};
   ${props =>
     props.orange &&

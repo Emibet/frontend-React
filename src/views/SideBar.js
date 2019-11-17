@@ -39,30 +39,30 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
   return (
     <div>
       <PrivateView>
-        <Lateral>
-          <h3 className="h3">Username:</h3> {user.username}
+        <Lateral top>
+          {/* <h3 className="h3">Username:</h3> {user.username}
           <br></br>
-          User Type: {user.contactName}
+          User Type: {user.contactName} */}
           {/* <Home /> */}
           {user.company && (
             <>
               <Link to={`${url}`}>
-                <Button lateral type="button">
+                <Button top type="button">
                   My Info
                 </Button>
               </Link>
               <Link to={`${url}/company/profile/edit`}>
-                <Button lateral type="button">
+                <Button top type="button">
                   Edit PROFILE
                 </Button>
               </Link>
               <Link to={`${url}/company/jobs`}>
-                <Button lateral type="button">
+                <Button top type="button">
                   MY JOBS
                 </Button>
               </Link>
               <Link to={`${url}/company/job/new`}>
-                <Button lateral type="button">
+                <Button top type="button">
                   ADD NEW JOB
                 </Button>
               </Link>
@@ -71,37 +71,37 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
           {!user.company && (
             <>
               <Link to={`${url}`}>
-                <Button lateral type="button">
+                <Button top type="button">
                   My Info
                 </Button>
               </Link>
               <Link to={`${url}/nurse/profile/edit`}>
-                <Button lateral type="button">
+                <Button top type="button">
                   Edit PROFILE
                 </Button>
               </Link>
               <Link to={`${url}/CV`}>
-                <Button lateral type="button">
+                <Button top type="button">
                   CV
                 </Button>
               </Link>
               <Link to={`${url}/jobs/available`}>
-                <Button lateral type="button">
+                <Button top type="button">
                   JOBS
                 </Button>
               </Link>
               <Link to={`${url}/jobs/applied`}>
-                <Button lateral type="button">
+                <Button top type="button">
                   Applied JOBS
                 </Button>
               </Link>
             </>
           )}
-          {isLoggedin && (
+          {/* {isLoggedin && (
             <Button primary lateral onClick={handleLogout}>
               logout
             </Button>
-          )}
+          )} */}
         </Lateral>
 
         <Switch>
@@ -130,7 +130,7 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
             </Card>
           </Router>
           <Router exact path={`${path}/company/jobs`}>
-            <Card>
+            <Card jobs>
               <CompanyJobsList {...rest} />
             </Card>
           </Router>
@@ -148,7 +148,7 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
           </Router>
           <Router exact path={`${path}/jobs/available`}>
             {/* <Home /> */}
-            <Card>
+            <Card jobList>
               <JobsToJoin />
             </Card>
           </Router>

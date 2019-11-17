@@ -30,6 +30,7 @@
   text-align: center;
   color: #4f98d3;
   font-weight: bold;
+  padding: 0.5em 0;
 }
 .unAssigned {
   font-weight: 500;
