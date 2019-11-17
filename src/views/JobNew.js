@@ -211,7 +211,7 @@ class JobNew extends Component {
                 onChange={this.handleChange}
               />
 
-              <Label htmlFor="urgent">CHECK IF URGENT:</Label>
+              {/* <Label htmlFor="urgent">CHECK IF URGENT:</Label>
               <Input
                 update
                 urgent
@@ -220,7 +220,7 @@ class JobNew extends Component {
                 id="urgent"
                 checked={job.urgent}
                 onChange={this.handleChangeBox}
-              />
+              /> */}
 
               <Label htmlFor="description">JOB Description:</Label>
               <Input

@@ -196,10 +196,10 @@ class NurseUpdate extends Component {
                 onChange={this.handleChangeBox}
               />
 
-              <Label htmlFor="year">NurseDegree (Year):</Label>
-              <Input type="date" name="year" id="year" value={nurse.nurseDegree} onChange={this.handleChange} />
+              {/* <Label htmlFor="year">NurseDegree (Year):</Label>
+              <Input type="date" name="year" id="year" value={nurse.nurseDegree} onChange={this.handleChange} /> */}
 
-              <Label htmlFor="experience">Experience:</Label>
+              {/* <Label htmlFor="experience">Experience:</Label>
               {nurse.resume.experience.map((oneExperience, index) => (
                 <FormExperience
                   key={index}
@@ -212,7 +212,7 @@ class NurseUpdate extends Component {
                   jobDescription={oneExperience.jobDescription}
                   handleChange={this.handleChange}
                 />
-              ))}
+              ))} */}
               <InputSubmit type="submit" value="Update" />
             </form>
           </>

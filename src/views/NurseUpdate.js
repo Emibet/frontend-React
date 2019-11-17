@@ -257,7 +257,7 @@ class NurseUpdate extends Component {
                 onChange={this.handleChange}
               />
 
-              <Label htmlFor="birthday">BirthDay:</Label>
+              {/* <Label htmlFor="birthday">BirthDay:</Label>
               <Input
                 update
                 type="date"
@@ -265,7 +265,7 @@ class NurseUpdate extends Component {
                 id="birthday"
                 value={user.nurse.birthday}
                 onChange={this.handleChange}
-              />
+              /> */}
 
               <Label htmlFor="dni">DNI:</Label>
               <Input update type="text" name="dni" id="dni" value={user.nurse.dni} onChange={this.handleChange} />
