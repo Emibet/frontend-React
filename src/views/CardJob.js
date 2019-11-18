@@ -64,6 +64,12 @@ class CardJob extends Component {
             <p>{job.requirementMin}</p>
           </div>
         )}
+        {job.description && (
+          <div className="cardJob-info">
+            Description:
+            <p>{job.description}</p>
+          </div>
+        )}
         {/* {job.title && (
           <div className="cardJob-info">
             Applicants:

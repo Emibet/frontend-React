@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 const WrappFlex = styled.div`
   display: flex;
   flex-direction: row;
-  overflow-y: auto;
+  overflow-y: scroll;
   ${props =>
     props.jobDetail &&
     css`

@@ -36,17 +36,48 @@ class Home extends Component {
       <>
         {!error && (
           <Card>
-            <h1 className="homepageTitle">FIND YOUR JOB or NURSE:</h1>
-            <h2>Jobs:</h2>
-            {!loading &&
-              jobs.jobs.map(job => {
-                return (
-                  <div key={job._id}>
-                    <div>{job.title}</div>
-                    <div> {job.location}</div>
-                  </div>
-                );
-              })}
+            <h1 className="homepageTitle">Welcome to EMIBET</h1>
+            <h2 className="homepageTitle">FIND YOUR JOB // FIND YOUR NURSE:</h2>
+            <h3 className="homepageTitle"> Register as contractor to publish Job Offers and manage the candidates.</h3>
+            <h3 className="homepageTitle">
+              Register as Nurse to see the Offers and view the status of your application.
+            </h3>
+            <h2 className="homepageSubTit">Job Offers:</h2>
+            <div className="wrapperTable">
+              <table className="table">
+                <thead className="thead">
+                  <tr className="tableTr">
+                    <th className="tTitle">Job Title</th>
+                    <th className="tTitle">Location</th>
+                    <th className="tTitle">Description</th>
+                  </tr>
+                </thead>
+                {/* <tfoot>
+                <tr>
+                <td>Job Title</td>
+                <td>Location</td>
+                <td>Description</td>
+                </tr>
+              </tfoot> */}
+                <tbody className="tBody">
+                  {!loading &&
+                    jobs.jobs.map(job => {
+                      return (
+                        <tr key={job._id}>
+                          <td className="tContent">{job.title}</td>
+                          <td className="tContent"> {job.location}</td>
+                          <td className="tContent"> {job.description}</td>
+                        </tr>
+                      );
+                    })}
+                  {/* <tr>
+                  <td className="tContent">Body content 1</td>
+                  <td>Body content 2</td>
+                  <td>Body content 2</td>
+                </tr> */}
+                </tbody>
+              </table>
+            </div>
 
             {/* {jobs.jobs.map()} */}
           </Card>

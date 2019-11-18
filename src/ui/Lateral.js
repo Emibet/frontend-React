@@ -8,7 +8,7 @@ const Lateral = styled.div`
   width: 100%;
   text-align: center;
   line-height: 1.5em;
-
+  /* box-sizing border-bo */
   /* background-color: white; */
   height: fit-content;
 
@@ -18,9 +18,15 @@ const Lateral = styled.div`
   ${props =>
     props.top &&
     css`
-      margin: 1em auto;
+      padding: 4em auto;
       width: 100%;
       justify-content: space-evenly;
+      flex-wrap: wrap;
+
+      align-items: center;
+      background: #067ee0;
+      box-sizing: border-box;
+      padding: 0.5em 0;
     `};
 `;
 

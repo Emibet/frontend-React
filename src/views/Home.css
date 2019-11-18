@@ -1,4 +1,42 @@
-.homepageTitle {
+.homepageTitle,
+.homepageSubTit {
   text-align: center;
   color: #4f98d3;
+}
+
+.table {
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.tableTr,
+th,
+tfoot > tr {
+  background-color: rgb(80, 137, 241);
+  margin: 0.5em;
+  padding: 0.75em;
+  box-sizing: border-box;
+}
+.tTitle {
+  font-size: 1.4em;
+}
+.tContent {
+  font-size: 1.2em;
+  padding: 0.3em 0;
+}
+tr:nth-child(even) {
+  background-color: rgb(188, 226, 248);
+}
+.wrapperTable {
+  border: 2px solid blue;
+  height: 80%;
+  /* overflow-y: scroll; */
+  /* position: sticky;
+  top: 100px; */
+}
+
+.tBody {
+  height: 100%;
+  overflow-y: scroll;
 }
