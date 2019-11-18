@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { device } from './device';
 
 const WrappFlex = styled.div`
   display: flex;
@@ -14,6 +15,9 @@ const WrappFlex = styled.div`
     props.jobList &&
     css`
       height: 100%;
+      @media ${device.tablet} {
+        flex-direction: column;
+      }
     `};
 `;
 

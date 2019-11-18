@@ -196,12 +196,12 @@ class JobsToJoin extends Component {
               availableJobs.map(job => {
                 return (
                   // <Card listed>
-                  <Card listed key={job._id}>
-                    <Link to={`/private/jobs/${job._id}/detail`} onClick={this.handleShow}>
-                      {job.title}
-                    </Link>
-                    {job.location}
-                  </Card>
+                  <Link to={`/private/jobs/${job._id}/detail`} key={job._id} onClick={this.handleShow}>
+                    <Card listed>
+                      <p>{job.title}</p>
+                      <p> {job.location}</p>
+                    </Card>
+                  </Link>
                   // </Card>
                 );
               })}

@@ -32,16 +32,20 @@ const Button = styled.button`
   ${props =>
     props.green &&
     css`
-      border-color: green;
-      background: green;
+      border-color: #00a30a;
+      background: #00a30a;
       color: white;
+      padding: 0.5em 1.5em;
+      font-size: 1.1em;
     `};
   ${props =>
     props.red &&
     css`
-      border-color: red;
-      background: red;
-      color: white;
+      border-color: #cc0000;
+      background: #cc0000;
+      color: black;
+      padding: 0.5em 1.5em;
+      font-size: 1.1em;
     `};
   ${props =>
     props.orange &&

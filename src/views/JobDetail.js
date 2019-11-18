@@ -305,14 +305,14 @@ class JobDetail extends Component {
                       {!user.company && (
                         <>
                           {!applicant ? (
-                            <>
+                            <div className="apply">
                               <p>Want to APPLY?</p>
                               <Button green onClick={this.handleApplytoJob}>
                                 Apply
                               </Button>
-                            </>
+                            </div>
                           ) : (
-                            <>
+                            <div className="apply">
                               <p>You are an applicant!!</p>
                               {job.employee ? (
                                 <>
@@ -352,7 +352,7 @@ class JobDetail extends Component {
                                   <p>You are an applicant!!</p>
                                 </>
                               )} */}
-                            </>
+                            </div>
                           )}
                         </>
                       )}

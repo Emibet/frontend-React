@@ -16,8 +16,14 @@
 }
 
 .freelance {
-  color: green;
+  color: rgb(46, 124, 88);
 }
 .not-freelance {
   color: orange;
+}
+.nurseWelcome {
+  text-align: center;
+  font-size: 1.3em;
+  color: #1c7bc9;
+  font-weight: bold;
 }

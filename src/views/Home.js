@@ -35,7 +35,7 @@ class Home extends Component {
     return (
       <>
         {!error && (
-          <Card>
+          <Card home>
             <h1 className="homepageTitle">Welcome to EMIBET</h1>
             <h2 className="homepageTitle">FIND YOUR JOB // FIND YOUR NURSE:</h2>
             <h3 className="homepageTitle"> Register as contractor to publish Job Offers and manage the candidates.</h3>

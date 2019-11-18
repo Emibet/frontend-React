@@ -2,3 +2,27 @@
   height: 100%;
   overflow-y: auto;
 }
+.jobsToJoin-title {
+  position: sticky;
+  top: 0em;
+  background-color: white;
+  box-sizing: border-box;
+  padding: 0.5em 0;
+  color: steelblue;
+}
+a {
+  color: rgb(26, 89, 172);
+}
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .jobsList {
+    width: 100%;
+  }
+}

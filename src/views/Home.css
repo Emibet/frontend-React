@@ -31,9 +31,10 @@ tr:nth-child(even) {
 .wrapperTable {
   border: 2px solid blue;
   height: 80%;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
   /* position: sticky;
   top: 100px; */
+  box-sizing: border-box;
 }
 
 .tBody {
