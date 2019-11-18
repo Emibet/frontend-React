@@ -10,6 +10,8 @@ import JobManage from './JobManage';
 import JobApplicants from './JobApplicants';
 import Card from '../ui/Card';
 import WrappFlex from '../ui/WrappFlex';
+import CompanyUpdate from './CompanyUpdate';
+import JobUpdate from './JobUpdate';
 
 class CompanyJobsList extends Component {
   state = {
@@ -84,6 +86,19 @@ class CompanyJobsList extends Component {
               >
               <JobApplicants job={job} />
             </Route> */}
+            <Route
+              exact
+              path="/private/company/job/:id/edit"
+              render={matchProps => (
+                <Card>
+                  <JobUpdate {...matchProps} />
+                </Card>
+              )}
+            >
+              {/* <Card>
+                <JobUpdate />
+              </Card> */}
+            </Route>
           </Switch>
         </WrappFlex>
       </WrappFlex>

@@ -74,6 +74,36 @@ class JobService {
       })
       .then(({ data }) => data);
   }
+
+  updateJob(jobId, job) {
+    console.log('TCL: CompanyJOBService -> updateJOB -> job', job);
+    const {
+      title,
+      location,
+      contractType,
+      salaryMin,
+      salaryMax,
+      experienceMin,
+      workDay,
+      study,
+      requirementMin,
+      description,
+    } = job;
+    return this.job
+      .put(`/jobs/${jobId}`, {
+        title,
+        location,
+        contractType,
+        salaryMin,
+        salaryMax,
+        experienceMin,
+        workDay,
+        study,
+        requirementMin,
+        description,
+      })
+      .then(({ data }) => data);
+  }
 }
 
 const jobService = new JobService();

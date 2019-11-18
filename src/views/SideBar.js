@@ -139,6 +139,11 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
               <CompanyJobsList {...rest} />
             </Card>
           </Router>
+          <Router exact path={`${path}/company/profile/edit`}>
+            <Card>
+              <CompanyUpdate />
+            </Card>
+          </Router>
 
           {/* <Router exact path="/private/company/jobs/manage">
             <Card>

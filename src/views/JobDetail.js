@@ -41,7 +41,7 @@ class JobDetail extends Component {
 
   async componentDidMount() {
     const { user } = this.props;
-    console.log('TCL: JobDetail -> componentDidMount -> this.props', this.props);
+    // console.log('TCL: JobDetail -> componentDidMount -> this.props', this.props);
     console.log('TCL: JobDetail -> componentDidMount -> user', user);
 
     const {
@@ -54,7 +54,7 @@ class JobDetail extends Component {
       const isApplicant = user.company ? 0 : user.nurse.candidateTo.includes(job.job._id);
 
       // const isApplicant = user.nurse.candidateTo.includes(job.job._id);
-      console.log('TCL: JobDetail -> componentDidMount -> isApplicant', isApplicant);
+      // console.log('TCL: JobDetail -> componentDidMount -> isApplicant', isApplicant);
 
       const applicant = isApplicant;
 
@@ -76,14 +76,14 @@ class JobDetail extends Component {
   }
 
   async getJob(id) {
-    console.log('TCL: JobDetail -> getJob -> id', id);
+    // console.log('TCL: JobDetail -> getJob -> id', id);
     const { user } = this.state;
     try {
       const job = await jobService.jobDetail(id);
-      console.log('TCL: JobDetail -> getJob -> job', job);
+      console.log('TCL: JobDetail -> getJob -> job HOLLAAAAAAAAA', job);
 
       const isApplicant = await job.job.applicants.filter(applicant => applicant.user._id === user._id);
-      console.log('TCL: JobDetail -> getJob -> isApplicant', isApplicant);
+      // console.log('TCL: JobDetail -> getJob -> isApplicant', isApplicant);
 
       const applicant = isApplicant.length > 0;
       this.setState({
@@ -100,6 +100,10 @@ class JobDetail extends Component {
       });
     }
   }
+
+  handleEditJob = () => {
+    this.props.history.push('/private/company/profile/edit');
+  };
 
   handleApplytoJob = async () => {
     const { job, user } = this.state;
@@ -167,10 +171,11 @@ class JobDetail extends Component {
 
   componentDidUpdate(prevProps) {
     // const { manageJob, viewApplicants } = this.state;
-    console.log('TCL: JobDetail -> componentDidUpdate -> prevProps', prevProps);
-    console.log('TCL: JobDetail -> componentDidUpdate ->  THIS Props', this.props);
+    // console.log('TCL: JobDetail -> componentDidUpdate -> prevProps', prevProps);
+    // console.log('TCL: JobDetail -> componentDidUpdate ->  THIS Props', this.props);
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.getJob(this.props.match.params.id);
+
       this.setState({
         viewApplicants: false,
         manageJob: false,
@@ -280,7 +285,13 @@ class JobDetail extends Component {
                           <Button primary type="button" onClick={this.handleManageJob}>
                             MANAGE JOB
                           </Button>
-                          {manageJob && <JobManageActions handleViewApplicants={this.handleViewApplicants} />}
+                          {manageJob && (
+                            <JobManageActions
+                              handleViewApplicants={this.handleViewApplicants}
+                              handleEditJob={this.handleEditJob}
+                              job={job}
+                            />
+                          )}
                         </>
                       )}
                       {/* <h1>Job Detail:</h1> */}
@@ -303,9 +314,44 @@ class JobDetail extends Component {
                           ) : (
                             <>
                               <p>You are an applicant!!</p>
-                              <Button red onClick={this.handleCancelApplytoJob}>
+                              {job.employee ? (
+                                <>
+                                  {job.employee._id === user._id ? (
+                                    <></>
+                                  ) : (
+                                    <>
+                                      <p>Sorry, your petition was Declined</p>
+                                    </>
+                                  )}
+                                </>
+                              ) : (
+                                <>
+                                  <Button red onClick={this.handleCancelApplytoJob}>
+                                    Cancel Application
+                                  </Button>
+                                </>
+                              )}
+                              {/* <Button red onClick={this.handleCancelApplytoJob}>
                                 Cancel Application
-                              </Button>
+                              </Button> */}
+                              {/* {job.employee && (
+                                <>
+                                  {console.log('TCL: JobDetail -> render -> job.employee.', job.employee._id)}
+                                  {console.log('TCL: JobDetail -> render -> user._id', user._id)}
+                                  {job.employee._id === user._id ? (
+                                    <></>
+                                  ) : (
+                                    <>
+                                      <Button red onClick={this.handleCancelApplytoJob}>
+                                        Cancel Application
+                                      </Button>
+                                      <p>Sorry, your petition was Declined</p>
+                                    </>
+                                  )}
+
+                                  <p>You are an applicant!!</p>
+                                </>
+                              )} */}
                             </>
                           )}
                         </>

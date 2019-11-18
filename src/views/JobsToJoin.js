@@ -185,7 +185,7 @@ class JobsToJoin extends Component {
     //   .toString()
     //   .toUpperCase();
     // console.log('TCL: render -> jobType', jobType);
-    console.log('HOLAAAAAAAAAAAAAAAAAA');
+    // console.log('HOLAAAAAAAAAAAAAAAAAA');
     return (
       <WrappFlex jobList>
         {!error && (
