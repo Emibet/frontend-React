@@ -14,12 +14,17 @@ import CompanyUpdate from './CompanyUpdate';
 import JobUpdate from './JobUpdate';
 
 class CompanyJobsList extends Component {
-  state = {
-    jobs: [],
-    loading: true,
-    error: undefined,
-    job: {},
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      jobs: [],
+      loading: true,
+      error: undefined,
+      job: {},
+    };
+    this.handlerNewJobs = this.handlerNewJobs.bind(this);
+  }
 
   async componentDidMount() {
     const { user } = this.props;
@@ -41,9 +46,29 @@ class CompanyJobsList extends Component {
     }
   }
 
+  handlerNewJobs = async () => {
+    const { user } = this.props;
+    try {
+      const jobs = await jobService.listCompanyJobs(user.username);
+      this.setState({
+        jobs,
+        loading: false,
+      });
+    } catch (error) {
+      console.log(error);
+      this.setState({
+        loading: false,
+        error: 'Unable to load JOBS',
+      });
+    }
+    this.setState({
+      someVar: 'some value',
+    });
+  };
+
   // componentDidUpdate(prevProps) {
-  //   // console.log('TCL: CompanyJobsList -> componentDidUpdate -> prevProps', prevProps);
-  //   // console.log('TCL: CompanyJobsList -> componentDidUpdate ->  THIS Props', this.props);
+  //   console.log('TCL: CompanyJobsList -> componentDidUpdate -> prevProps', prevProps);
+  //   console.log('TCL: CompanyJobsList -> componentDidUpdate ->  THIS Props', this.props);
   //   if (this.props.location.key !== prevProps.location.key) {
   //     // this.getJob(this.props.match.params.id);
   //     // this.props.history.push('/private/company/jobs');
@@ -52,21 +77,29 @@ class CompanyJobsList extends Component {
 
   render() {
     const { jobs, loading, error, job } = this.state;
+    console.log('TCL: render -> jobs', jobs);
     console.log('PROPS COMPANY JOB LIST ', this.props);
     return (
-      <WrappFlex>
+      <WrappFlex jobList>
         {!error && (
-          <div>
+          <div className="jobsList">
             {/* {console.log('RENDER COMPANY JOB LIST')} */}
-            <h1>All My Jobs:</h1>
+            <h1 className="jobsToJoin-title">All My Jobs:</h1>
 
             {!loading &&
               jobs.jobs.map(job => {
                 return (
-                  <Card listed key={job._id}>
-                    <Link to={`/private/company/jobs/${job._id}`}>{job.title}</Link>
-                    {job.location}
-                  </Card>
+                  <Link to={`/private/company/jobs/${job._id}`} key={job._id}>
+                    <Card listed>
+                      {job.employee ? (
+                        <p className="jobIsAssigned">Assigned </p>
+                      ) : (
+                        <p className="jobIsAssigned not"> Not Assigned </p>
+                      )}
+                      <p>{job.title}</p>
+                      <p>{job.location}</p>
+                    </Card>
+                  </Link>
                 );
               })}
           </div>
@@ -74,7 +107,12 @@ class CompanyJobsList extends Component {
         {loading && <div>loading...</div>}
         <WrappFlex jobDetail>
           <Switch>
-            <Route exact path="/private/company/jobs/:id" component={JobDetail}></Route>
+            <Route
+              exact
+              path="/private/company/jobs/:id"
+              // component={JobDetail}
+              render={matchProps => <JobDetail {...matchProps} handlerNewJobs={this.handlerNewJobs} />}
+            ></Route>
             {/* <Route
               exact
               path="/private/company/job/:id/manage"

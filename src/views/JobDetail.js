@@ -192,11 +192,13 @@ class JobDetail extends Component {
 
   handleAssignToJob = async (jobId, nurseId, applicationId) => {
     const { user } = this.state;
-    const { userData } = this.props;
+    const { handlerNewJobs } = this.props;
+    console.log('TCL: JobDetail -> handleAssignToJob -> this.props', this.props);
 
     try {
       const job = await jobService.confirmJob(jobId, nurseId, applicationId);
-
+      // await this.props.userData();
+      handlerNewJobs();
       this.setState({
         job: job.job,
       });
@@ -211,11 +213,12 @@ class JobDetail extends Component {
 
   handleQuitFromJob = async (jobId, nurseId) => {
     const { user } = this.state;
-    const { userData } = this.props;
+    const { handlerNewJobs } = this.props;
 
     try {
       const job = await jobService.cancelJob(jobId, nurseId);
-
+      // await this.props.userData();
+      handlerNewJobs();
       this.setState({
         job: job.job,
       });
@@ -231,7 +234,7 @@ class JobDetail extends Component {
   handleDeclineToJob = async (jobId, nurseId) => {
     try {
       const job = await jobService.declineJob(jobId, nurseId);
-
+      await this.props.userData();
       this.setState({
         job: job.job,
       });

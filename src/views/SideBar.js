@@ -135,7 +135,7 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
             </Card>
           </Router>
           <Router exact path={`${path}/company/jobs`}>
-            <Card jobs>
+            <Card jobList>
               <CompanyJobsList {...rest} />
             </Card>
           </Router>
