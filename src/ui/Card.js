@@ -14,6 +14,7 @@ const Card = styled.div`
   background-color: white;
 
   @media ${device.tablet} {
+    max-width: 100%;
     width: 100%;
     margin: 2em 0;
   }
@@ -90,7 +91,8 @@ const Card = styled.div`
   ${props =>
     props.jobList &&
     css`
-      height: 80%;
+      max-width: 80%;
+      height: 90%;
     `};
 `;
 

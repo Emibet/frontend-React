@@ -4,13 +4,16 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin: 0.75em 0;
+  box-sizing: border-box;
 }
 .cardJob-info {
   display: inline-block;
-  width: 75px;
+  width: 240px;
   text-align: center;
-  padding: 0.25em 0.75em;
   font-weight: bold;
+  box-sizing: border-box;
+  padding: 0.5em 0.75em;
+  margin: 0.25em 0;
 }
 
 .cardJob-info p {

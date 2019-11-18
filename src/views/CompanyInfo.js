@@ -6,7 +6,11 @@ const CompanyInfo = props => {
   const { jobs } = props;
   return (
     <div>
-      <p>TOTAL JOBS CREATED: {jobs.jobs.length}</p>
+      <div className="nurseWelcome">
+        <p className="nurseWelcomeInfo">YOUR TOTAL JOBS CREATED: </p>
+        <p className="nurseWelcomeInfo"> {jobs.jobs.length} </p>
+      </div>
+
       {username && (
         <p className="name">
           Username: <span className="info">{username}</span>
