@@ -1,0 +1,11 @@
+.jobIsAssigned {
+  color: rgb(0, 104, 0);
+  border: 1px solid black;
+  padding: 0.25em;
+  margin: 0;
+  text-align: center;
+}
+
+.not {
+  color: red;
+}

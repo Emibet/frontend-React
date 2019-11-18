@@ -12,6 +12,7 @@ import Card from '../ui/Card';
 import WrappFlex from '../ui/WrappFlex';
 import CompanyUpdate from './CompanyUpdate';
 import JobUpdate from './JobUpdate';
+import './CompanyJobList.css';
 
 class CompanyJobsList extends Component {
   constructor(props) {
@@ -91,13 +92,13 @@ class CompanyJobsList extends Component {
                 return (
                   <Link to={`/private/company/jobs/${job._id}`} key={job._id}>
                     <Card listed>
+                      <p>{job.title}</p>
+                      <p>{job.location}</p>
                       {job.employee ? (
                         <p className="jobIsAssigned">Assigned </p>
                       ) : (
                         <p className="jobIsAssigned not"> Not Assigned </p>
                       )}
-                      <p>{job.title}</p>
-                      <p>{job.location}</p>
                     </Card>
                   </Link>
                 );
