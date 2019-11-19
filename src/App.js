@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 import styled, { css } from 'styled-components';
-import { GlobalStyle } from './ui';
+// import { GlobalStyle } from './ui';
 import PrivateView from './views/PrivateView_old';
 import Login from './views/auth/Login';
 import Signup from './views/auth/Signup';
@@ -32,7 +32,7 @@ class App extends Component {
     return (
       <>
         {/* <Navbar handleLogout={handleLogout}></Navbar> */}
-        <GlobalStyle />
+
         <Router>
           <WrappHeader>
             <Link to="/">
