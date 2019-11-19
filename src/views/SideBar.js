@@ -33,17 +33,11 @@ const JobsListCard = styled.div`
 
 const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
   let { path, url } = useRouteMatch();
-  // const { handleLogout, isLoggedin } = this.props;
-  console.log('TCL: SideBar -> user', user);
 
   return (
     <div>
       <PrivateView>
         <Lateral top>
-          {/* <h3 className="h3">Username:</h3> {user.username}
-          <br></br>
-          User Type: {user.contactName} */}
-          {/* <Home /> */}
           {user.company && (
             <>
               <Link to={`${url}`}>
@@ -95,18 +89,8 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
                   Applied JOBS
                 </Button>
               </Link>
-              {/* <Link to={`${url}/jobs/assigned`}>
-                <Button top type="button">
-                  Assigned JOBS
-                </Button>
-              </Link> */}
             </>
           )}
-          {/* {isLoggedin && (
-            <Button primary lateral onClick={handleLogout}>
-              logout
-            </Button>
-          )} */}
         </Lateral>
 
         <Switch>
@@ -115,7 +99,6 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
           </AnonRoute>
           <PrivateRoute exact path={`${path}/`}>
             <Card>
-              {/* <Home /> */}
               <UserData />
             </Card>
           </PrivateRoute>
@@ -145,19 +128,12 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
             </Card>
           </Router>
 
-          {/* <Router exact path="/private/company/jobs/manage">
-            <Card>
-              <JobNew />
-            </Card>
-          </Router> */}
-
           <Router exact path={`${path}/CV`}>
             <Card>
               <ResumeUpdate />
             </Card>
           </Router>
           <Router exact path={`${path}/jobs/available`}>
-            {/* <Home /> */}
             <Card jobList>
               <JobsToJoin {...rest} />
             </Card>
@@ -166,26 +142,7 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
             <Card jobList>
               <JobsToJoin {...rest} />
             </Card>
-            {/* <Card>
-              <JobsApplied />
-            </Card> */}
           </Router>
-          {/* <Router exact path={`${path}/jobs/assigned`}>
-            <Card jobList>
-              <JobsToJoin {...rest} />
-            </Card>
-          </Router> */}
-          {/* <Router path={`${path}/*`} component={NotFound} /> */}
-          {/* <Router exact path={`${path}/${user.username}/jobs`}>
-          <CompanyUpdate />
-        </Router> */}
-
-          {/* <Route exact path={path}>
-          <h3>Please select a topic.</h3>
-        </Route> */}
-          {/* <Route path={`${path}/:topicId`}>
-          <Topic />
-        </Route> */}
         </Switch>
       </PrivateView>
     </div>
