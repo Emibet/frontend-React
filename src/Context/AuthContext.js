@@ -50,8 +50,6 @@ export default class AuthProvider extends Component {
           user,
           isLoading: false,
         });
-
-        console.log('me', user);
       })
       .catch(() => {
         this.setState({
@@ -60,10 +58,6 @@ export default class AuthProvider extends Component {
       });
     this.userData();
   }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   console.log('Component  UPDATED : ', prevState.user);
-  // }
 
   userData = () => {
     authService
@@ -74,8 +68,6 @@ export default class AuthProvider extends Component {
           user,
           isLoading: false,
         });
-
-        console.log('USERDATA me', user);
       })
       .catch(() => {
         this.setState({
