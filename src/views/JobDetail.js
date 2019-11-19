@@ -13,15 +13,6 @@ import Card from '../ui/Card';
 import './JobDetail.css';
 import Button from '../ui/Button';
 
-// const Card = styled.div`
-//   border-radius: 3px;
-//   border: 2px solid #4f98d3;
-//   // width: 100%;
-//   margin-left: 2em;
-//   padding: 0.25em 1em;
-//   box-sizing: border-box;
-// `;
-
 class JobDetail extends Component {
   constructor(props) {
     super(props);
@@ -42,20 +33,14 @@ class JobDetail extends Component {
 
   async componentDidMount() {
     const { user } = this.props;
-    // console.log('TCL: JobDetail -> componentDidMount -> this.props', this.props);
-    console.log('TCL: JobDetail -> componentDidMount -> user', user);
 
     const {
       params: { id },
     } = this.props.match;
     try {
       const job = await jobService.jobDetail(id);
-      console.log('TCL: JobDetail -> componentDidMount -> job', job);
 
       const isApplicant = user.company ? 0 : user.nurse.candidateTo.includes(job.job._id);
-
-      // const isApplicant = user.nurse.candidateTo.includes(job.job._id);
-      // console.log('TCL: JobDetail -> componentDidMount -> isApplicant', isApplicant);
 
       const applicant = isApplicant;
 
@@ -77,14 +62,11 @@ class JobDetail extends Component {
   }
 
   async getJob(id) {
-    // console.log('TCL: JobDetail -> getJob -> id', id);
     const { user } = this.state;
     try {
       const job = await jobService.jobDetail(id);
-      console.log('TCL: JobDetail -> getJob -> job HOLLAAAAAAAAA', job);
 
       const isApplicant = await job.job.applicants.filter(applicant => applicant.user._id === user._id);
-      // console.log('TCL: JobDetail -> getJob -> isApplicant', isApplicant);
 
       const applicant = isApplicant.length > 0;
       this.setState({
@@ -171,9 +153,6 @@ class JobDetail extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    // const { manageJob, viewApplicants } = this.state;
-    // console.log('TCL: JobDetail -> componentDidUpdate -> prevProps', prevProps);
-    // console.log('TCL: JobDetail -> componentDidUpdate ->  THIS Props', this.props);
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.getJob(this.props.match.params.id);
 
@@ -194,11 +173,10 @@ class JobDetail extends Component {
   handleAssignToJob = async (jobId, nurseId, applicationId) => {
     const { user } = this.state;
     const { handlerNewJobs } = this.props;
-    console.log('TCL: JobDetail -> handleAssignToJob -> this.props', this.props);
 
     try {
       const job = await jobService.confirmJob(jobId, nurseId, applicationId);
-      // await this.props.userData();
+
       handlerNewJobs();
       this.setState({
         job: job.job,
@@ -218,7 +196,7 @@ class JobDetail extends Component {
 
     try {
       const job = await jobService.cancelJob(jobId, nurseId);
-      // await this.props.userData();
+
       handlerNewJobs();
       this.setState({
         job: job.job,
@@ -266,11 +244,10 @@ class JobDetail extends Component {
 
   render() {
     const { job, user, applicant, isApplicant, loading, error, show, manageJob, viewApplicants, nurse } = this.state;
-    console.log('JOB DETAILLLLLLLLLLLLLLLLLLL');
+
     const {
       params: { id },
     } = this.props.match;
-    // console.log('TCL: JobDetail -> render -> this.props', this.props);
 
     return (
       <div>
@@ -284,11 +261,9 @@ class JobDetail extends Component {
                       <div className="iconCloseR">
                         <AiOutlineCloseCircle size="35px" color="#067ee0" onClick={this.handleShow} />
                       </div>
-                      {/* <button onClick={this.handleShow}>Close Detail</button> */}
+
                       {user.company && (
                         <>
-                          {/* <h2> COMPANY</h2> */}
-
                           <Button primary type="button" onClick={this.handleManageJob}>
                             MANAGE JOB
                           </Button>
@@ -301,7 +276,7 @@ class JobDetail extends Component {
                           )}
                         </>
                       )}
-                      {/* <h1>Job Detail:</h1> */}
+
                       {job.done && <h3>JOB COMPLETED</h3>}
                       <p className="applicants">{job.applicants.length} Applicants</p>
                       {job.employee ? (
@@ -338,27 +313,6 @@ class JobDetail extends Component {
                                   </Button>
                                 </>
                               )}
-                              {/* <Button red onClick={this.handleCancelApplytoJob}>
-                                Cancel Application
-                              </Button> */}
-                              {/* {job.employee && (
-                                <>
-                                  {console.log('TCL: JobDetail -> render -> job.employee.', job.employee._id)}
-                                  {console.log('TCL: JobDetail -> render -> user._id', user._id)}
-                                  {job.employee._id === user._id ? (
-                                    <></>
-                                  ) : (
-                                    <>
-                                      <Button red onClick={this.handleCancelApplytoJob}>
-                                        Cancel Application
-                                      </Button>
-                                      <p>Sorry, your petition was Declined</p>
-                                    </>
-                                  )}
-
-                                  <p>You are an applicant!!</p>
-                                </>
-                              )} */}
                             </div>
                           )}
                         </>
@@ -384,12 +338,10 @@ class JobDetail extends Component {
                         <>
                           <div>
                             <p className="worker unAssigned"> Applicants:</p>
-                            {/* {console.log(' DENTRO APLLICANTS ', job)} */}
+
                             {job.applicants.map(nurse => {
-                              console.log('TCL: JobDetail -> render MAP -> nurse', nurse);
                               return (
                                 <div key={nurse._id}>
-                                  {/* <p>{nurse.status}</p> */}
                                   <NurseDetail
                                     applicant={true}
                                     job={job}
