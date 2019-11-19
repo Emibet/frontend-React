@@ -28,13 +28,7 @@ class JobNew extends Component {
   };
 
   async componentDidMount() {
-    // const {
-    //   match: {
-    //     params: { id },
-    //   },
-    // } = this.props;
     const { user } = this.props; // Original
-    // console.log('TCL: JOB NEW -> componentDidMount -> user', user);
 
     try {
       this.setState({
@@ -63,11 +57,8 @@ class JobNew extends Component {
   };
 
   handleChangeBox = event => {
-    // console.log('TCL: NurseUpdate -> event', event.target.name);
     const { job } = this.state;
     const { name, checked: value, type } = event.target;
-    // console.log('TCL: NurseUpdate -> value', type);
-    // console.log('TCL: NurseUpdate -> value', value);
 
     this.setState({
       job: {
@@ -80,12 +71,6 @@ class JobNew extends Component {
   handleFormSubmit = e => {
     e.preventDefault();
     const { username, password, company, user, job } = this.state;
-    // this.props.handleUpdate({
-    //   username,
-    //   password,
-    //   company,
-    // });
-    // console.log('The JOB to SEND: ', job);
 
     jobService
       .addNewJob(job, user.username)
@@ -106,12 +91,8 @@ class JobNew extends Component {
             description: '',
           },
         });
-        console.log('JobAdded');
       })
-      // .then(() => {
-      //   <Redirect to="/private" />;
-      //   // this.props.userData();
-      // })
+
       .catch(() => {
         console.log('catch');
       });
@@ -119,13 +100,6 @@ class JobNew extends Component {
 
   render() {
     const { username, password, company, user, job, message, loading, redirect } = this.state;
-
-    // console.log('PROPS: ', this.props);
-
-    // if (redirect) {
-    //   console.log('REDIRECTS');
-    //   return <Redirect to={'/private/company/jobs'} />;
-    // }
 
     return (
       <div>
@@ -212,17 +186,6 @@ class JobNew extends Component {
                 value={job.requirementMin}
                 onChange={this.handleChange}
               />
-
-              {/* <Label htmlFor="urgent">CHECK IF URGENT:</Label>
-              <Input
-                update
-                urgent
-                type="checkbox"
-                name="urgent"
-                id="urgent"
-                checked={job.urgent}
-                onChange={this.handleChangeBox}
-              /> */}
 
               <Label htmlFor="description">JOB Description:</Label>
               <Input
