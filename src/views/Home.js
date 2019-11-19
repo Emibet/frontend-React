@@ -18,7 +18,7 @@ class Home extends Component {
   async componentDidMount() {
     try {
       const jobs = await jobService.listAllJobs();
-      console.log('TCL: Home -> componentDidMount -> jobs', jobs);
+
       this.setState({
         jobs,
         loading: false,
@@ -54,13 +54,7 @@ class Home extends Component {
                     <th className="tTitle">Description</th>
                   </tr>
                 </thead>
-                {/* <tfoot>
-                <tr>
-                <td>Job Title</td>
-                <td>Location</td>
-                <td>Description</td>
-                </tr>
-              </tfoot> */}
+
                 <tbody className="tBody">
                   {!loading &&
                     jobs.jobs.map(job => {
@@ -72,22 +66,12 @@ class Home extends Component {
                         </tr>
                       );
                     })}
-                  {/* <tr>
-                  <td className="tContent">Body content 1</td>
-                  <td>Body content 2</td>
-                  <td>Body content 2</td>
-                </tr> */}
                 </tbody>
               </table>
             </div>
-
-            {/* {jobs.jobs.map()} */}
           </Card>
         )}
         {loading && <Spinner src={logo} className="spinner" alt="logo" />}
-        {/* <div className="col-7">
-          <Route exact path="/jobs/:id/detail" component={JobDetail}></Route>
-        </div> */}
       </>
     );
   }
