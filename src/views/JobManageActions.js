@@ -7,7 +7,6 @@ import Card from '../ui/Card';
 import CompanyUpdate from './CompanyUpdate';
 
 const JobManageActions = props => {
-  console.log('TCL: props', props);
   const { handleViewApplicants, handleEditJob, job } = props;
   return (
     <div className="wrapperActions">
