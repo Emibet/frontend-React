@@ -13,6 +13,8 @@ import WrappFlex from '../ui/WrappFlex';
 import CompanyUpdate from './CompanyUpdate';
 import JobUpdate from './JobUpdate';
 import './CompanyJobList.css';
+import logo from '../images/logo192.png';
+import Spinner from '../ui/Loading';
 
 class CompanyJobsList extends Component {
   constructor(props) {
@@ -92,6 +94,8 @@ class CompanyJobsList extends Component {
                 return (
                   <Link to={`/private/company/jobs/${job._id}`} key={job._id}>
                     <Card listed>
+                      {console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', job)}
+                      <p className="numberApplicants">{job.applicants.length} Applicants</p>
                       <p>{job.title}</p>
                       <p>{job.location}</p>
                       {job.employee ? (
@@ -105,7 +109,7 @@ class CompanyJobsList extends Component {
               })}
           </div>
         )}
-        {loading && <div>loading...</div>}
+        {loading && <Spinner src={logo} className="spinner" alt="logo" />}
         <WrappFlex jobDetail>
           <Switch>
             <Route

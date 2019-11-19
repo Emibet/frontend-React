@@ -8,6 +8,7 @@ const Button = styled.button`
   color: #4f98d3;
   margin: 0.25em 1em;
   padding: 0.5em 1em;
+  font-size: 0.9em;
   box-sizing: border-box;
   ${props =>
     props.primary &&

@@ -45,3 +45,8 @@
 .unAssigned {
   font-weight: 500;
 }
+.iconCloseR {
+  /* text-align: end; */
+  position: absolute;
+  right: 10px;
+}

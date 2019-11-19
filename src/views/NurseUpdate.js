@@ -6,6 +6,8 @@ import userService from '../services/userService';
 import authService from '../services/authService';
 import Input from '../ui/Input';
 import Message from '../ui/Message';
+import logo from '../images/logo192.png';
+import Spinner from '../ui/Loading';
 
 const InputSubmit = styled.input`
   background-color: #4f98d3;
@@ -190,7 +192,7 @@ class NurseUpdate extends Component {
         NURSE UPDATE PROFILE:
         {username}
         {message && <Message>{message}</Message>}
-        {loading && <div>Loading...</div>}
+        {loading && <Spinner src={logo} className="spinner" alt="logo" />}
         {!loading && (
           <>
             <form onSubmit={this.handleFormSubmit}>

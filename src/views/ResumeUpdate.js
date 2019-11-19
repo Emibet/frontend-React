@@ -7,6 +7,8 @@ import authService from '../services/authService';
 import FormExperience from './FormExperience';
 import Message from '../ui/Message';
 import Title from '../ui/Ttile';
+import logo from '../images/logo192.png';
+import Spinner from '../ui/Loading';
 
 const InputSubmit = styled.input`
   background-color: #4f98d3;
@@ -172,7 +174,7 @@ class NurseUpdate extends Component {
         <Title>UPDATE RESUME:</Title>
         {/* {username} */}
         {message && <Message>{message}</Message>}
-        {loading && <div>Loading...</div>}
+        {loading && <Spinner src={logo} className="spinner" alt="logo" />}
         {!loading && (
           <>
             <form onSubmit={this.handleFormSubmit}>

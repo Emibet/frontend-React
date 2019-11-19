@@ -7,6 +7,8 @@ import authService from '../services/authService';
 import Message from '../ui/Message';
 import Input from '../ui/Input';
 import InputSubmit from '../ui/InputSubmit';
+import logo from '../images/logo192.png';
+import Spinner from '../ui/Loading';
 
 const Label = styled.label`
   color: #4f98d3;
@@ -130,7 +132,7 @@ class JobNew extends Component {
         ADD NEW JOB:
         {username}
         {message && <Message>{message}</Message>}
-        {loading && <div>Loading...</div>}
+        {loading && <Spinner src={logo} className="spinner" alt="logo" />}
         {!loading && (
           <>
             <form onSubmit={this.handleFormSubmit}>

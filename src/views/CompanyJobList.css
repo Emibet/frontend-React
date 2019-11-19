@@ -9,3 +9,9 @@
 .not {
   color: red;
 }
+
+.numberApplicants {
+  font-size: 0.8em;
+  margin: 0;
+  text-align: end;
+}

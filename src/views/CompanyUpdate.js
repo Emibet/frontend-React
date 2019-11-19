@@ -5,6 +5,8 @@ import { withAuth } from '../Context/AuthContext';
 import companyService from '../services/companyService';
 import authService from '../services/authService';
 import Message from '../ui/Message';
+import logo from '../images/logo192.png';
+import Spinner from '../ui/Loading';
 
 import Input from '../ui/Input';
 import InputSubmit from '../ui/InputSubmit';
@@ -89,7 +91,7 @@ class CompanyUpdate extends Component {
         COMPANY UPDATE PROFILE:
         {/* {username} */}
         {message && <Message> {message}</Message>}
-        {loading && <div>Loading...</div>}
+        {loading && <Spinner src={logo} className="spinner" alt="logo" />}
         {!loading && (
           <>
             <form onSubmit={this.handleFormSubmit}>

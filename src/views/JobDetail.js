@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import { BrowserRouter as Router, Switch, Link, useParams, useRouteMatch } from 'react-router-dom';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 import jobService from '../services/jobService';
 import { withAuth } from '../Context/AuthContext';
 import CardJob from './CardJob';
@@ -280,7 +281,10 @@ class JobDetail extends Component {
                 <Card detailJob className="jobDetailPopUp">
                   {show && (
                     <>
-                      <button onClick={this.handleShow}>Close Detail</button>
+                      <div className="iconCloseR">
+                        <AiOutlineCloseCircle size="35px" color="#067ee0" onClick={this.handleShow} />
+                      </div>
+                      {/* <button onClick={this.handleShow}>Close Detail</button> */}
                       {user.company && (
                         <>
                           {/* <h2> COMPANY</h2> */}

@@ -3,6 +3,8 @@ import { withAuth } from '../Context/AuthContext';
 import jobService from '../services/jobService';
 import CompanyInfo from './CompanyInfo';
 import NurseInfo from './NurseInfo';
+import logo from '../images/logo192.png';
+import Spinner from '../ui/Loading';
 
 class UserData extends Component {
   state = {
@@ -38,7 +40,7 @@ class UserData extends Component {
     return (
       <div>
         {message && <div>{message}</div>}
-        {loading && <div>Loading...</div>}
+        {loading && <Spinner src={logo} className="spinner" alt="logo" />}
         {!loading && (
           <>
             {user.company && (

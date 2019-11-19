@@ -82,7 +82,7 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
               </Link>
               <Link to={`${url}/CV`}>
                 <Button top type="button">
-                  CV
+                  Edit CV
                 </Button>
               </Link>
               <Link to={`${url}/jobs/available`}>
@@ -95,11 +95,11 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
                   Applied JOBS
                 </Button>
               </Link>
-              <Link to={`${url}/jobs/assigned`}>
+              {/* <Link to={`${url}/jobs/assigned`}>
                 <Button top type="button">
                   Assigned JOBS
                 </Button>
-              </Link>
+              </Link> */}
             </>
           )}
           {/* {isLoggedin && (
@@ -170,11 +170,11 @@ const SideBar = ({ user, handleLogout, isLoggedin, ...rest }) => {
               <JobsApplied />
             </Card> */}
           </Router>
-          <Router exact path={`${path}/jobs/assigned`}>
+          {/* <Router exact path={`${path}/jobs/assigned`}>
             <Card jobList>
               <JobsToJoin {...rest} />
             </Card>
-          </Router>
+          </Router> */}
           {/* <Router path={`${path}/*`} component={NotFound} /> */}
           {/* <Router exact path={`${path}/${user.username}/jobs`}>
           <CompanyUpdate />

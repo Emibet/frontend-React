@@ -6,6 +6,8 @@ import PrivateRoute from '../components/PrivateRoute';
 import jobService from '../services/jobService';
 import userService from '../services/userService';
 import JobDetail from './JobDetail';
+import logo from '../images/logo192.png';
+import Spinner from '../ui/Loading';
 
 class JobsApplied extends Component {
   state = {
@@ -63,7 +65,7 @@ class JobsApplied extends Component {
               })}
           </>
         )}
-        {loading && <div>loading...</div>}
+        {loading && <Spinner src={logo} className="spinner" alt="logo" />}
         <div className="col-7">
           <Switch>
             <Route exact path="/jobs/applied/:id/detail" component={JobDetail}></Route>

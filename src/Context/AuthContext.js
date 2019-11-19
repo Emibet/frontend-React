@@ -1,6 +1,8 @@
 // eslint-disable-next-line max-classes-per-file
 import React, { Component, createContext } from 'react';
 import authService from '../services/authService';
+import logo from '../images/logo192.png';
+import Spinner from '../ui/Loading';
 
 const AuthContext = createContext();
 
@@ -143,7 +145,7 @@ export default class AuthProvider extends Component {
     const { isLoading, isLoggedin, user } = this.state;
     const { children } = this.props;
     if (isLoading) {
-      return <div>Loading...</div>;
+      return <Spinner src={logo} className="spinner" alt="logo" />;
       // eslint-disable-next-line no-else-return
     } else {
       return (

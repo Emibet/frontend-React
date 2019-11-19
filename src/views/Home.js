@@ -5,6 +5,8 @@ import jobService from '../services/jobService';
 import JobDetail from './JobDetail';
 import Card from '../ui/Card';
 import './Home.css';
+import logo from '../images/logo192.png';
+import Spinner from '../ui/Loading';
 
 class Home extends Component {
   state = {
@@ -82,7 +84,7 @@ class Home extends Component {
             {/* {jobs.jobs.map()} */}
           </Card>
         )}
-        {loading && <div>loading...</div>}
+        {loading && <Spinner src={logo} className="spinner" alt="logo" />}
         {/* <div className="col-7">
           <Route exact path="/jobs/:id/detail" component={JobDetail}></Route>
         </div> */}

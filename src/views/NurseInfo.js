@@ -39,9 +39,9 @@ class NurseInfo extends Component {
     } = this.props.user.nurse;
     return (
       <>
-        <div className="nurseWelcome">
+        {/* <div className="nurseWelcome">
           <p className="nurseWelcomeInfo">Welcome to Emibet, Your WebApp to find your Nursering Job!!</p>
-        </div>
+        </div> */}
         <div className="Wrapper">
           <div>
             {resume && (

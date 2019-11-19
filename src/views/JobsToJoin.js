@@ -9,6 +9,9 @@ import JobDetail from './JobDetail';
 import Card from '../ui/Card';
 import WrappFlex from '../ui/WrappFlex';
 import './JobsToJoin.css';
+import logo from '../images/logo192.png';
+import Spinner from '../ui/Loading';
+
 // const WrappFlex = styled.div`
 //   display: flex;
 //   flex-direction: row;
@@ -78,13 +81,14 @@ class JobsToJoin extends Component {
         });
         return appliedJobs;
       }
-      case '/private/jobs/assigned': {
-        const jobsNoDone = jobs.jobs.filter(job => job.done === false);
-        const appliedJobs = jobsNoDone.filter(job => {
-          return user.nurse.candidateTo.findIndex(jobId => jobId === job._id) >= 0;
-        });
-        return appliedJobs;
-      }
+      // NOT IMPLEMENTED
+      // case '/private/jobs/assigned': {
+      //   const jobsNoDone = jobs.jobs.filter(job => job.done === false);
+      //   const appliedJobs = jobsNoDone.filter(job => {
+      //     return user.nurse.candidateTo.findIndex(jobId => jobId === job._id) >= 0;
+      //   });
+      //   return appliedJobs;
+      // }
 
       default:
         return null;
@@ -207,7 +211,7 @@ class JobsToJoin extends Component {
               })}
           </div>
         )}
-        {loading && <div>loading...</div>}
+        {loading && <Spinner src={logo} className="spinner" alt="logo" />}
         <WrappFlex jobDetail>
           {showDetail && (
             <>

@@ -73,9 +73,9 @@ class NurseDetail extends Component {
           <>
             {/* <p> Request: {nurse.status}</p> */}
             <Request>{nurse.status}</Request>
-            <button type="button" onClick={this.handleShowCV}>
+            {/* <button type="button" onClick={this.handleShowCV}>
               View CV
-            </button>
+            </button> */}
             <NurseInfo user={nurse.user} />
             {nurse.status === 'Pending' && !job.employee && (
               <>
@@ -96,7 +96,7 @@ class NurseDetail extends Component {
             )}
           </>
         )}
-        {showCV && (
+        {/* {showCV && (
           <>
             {nurse.user.nurse.resume.freelance ? (
               <>
@@ -108,7 +108,7 @@ class NurseDetail extends Component {
               </>
             )}
           </>
-        )}
+        )} */}
       </div>
     );
   }
