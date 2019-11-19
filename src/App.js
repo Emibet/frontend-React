@@ -8,15 +8,12 @@ import Login from './views/auth/Login';
 import Signup from './views/auth/Signup';
 import { withAuth } from './Context/AuthContext';
 
-import Navbar from './views/Navbar';
-
 import SideBar from './views/SideBar';
 
 import PrivateRoute from './components/PrivateRoute';
 import AnonRoute from './components/AnonRoute';
 import Home from './views/Home';
 import Emibet from './images/Emibet.jpg';
-import JobNew from './views/JobNew';
 
 import Button from './ui/Button';
 import WrappSignUp from './ui/WrappSignUp';
@@ -31,8 +28,6 @@ class App extends Component {
     const { handleLogout, isLoggedin } = this.props;
     return (
       <>
-        {/* <Navbar handleLogout={handleLogout}></Navbar> */}
-
         <Router>
           <WrappHeader>
             <Link to="/">
@@ -57,7 +52,6 @@ class App extends Component {
                   <Link to="/login">
                     <Button primary type="button">
                       Log in
-                      {/* <button type="button">LoginYo</button> */}
                     </Button>
                   </Link>
                   <WrappSignUp>
@@ -72,7 +66,7 @@ class App extends Component {
               </>
             )}
           </WrappHeader>
-          {/* <AnonRoute exact path="/" component={Home} /> */}
+
           <Switch>
             <AnonRoute exact path="/">
               <Home />
@@ -80,15 +74,10 @@ class App extends Component {
             <AnonRoute exact path="/login" component={Login} />
             <AnonRoute exact path="/signup-employee" component={Signup} />
             <AnonRoute exact path="/signup-contractor" component={Signup} />
-            {/* <PrivateRoute path="/private" component={PrivateView}></PrivateRoute> */}
+
             <PrivateRoute path="/private" component={SideBar}></PrivateRoute>
             <Route path="*" component={NotFound} />
           </Switch>
-          {/* <PrivateRoute exact path="/private/comapny/jobs/manage" component={JobNew}></PrivateRoute> */}
-
-          {/* <PrivateRoute exact path="/private">
-            <PrivateView />
-          </PrivateRoute> */}
         </Router>
       </>
     );
