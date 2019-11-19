@@ -28,7 +28,6 @@ class CompanyUpdate extends Component {
 
   async componentDidMount() {
     const { user } = this.props; // Original
-    console.log('TCL: CompanyUpdate -> componentDidMount -> user', user);
 
     try {
       this.setState({
