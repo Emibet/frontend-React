@@ -58,12 +58,6 @@ class CompanyUpdate extends Component {
   handleFormSubmit = e => {
     e.preventDefault();
     const { username, password, company, user } = this.state;
-    // this.props.handleUpdate({
-    //   username,
-    //   password,
-    //   company,
-    // });
-    console.log('The USER to SEND: ', user);
 
     companyService
       .updateUserCompany(user)
@@ -71,7 +65,6 @@ class CompanyUpdate extends Component {
         this.setState({
           message: 'User Updated',
         });
-        console.log('UserUpdated');
       })
       .then(() => {
         this.props.userData();
@@ -84,12 +77,9 @@ class CompanyUpdate extends Component {
   render() {
     const { username, password, company, user, message, loading } = this.state;
 
-    console.log('PROPS: ', this.props);
-
     return (
       <div>
         COMPANY UPDATE PROFILE:
-        {/* {username} */}
         {message && <Message> {message}</Message>}
         {loading && <Spinner src={logo} className="spinner" alt="logo" />}
         {!loading && (
