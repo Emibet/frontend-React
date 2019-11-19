@@ -12,11 +12,6 @@ import './JobsToJoin.css';
 import logo from '../images/logo192.png';
 import Spinner from '../ui/Loading';
 
-// const WrappFlex = styled.div`
-//   display: flex;
-//   flex-direction: row;
-// `;
-
 const JobsListCard = styled.div`
   border-radius: 3px;
   border: 2px solid #4f98d3;
@@ -39,39 +34,11 @@ class JobsToJoin extends Component {
     switch (pathname) {
       case '/private/jobs/available': {
         const jobsNoDone = jobs.jobs.filter(job => job.done === false);
-        console.log('TCL: jobSwitch -> jobsNoDone', jobsNoDone);
-        // const availableJobs = jobsNoDone.filter(job => {
-        //   return job.applicants.filter(applicant => applicant._id === user._id).length;
-        // });
 
-        console.log('TCL: jobSwitch -> TEST user', user);
-        console.log('TCL: jobSwitch -> TEST user', user._id);
-        // console.log('TCL: jobSwitch -> TEST', jobsNoDone[0].applicants[1].user._id);
-        // const availableJobs = jobsNoDone.filter(job =>
-        //   user.nurse.candidateTo.findIndex(jobId => jobId === job._id),
-        // );
-        // function isJob(job) {
-        //   // console.log('TCL: isJob -> job._id', job._id);
-        //   // const { user } = this.props;
-        //   return user.nurse.candidateTo.findIndex(jobId => jobId === job._id) >= 0;
-        //   // console.log('TCL: isJob -> user.nurse.candidateTo', user.nurse.candidateTo);
-        //   // console.log('TCL: isJob -> jobFinded', jobFinded);
-        //   // return jobFinded >= 0;
-        // }
-
-        // const availableJobs = jobsNoDone.filter(isJob);
-
-        // Esto será los que he aplicado.
-        // const appliedJobs = jobsNoDone.filter(job => {
-        //   return user.nurse.candidateTo.findIndex(jobId => jobId === job._id) >= 0;
-        // });
-        // Esto será los disponibles sin hacer y que no he aplicado.
         const availableJobs = jobsNoDone.filter(job => {
           return user.nurse.candidateTo.findIndex(jobId => jobId === job._id) === -1;
         });
 
-        // let filteredArray = arrayOfElements.filter((element) => 	element.subElements.some((subElement) => subElement.surname === 1));
-        console.log('TCL: jobSwitch -> availableJobs', availableJobs);
         return availableJobs;
       }
       case '/private/jobs/applied': {
@@ -81,14 +48,6 @@ class JobsToJoin extends Component {
         });
         return appliedJobs;
       }
-      // NOT IMPLEMENTED
-      // case '/private/jobs/assigned': {
-      //   const jobsNoDone = jobs.jobs.filter(job => job.done === false);
-      //   const appliedJobs = jobsNoDone.filter(job => {
-      //     return user.nurse.candidateTo.findIndex(jobId => jobId === job._id) >= 0;
-      //   });
-      //   return appliedJobs;
-      // }
 
       default:
         return null;
@@ -100,21 +59,18 @@ class JobsToJoin extends Component {
       user,
       location: { pathname },
     } = this.props;
-    console.log('TCL: componentDidMount -> pathname', pathname);
-    console.log('TCL: componentDidMount -> this.props', this.props);
+
     try {
       const jobType = pathname
         .split('/')
         .splice(-1)
         .toString()
         .toUpperCase();
-      // console.log('TCL: componentDidMount -> username', username);
+
       const jobs = await jobService.listAllJobs();
-      // console.log('TCL: componentDidMount -> jobs', jobs);
 
       const availableJobs = this.jobSwitch(pathname, jobs, user);
-      // const availableJobs = jobs.jobs.filter(job => job.done === false);
-      console.log('TCL: CompanyJobsList -> componentDidMount -> Dispo jobs', availableJobs);
+
       this.setState({
         jobType,
         jobs,
@@ -136,10 +92,7 @@ class JobsToJoin extends Component {
       location: { pathname },
     } = this.props;
     const { jobs, showDetail } = this.state;
-    // console.log('HolAAAAAAAAAAAAA');
-    // Typical usage (don't forget to compare props):
-    // console.log('TCL: componentDidUpdate -> prevProps', prevProps);
-    // console.log('TCL: componentDidUpdate -> this.props', this.props);
+
     if (this.props.user.nurse.candidateTo.length !== prevProps.user.nurse.candidateTo.length) {
       const availableJobs = this.jobSwitch(pathname, jobs, user);
 
@@ -169,11 +122,9 @@ class JobsToJoin extends Component {
   }
 
   handleShow = () => {
-    // const { showDetail } = this.state;
     this.setState({
       showDetail: true,
     });
-    // this.props.history.push('/private');
   };
 
   render() {
@@ -181,15 +132,7 @@ class JobsToJoin extends Component {
     const {
       location: { pathname },
     } = this.props;
-    console.log('TCL: render -> this.props', this.props);
 
-    // const jobType = pathname
-    //   .split('/')
-    //   .splice(-1)
-    //   .toString()
-    //   .toUpperCase();
-    // console.log('TCL: render -> jobType', jobType);
-    // console.log('HOLAAAAAAAAAAAAAAAAAA');
     return (
       <WrappFlex jobList>
         {!error && (
@@ -199,29 +142,19 @@ class JobsToJoin extends Component {
             {!loading &&
               availableJobs.map(job => {
                 return (
-                  // <Card listed>
                   <Link to={`/private/jobs/${job._id}/detail`} key={job._id} onClick={this.handleShow}>
                     <Card listed>
                       <p>{job.title}</p>
                       <p> {job.location}</p>
                     </Card>
                   </Link>
-                  // </Card>
                 );
               })}
           </div>
         )}
         {loading && <Spinner src={logo} className="spinner" alt="logo" />}
         <WrappFlex jobDetail>
-          {showDetail && (
-            <>
-              {/* <Switch> */}
-              {/* <JobDetail {...this.props} /> */}
-
-              <Route path="/private/jobs/:id/detail" component={JobDetail}></Route>
-              {/* </Switch> */}
-            </>
-          )}
+          {showDetail && <Route path="/private/jobs/:id/detail" component={JobDetail}></Route>}
         </WrappFlex>
       </WrappFlex>
     );
