@@ -9,7 +9,6 @@ class CompanyService {
   }
 
   updateUserCompany(user) {
-    console.log('TCL: CompanyService -> updateUserCompany -> user', user);
     const { contactName, email, location, address, phone, NIF, description } = user;
     return this.company
       .put('/companies/profile/edit', { contactName, email, location, address, phone, NIF, description })
