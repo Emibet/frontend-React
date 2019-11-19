@@ -153,12 +153,6 @@ class NurseUpdate extends Component {
   handleFormSubmit = e => {
     e.preventDefault();
     const { username, password, company, user } = this.state;
-    // this.props.handleUpdate({
-    //   username,
-    //   password,
-    //   company,
-    // });
-    console.log('The USER to SEND: ', user);
 
     userService
       .updateUserNurse(user)
@@ -166,7 +160,6 @@ class NurseUpdate extends Component {
         this.setState({
           message: 'User Updated',
         });
-        console.log('UserUpdated');
       })
       .then(() => {
         this.props.userData();
@@ -178,14 +171,6 @@ class NurseUpdate extends Component {
 
   render() {
     const { username, password, company, user, message, loading } = this.state;
-    // const {
-    //   user: { title, author, description, rating },
-    //   loading,
-    //   message,
-    // } = this.state;
-    console.log('PROPS: ', this.props);
-    // console.log('TCL: Signup -> render -> contractor', contractor);
-    console.log('TCL: Signup -> componentDidMount -> user', user);
 
     return (
       <div>
@@ -258,16 +243,6 @@ class NurseUpdate extends Component {
                 value={user.nurse.speciality}
                 onChange={this.handleChange}
               />
-
-              {/* <Label htmlFor="birthday">BirthDay:</Label>
-              <Input
-                update
-                type="date"
-                name="birthday"
-                id="birthday"
-                value={user.nurse.birthday}
-                onChange={this.handleChange}
-              /> */}
 
               <Label htmlFor="dni">DNI:</Label>
               <Input update type="text" name="dni" id="dni" value={user.nurse.dni} onChange={this.handleChange} />
