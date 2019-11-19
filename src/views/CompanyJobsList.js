@@ -31,11 +31,10 @@ class CompanyJobsList extends Component {
 
   async componentDidMount() {
     const { user } = this.props;
-    // console.log('TCL: componentDidMount -> his.props', this.props);
+
     try {
-      // console.log('TCL: componentDidMount -> username', username);
       const jobs = await jobService.listCompanyJobs(user.username);
-      // console.log('TCL: CompanyJobsList -> componentDidMount -> jobs', jobs);
+
       this.setState({
         jobs,
         loading: false,
@@ -69,24 +68,13 @@ class CompanyJobsList extends Component {
     });
   };
 
-  // componentDidUpdate(prevProps) {
-  //   console.log('TCL: CompanyJobsList -> componentDidUpdate -> prevProps', prevProps);
-  //   console.log('TCL: CompanyJobsList -> componentDidUpdate ->  THIS Props', this.props);
-  //   if (this.props.location.key !== prevProps.location.key) {
-  //     // this.getJob(this.props.match.params.id);
-  //     // this.props.history.push('/private/company/jobs');
-  //   }
-  // }
-
   render() {
     const { jobs, loading, error, job } = this.state;
-    console.log('TCL: render -> jobs', jobs);
-    console.log('PROPS COMPANY JOB LIST ', this.props);
+
     return (
       <WrappFlex jobList>
         {!error && (
           <div className="jobsList">
-            {/* {console.log('RENDER COMPANY JOB LIST')} */}
             <h1 className="jobsToJoin-title">All My Jobs:</h1>
 
             {!loading &&
@@ -94,7 +82,6 @@ class CompanyJobsList extends Component {
                 return (
                   <Link to={`/private/company/jobs/${job._id}`} key={job._id}>
                     <Card listed>
-                      {console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', job)}
                       <p className="numberApplicants">{job.applicants.length} Applicants</p>
                       <p>{job.title}</p>
                       <p>{job.location}</p>
@@ -115,20 +102,9 @@ class CompanyJobsList extends Component {
             <Route
               exact
               path="/private/company/jobs/:id"
-              // component={JobDetail}
               render={matchProps => <JobDetail {...matchProps} handlerNewJobs={this.handlerNewJobs} />}
             ></Route>
-            {/* <Route
-              exact
-              path="/private/company/job/:id/manage"
-              render={matchProps => <JobManage {...matchProps} {...this.props} handleMatch={this.handleMatch} />}
-              />
-              <Route
-              path="/private/company/job/:id/manage/applicants"
-              // path={`${this.props.match.path}/applicants`}
-              >
-              <JobApplicants job={job} />
-            </Route> */}
+
             <Route
               exact
               path="/private/company/job/:id/edit"
@@ -137,11 +113,7 @@ class CompanyJobsList extends Component {
                   <JobUpdate {...matchProps} />
                 </Card>
               )}
-            >
-              {/* <Card>
-                <JobUpdate />
-              </Card> */}
-            </Route>
+            ></Route>
           </Switch>
         </WrappFlex>
       </WrappFlex>
