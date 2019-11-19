@@ -12,7 +12,7 @@ const Card = styled.div`
   padding: 0.75em 1em;
   box-sizing: border-box;
   background-color: white;
-  position: relative;
+  /* position: relative; */
 
   @media ${device.tablet} {
     max-width: 100%;
