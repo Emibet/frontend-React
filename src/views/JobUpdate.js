@@ -78,7 +78,6 @@ class JobNew extends Component {
         this.setState({
           message: 'JOB Updated',
         });
-        console.log('JobUPDATED');
       })
 
       .catch(() => {
