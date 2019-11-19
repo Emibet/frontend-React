@@ -5,7 +5,6 @@ import './CardJob.css';
 class CardJob extends Component {
   render() {
     const { job, user } = this.props;
-    console.log('TCL: CardJob -> render -> job', job);
 
     return (
       <div className="cardJob-Wrapper-info">
@@ -70,12 +69,7 @@ class CardJob extends Component {
             <p>{job.description}</p>
           </div>
         )}
-        {/* {job.title && (
-          <div className="cardJob-info">
-            Applicants:
-            <p>{job.title}</p>
-          </div>
-        )} */}
+
         {job.employee && (
           <div className="cardJob-info">
             Employee:
