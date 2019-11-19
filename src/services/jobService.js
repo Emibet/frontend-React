@@ -76,7 +76,6 @@ class JobService {
   }
 
   updateJob(jobId, job) {
-    console.log('TCL: CompanyJOBService -> updateJOB -> job', job);
     const {
       title,
       location,
