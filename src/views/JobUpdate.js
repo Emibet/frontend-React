@@ -36,14 +36,10 @@ class JobNew extends Component {
     const {
       params: { id },
     } = this.props.match;
-    console.log('TCL: JobNew -> componentDidMount -> id', id);
+
     const { user } = this.props; // Original
 
-    console.log('TCL: JobNew -> componentDidMount -> this.props', this.props);
-    console.log('TCL: JOB NEW -> componentDidMount -> user', user);
-
     const job = await jobService.jobDetail(id);
-    console.log('TCL: JobNew -> componentDidMount -> job', job);
 
     try {
       this.setState({
@@ -72,55 +68,19 @@ class JobNew extends Component {
     });
   };
 
-  // handleChangeBox = event => {
-  //   // console.log('TCL: NurseUpdate -> event', event.target.name);
-  //   const { job } = this.state;
-  //   const { name, checked: value, type } = event.target;
-  //   // console.log('TCL: NurseUpdate -> value', type);
-  //   // console.log('TCL: NurseUpdate -> value', value);
-
-  //   this.setState({
-  //     job: {
-  //       ...job,
-  //       [name]: value,
-  //     },
-  //   });
-  // };
-
   handleFormSubmit = e => {
     e.preventDefault();
     const { username, password, company, user, job } = this.state;
-    // this.props.handleUpdate({
-    //   username,
-    //   password,
-    //   company,
-    // });
-    // console.log('The JOB to SEND: ', job);
 
     jobService
       .updateJob(job._id, job)
       .then(() => {
         this.setState({
           message: 'JOB Updated',
-          // job: {
-          //   title: '',
-          //   location: '',
-          //   contractType: '',
-          //   salaryMin: '',
-          //   salaryMax: '',
-          //   experienceMin: '',
-          //   workDay: '',
-          //   study: '',
-          //   requirementMin: '',
-          //   description: '',
-          // },
         });
         console.log('JobUPDATED');
       })
-      // .then(() => {
-      //   <Redirect to="/private" />;
-      //   // this.props.userData();
-      // })
+
       .catch(() => {
         console.log('catch');
       });
@@ -128,13 +88,6 @@ class JobNew extends Component {
 
   render() {
     const { username, password, company, user, job, message, loading, redirect } = this.state;
-
-    // console.log('PROPS: ', this.props);
-
-    // if (redirect) {
-    //   console.log('REDIRECTS');
-    //   return <Redirect to={'/private/company/jobs'} />;
-    // }
 
     return (
       <div>
@@ -221,17 +174,6 @@ class JobNew extends Component {
                 value={job.requirementMin}
                 onChange={this.handleChange}
               />
-
-              {/* <Label htmlFor="urgent">CHECK IF URGENT:</Label>
-              <Input
-                update
-                urgent
-                type="checkbox"
-                name="urgent"
-                id="urgent"
-                checked={job.urgent}
-                onChange={this.handleChangeBox}
-              /> */}
 
               <Label htmlFor="description">JOB Description:</Label>
               <Input
