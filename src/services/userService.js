@@ -16,10 +16,6 @@ class UserService {
   infoUserNurse(nurseId) {
     return this.user.get(`/nurses/${nurseId}/detail`).then(({ data }) => data);
   }
-
-  // listAllJobs() {
-  //   return this.job.get('/jobs/all').then(({ data }) => data);
-  // }
 }
 
 const userService = new UserService();
