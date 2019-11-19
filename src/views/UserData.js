@@ -17,7 +17,7 @@ class UserData extends Component {
   async componentDidMount() {
     const { user } = this.props;
     let jobs = {};
-    console.log('TCL: UserData -> componentDidMount -> user', user);
+
     try {
       if (user.company) {
         jobs = await jobService.listCompanyJobs(user.username);

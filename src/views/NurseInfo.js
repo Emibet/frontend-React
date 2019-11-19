@@ -5,7 +5,7 @@ import Button from '../ui/Button';
 class NurseInfo extends Component {
   constructor(props) {
     super(props);
-    // No llames this.setState() aquí!
+
     this.state = {
       showCV: false,
     };
@@ -23,7 +23,6 @@ class NurseInfo extends Component {
   render() {
     const { showCV } = this.state;
 
-    console.log('TCL: props NURSE INFO', this.props);
     const {
       address,
       dni,
@@ -39,9 +38,6 @@ class NurseInfo extends Component {
     } = this.props.user.nurse;
     return (
       <>
-        {/* <div className="nurseWelcome">
-          <p className="nurseWelcomeInfo">Welcome to Emibet, Your WebApp to find your Nursering Job!!</p>
-        </div> */}
         <div className="Wrapper">
           <div>
             {resume && (
@@ -116,9 +112,6 @@ class NurseInfo extends Component {
                 Speciality: <span className="info">{speciality}</span>
               </p>
             )}
-
-            {/* <p>Aquí hay que implementar el MAP para ver los jobs</p>
-          <p>Aquí hay que implementar el MAP para ver donde he aplicado</p> */}
           </div>
         </div>
       </>

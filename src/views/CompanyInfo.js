@@ -1,7 +1,6 @@
 import React from 'react';
 
 const CompanyInfo = props => {
-  console.log('TCL: props', props);
   const { username, NIF, address, contactName, email, location, phone } = props.user;
   const { jobs } = props;
   return (
