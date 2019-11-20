@@ -13,7 +13,7 @@ import Spinner from '../ui/Loading';
 
 const Label = styled.label`
   color: #4f98d3;
-  position: absolute;
+  position: relative;
 `;
 
 class JobNew extends Component {

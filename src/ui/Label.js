@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 const Label = styled.label`
   font-weight: bold;
   margin: 0.5em auto;
-  // position: absolute;
+  position: relative;
   pointer-events: none;
 `;
 
